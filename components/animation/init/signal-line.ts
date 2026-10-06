@@ -1,5 +1,4 @@
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { $, $$, motionEnabled } from '@/utils/dom';
 
 const POINTS = 140;
@@ -120,17 +119,22 @@ function createLine(host: HTMLElement) {
 
   const rise = { value: 0 };
   draw();
-  ScrollTrigger.create({
-    trigger: host,
-    start: 'top bottom',
-    end: 'bottom top',
-    onToggle: (self) => (self.isActive ? start() : stop()),
-  });
-
-  gsap
-    .timeline({ scrollTrigger: { trigger: host, start: 'top 92%', once: true } })
+  const reveal = gsap
+    .timeline({ paused: true })
     .to(base, { attr: { 'stroke-dashoffset': 0 }, ease: 'power2.inOut', duration: 1.6 })
     .to(rise, { value: 1, duration: 0.9, ease: 'expo.out', onUpdate: () => (spike = rise.value) }, 0.9);
+
+  new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        start();
+        if (reveal.progress() === 0) reveal.play();
+      } else {
+        stop();
+      }
+    },
+    { threshold: 0.2 },
+  ).observe(host);
 
   gsap.fromTo(
     pulse,
