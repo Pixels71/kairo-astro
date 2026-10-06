@@ -7,6 +7,19 @@ export default function init() {
   if (!motionEnabled()) return;
 
   onIntro(() => {
+    $$('[data-parallax]').forEach((image) => {
+      const amount = Number(image.dataset.parallax) || 0.15;
+      gsap.fromTo(
+        image,
+        { yPercent: -amount * 50 },
+        {
+          yPercent: amount * 50,
+          ease: 'none',
+          scrollTrigger: { trigger: image.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
+        },
+      );
+    });
+
     const intro = $$('[data-intro]');
     if (intro.length) {
       gsap.fromTo(
@@ -43,19 +56,6 @@ export default function init() {
       ) {
         tl.fromTo(image, { scale: 1.3 }, { scale: 1, duration: 1.9, ease: 'expo.out', clearProps: 'scale' }, 0.1);
       }
-    });
-
-    $$('[data-parallax]').forEach((image) => {
-      const amount = Number(image.dataset.parallax) || 0.15;
-      gsap.fromTo(
-        image,
-        { yPercent: -amount * 50 },
-        {
-          yPercent: amount * 50,
-          ease: 'none',
-          scrollTrigger: { trigger: image.parentElement, start: 'top bottom', end: 'bottom top', scrub: true },
-        },
-      );
     });
   });
 }

@@ -104,6 +104,20 @@ function createLine(host: HTMLElement) {
     );
   });
 
+  host.addEventListener('signal:pulse', () => {
+    for (let i = 1; i < 10; i++) velocity[i] -= 7 * Math.cos(((i - 1) / 9) * (Math.PI / 2));
+    gsap.fromTo(
+      pulse,
+      { attr: { 'stroke-dashoffset': 1.05, 'stroke-dasharray': '0.12 1' } },
+      {
+        attr: { 'stroke-dashoffset': -0.12 },
+        duration: 1.4,
+        ease: 'power2.inOut',
+        onComplete: () => pulse.setAttribute('stroke-dasharray', '0.05 1'),
+      },
+    );
+  });
+
   const rise = { value: 0 };
   draw();
   ScrollTrigger.create({

@@ -1,5 +1,6 @@
 ---
 import Icon from '@/components/shared/icons/icon.astro';
+import PulseUnderline from '@/components/shared/ui/pulse-underline.astro';
 import SignalLine from '@/components/shared/ui/signal-line.astro';
 import TextRoll from '@/components/shared/ui/text-roll.astro';
 import { footerGroups, socialLinks } from '@/data/footer';
@@ -53,8 +54,9 @@ import { chars } from '@/utils/text';
             <ul class="mt-5 flex flex-col gap-3">
               {group.links.map((link) => (
                 <li>
-                  <a href={link.href} class="group inline-flex text-bone">
+                  <a href={link.href} class="group relative inline-flex text-bone">
                     <TextRoll text={link.label} />
+                    <PulseUnderline />
                   </a>
                 </li>
               ))}
@@ -71,9 +73,10 @@ import { chars } from '@/utils/text';
                   target="_blank"
                   rel="noopener"
                   aria-label={social.label}
-                  class="group inline-flex items-center gap-2 text-bone">
+                  class="group relative inline-flex items-center gap-2 text-bone">
                   <Icon name={social.icon === 'x' ? 'x-logo' : social.icon} class="text-mute" />
                   <TextRoll text={social.icon === 'x' ? 'X' : social.icon === 'linkedin' ? 'LinkedIn' : 'GitHub'} />
+                  <PulseUnderline />
                 </a>
               </li>
             ))}
@@ -113,25 +116,25 @@ import { chars } from '@/utils/text';
     </div>
   </div>
 
-  <div class="relative mt-4 cursor-crosshair overflow-hidden" data-footer-mark aria-hidden="true">
+  <div
+    class="relative mt-2 h-[clamp(12rem,21vw,23rem)] touch-pan-y overflow-hidden select-none"
+    data-footer-mark
+    aria-hidden="true">
     <p
-      class="-ml-[0.04em] flex justify-center font-display text-[27vw] leading-[0.7] font-extrabold tracking-[-0.075em] text-bone/[0.04] [-webkit-text-stroke:1px_var(--color-line-strong)]"
+      class="absolute inset-x-0 bottom-0 flex justify-center font-display text-[24vw] leading-[0.74] font-extrabold tracking-[-0.06em] text-bone"
       data-footer-word>
       {chars('KAIRO').map((c) => (
-        <span class="inline-block origin-bottom" data-footer-letter>
+        <span
+          class="inline-block cursor-grab transition-colors duration-300 will-change-transform active:cursor-grabbing data-[grab=true]:text-signal"
+          data-footer-letter>
           {c}
         </span>
       ))}
     </p>
     <p
-      class="pointer-events-none absolute inset-0 -ml-[0.04em] flex justify-center font-display text-[27vw] leading-[0.7] font-extrabold tracking-[-0.075em] text-signal [mask-image:radial-gradient(circle_var(--mr,0px)_at_var(--mx,50%)_var(--my,50%),#000_55%,transparent_100%)]"
-      data-footer-word
-      data-footer-spot>
-      {chars('KAIRO').map((c) => (
-        <span class="inline-block origin-bottom" data-footer-letter>
-          {c}
-        </span>
-      ))}
+      class="pointer-events-none absolute top-3 right-4 font-mono text-label text-dim uppercase opacity-0 md:right-8"
+      data-footer-hint>
+      Grab a letter. Double-click to tidy up.
     </p>
   </div>
 </footer>

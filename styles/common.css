@@ -230,3 +230,14 @@ body::after {
     opacity: 0;
   }
 }
+
+.pulse-underline {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.7s var(--ease-out-expo);
+}
+
+.group:hover .pulse-underline,
+.group:focus-visible .pulse-underline {
+  stroke-dashoffset: 0;
+}

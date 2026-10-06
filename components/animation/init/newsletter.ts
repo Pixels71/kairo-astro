@@ -35,6 +35,7 @@ export default function init() {
       setState('loading', 'Subscribing...');
       setTimeout(() => {
         setState('success', 'You are in. The first issue lands on Friday.');
+        form.closest('footer')?.querySelector('[data-signal-line]')?.dispatchEvent(new CustomEvent('signal:pulse'));
         input.value = '';
         input.disabled = true;
       }, 1100);
