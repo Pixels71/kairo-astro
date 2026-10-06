@@ -20,9 +20,26 @@ if (root.classList.contains('is-loading')) playLoader(releaseIntro);
 else if (root.classList.contains('is-arriving')) playArrive(releaseIntro);
 else releaseIntro();
 
+const watchLayout = () => {
+  const page = document.querySelector('[data-page]');
+  if (!page) return;
+  let measured = document.documentElement.scrollHeight;
+  let timer = 0;
+  ScrollTrigger.addEventListener('refresh', () => {
+    measured = document.documentElement.scrollHeight;
+  });
+  new ResizeObserver(() => {
+    if (Math.abs(document.documentElement.scrollHeight - measured) < 2) return;
+    window.clearTimeout(timer);
+    timer = window.setTimeout(() => ScrollTrigger.refresh(), 180);
+  }).observe(page);
+  document.fonts?.ready.then(() => ScrollTrigger.refresh());
+};
+
 onIntro(() => {
   ScrollTrigger.sort();
   ScrollTrigger.refresh();
+  watchLayout();
   if (!window.location.hash) return;
   const target = document.querySelector<HTMLElement>(window.location.hash);
   if (target) setTimeout(() => scrollToTarget(target), 200);

@@ -180,10 +180,17 @@ const brief =
       <p
         class="mt-8 min-h-[7.5rem] border-t border-ink/20 pt-5 font-mono text-[0.8125rem] leading-relaxed"
         data-type={brief}>
-        <span data-type-text>{brief}</span>
-        <span
-          class="ml-0.5 inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] animate-pulse bg-ink"
-          aria-hidden="true"></span>
+        <span class="relative block">
+          <span class="invisible" aria-hidden="true">
+            {brief}&nbsp;&nbsp;
+          </span>
+          <span class="absolute inset-0">
+            <span data-type-text>{brief}</span>
+            <span
+              class="ml-0.5 inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] animate-pulse bg-ink"
+              aria-hidden="true"></span>
+          </span>
+        </span>
       </p>
     </article>
 
