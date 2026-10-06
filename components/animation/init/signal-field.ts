@@ -66,8 +66,8 @@ function createField(canvas: HTMLCanvasElement) {
 
   const draw = () => {
     const t = clock;
-    mouse.x += (mouse.tx - mouse.x) * 0.35;
-    mouse.y += (mouse.ty - mouse.y) * 0.35;
+    mouse.x += (mouse.tx - mouse.x) * 0.12;
+    mouse.y += (mouse.ty - mouse.y) * 0.12;
     mouse.power += (mouse.target - mouse.power) * 0.08;
     ctx.clearRect(0, 0, width, height);
 
