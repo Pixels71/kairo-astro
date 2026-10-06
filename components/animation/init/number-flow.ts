@@ -21,6 +21,8 @@ const label = (flow: NumberFlow, value: number) => {
 export const setFlow = (flow: NumberFlow, value: number, affix?: { prefix?: string; suffix?: string }) => {
   if (affix?.prefix !== undefined) flow.numberPrefix = affix.prefix;
   if (affix?.suffix !== undefined) flow.numberSuffix = affix.suffix;
+  const previous = Number(flow.dataset.value);
+  flow.trend = value === previous ? 0 : value > previous ? 1 : -1;
   flow.dataset.value = String(value);
   flow.update(value);
   label(flow, value);

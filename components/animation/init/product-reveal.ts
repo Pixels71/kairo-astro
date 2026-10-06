@@ -1,6 +1,8 @@
 import gsap from 'gsap';
 import { setFlow, type Flow } from '@/components/animation/init/number-flow';
-import { $, $$, motionEnabled } from '@/utils/dom';
+import { SplitText } from 'gsap/SplitText';
+import { $, $$, fontsReady, motionEnabled } from '@/utils/dom';
+import { scramble } from '@/utils/scramble';
 
 interface Act {
   count: number;
@@ -43,29 +45,77 @@ export default function init() {
   window.addEventListener('resize', placeFrame);
 
   let act = 0;
+  const wipe = $('[data-product-wipe]', section);
+  const parts = captions.map((caption) => ({
+    caption,
+    title: $('[data-product-title]', caption),
+    body: $('[data-product-body]', caption),
+    words: [] as Element[],
+    lines: [] as Element[],
+  }));
+
+  fontsReady().then(() => {
+    parts.forEach((part) => {
+      if (part.title)
+        part.words = SplitText.create(part.title, { type: 'words', mask: 'words', wordsClass: 'caption-word' }).words;
+      if (part.body) part.lines = SplitText.create(part.body, { type: 'lines', mask: 'lines' }).lines;
+    });
+  });
+
+  let switching: gsap.core.Timeline | null = null;
+
   const setAct = (next: number) => {
     if (next === act) return;
-    const previous = act;
+    const outgoing = parts[act];
+    const incoming = parts[next];
+    const direction = next > act ? 1 : -1;
     act = next;
-    gsap.to(captions[previous], { opacity: 0, y: -24, duration: 0.35, ease: 'power3.in', overwrite: true });
-    gsap.fromTo(
-      captions[act],
-      { opacity: 0, y: 28 },
-      { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', overwrite: true },
-    );
+
     tabs.forEach((tab, i) =>
       i === act ? tab.setAttribute('aria-current', 'step') : tab.removeAttribute('aria-current'),
     );
     if (flow) setFlow(flow, acts[act].count);
-    if (unit) {
-      gsap
-        .timeline()
-        .to(unit, { opacity: 0, duration: 0.2 })
-        .call(() => {
-          unit.textContent = acts[act].unit;
-        })
-        .to(unit, { opacity: 1, duration: 0.4 });
+    if (unit) scramble(unit, acts[act].unit.toUpperCase(), 0.7);
+
+    switching?.progress(1);
+    parts.forEach((part) => {
+      if (part !== outgoing && part !== incoming) gsap.set(part.caption, { opacity: 0 });
+    });
+
+    const box = incoming.title;
+    const tl = gsap.timeline({ onComplete: () => gsap.set(outgoing.caption, { opacity: 0 }) });
+    switching = tl;
+
+    tl.to(outgoing.words, { yPercent: -110 * direction, duration: 0.4, ease: 'power3.in', stagger: 0.025 }, 0).to(
+      outgoing.lines,
+      { yPercent: -110 * direction, duration: 0.4, ease: 'power3.in', stagger: 0.04 },
+      0.05,
+    );
+
+    if (wipe && box) {
+      tl.set(
+        wipe,
+        { width: box.offsetWidth + 12, height: box.offsetHeight, x: -6, transformOrigin: 'left center' },
+        0.15,
+      )
+        .fromTo(wipe, { scaleX: 0 }, { scaleX: 1, duration: 0.35, ease: 'power3.inOut' }, 0.15)
+        .set(wipe, { transformOrigin: 'right center' }, 0.5)
+        .to(wipe, { scaleX: 0, duration: 0.55, ease: 'expo.inOut' }, 0.5);
     }
+
+    tl.set(incoming.caption, { opacity: 1 }, 0.42)
+      .fromTo(
+        incoming.words,
+        { yPercent: 110 * direction, rotate: 6 * direction },
+        { yPercent: 0, rotate: 0, duration: 0.9, ease: 'expo.out', stagger: 0.045 },
+        0.48,
+      )
+      .fromTo(
+        incoming.lines,
+        { yPercent: 105 * direction },
+        { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.07 },
+        0.6,
+      );
   };
 
   const scatter = gsap.utils.random(-1, 1, true);
