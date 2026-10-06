@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setFlow, type Flow } from '@/components/animation/init/number-flow';
 import { getLenis } from '@/components/animation/lenis-instance';
 import { $, $$ } from '@/utils/dom';
@@ -13,6 +14,7 @@ export default function playLoader(done: () => void) {
     root.classList.remove('is-loading');
     loader?.remove();
     getLenis()?.start();
+    ScrollTrigger.refresh();
   };
   if (!loader) {
     finish();
