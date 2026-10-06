@@ -1,5 +1,4 @@
 import gsap from 'gsap';
-import type { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { scrollToTarget } from '@/components/animation/lenis-instance';
 import { $, $$, motionEnabled } from '@/utils/dom';
 
@@ -35,7 +34,7 @@ export default function init() {
     end: () => `bottom ${window.innerHeight - footer.offsetHeight}px`,
     scrub: true,
     invalidateOnRefresh: true,
-  } satisfies ScrollTrigger.Vars;
+  };
 
   gsap
     .timeline({ scrollTrigger: range })

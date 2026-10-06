@@ -1,0 +1,47 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+  value: number;
+  from?: number;
+  delay?: number;
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
+  grouping?: boolean;
+  trigger?: 'scroll' | 'load' | 'manual';
+  class?: string;
+}
+
+const {
+  value,
+  from = 0,
+  delay = 0,
+  duration = 1.8,
+  prefix = '',
+  suffix = '',
+  decimals = 0,
+  grouping = true,
+  trigger = 'scroll',
+  class: className,
+} = Astro.props;
+const text = `${prefix}${value.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals, useGrouping: grouping })}${suffix}`;
+---
+
+<number-flow
+  class={cn('inline-block tabular-nums', className)}
+  aria-label={text}
+  role="img"
+  data-number-flow
+  data-value={value}
+  data-from={from}
+  data-delay={delay}
+  data-duration={duration}
+  data-prefix={prefix}
+  data-suffix={suffix}
+  data-decimals={decimals}
+  data-grouping={String(grouping)}
+  data-trigger={trigger}>
+  {text}
+</number-flow>

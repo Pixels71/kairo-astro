@@ -155,27 +155,6 @@ body::after {
     fill: currentColor;
   }
 
-  .odo {
-    display: inline-flex;
-    height: 1em;
-    overflow: hidden;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-
-  .odo-col {
-    display: flex;
-    flex-direction: column;
-    transition: translate 1.4s var(--ease-out-expo);
-    transition-delay: calc(var(--i, 0) * 70ms);
-  }
-
-  .odo-col > span {
-    display: block;
-    height: 1em;
-    text-align: center;
-  }
-
   .media-zoom img {
     transition:
       scale 1.1s var(--ease-out-expo),

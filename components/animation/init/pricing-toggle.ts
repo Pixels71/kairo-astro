@@ -1,4 +1,4 @@
-import { setOdometer } from '@/components/animation/init/odometer';
+import { setFlow, type Flow } from '@/components/animation/init/number-flow';
 import { $, $$ } from '@/utils/dom';
 
 export default function init() {
@@ -22,16 +22,11 @@ export default function init() {
     });
     cards.forEach((card) => {
       const note = $('[data-price-note]', card);
-      const odometer = $('[data-odo]', card);
-      const label = $('[data-price-label]', card);
-      if (!note || !odometer) return;
+      const flow = $<Flow>('[data-number-flow]', card);
+      if (!note || !flow) return;
       const monthly = Number(note.dataset.monthly);
       const value = period === 'yearly' ? Number(note.dataset.yearly) : monthly;
-      const digits = String(value).padStart(odometer.querySelectorAll('.odo-col').length, '0');
-      $$('.odo-col', odometer).forEach((column, i) => (column.dataset.digit = digits[i]));
-      setOdometer(odometer);
-      odometer.setAttribute('aria-label', String(value));
-      if (label) label.textContent = `$${value} per month`;
+      setFlow(flow, value);
       if (monthly > 0)
         note.textContent =
           period === 'yearly' ? `$${(value * 12).toLocaleString('en-US')} billed yearly` : 'Billed monthly';

@@ -82,3 +82,13 @@ export interface Role {
   team: string;
   location: string;
 }
+
+export interface Moment {
+  client: string;
+  label: string;
+  value: number;
+  prefix?: string;
+  suffix?: string;
+  image: string;
+  alt: string;
+}

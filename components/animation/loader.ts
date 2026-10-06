@@ -1,4 +1,5 @@
 import gsap from 'gsap';
+import { setFlow, type Flow } from '@/components/animation/init/number-flow';
 import { getLenis } from '@/components/animation/lenis-instance';
 import { $, $$ } from '@/utils/dom';
 
@@ -22,7 +23,7 @@ export default function playLoader(done: () => void) {
   }
 
   const letters = $$('[data-loader-letter]', loader);
-  const digits = $$('[data-loader-digit]', loader);
+  const counter = $<Flow>('[data-number-flow]', loader);
   const line = $('[data-loader-line]', loader);
   const content = $('[data-loader-content]', loader);
   const fade = $$('[data-loader-caption], [data-loader-count]', loader);
@@ -31,10 +32,7 @@ export default function playLoader(done: () => void) {
   const page = $('[data-page]');
 
   const setCount = (value: number) => {
-    const text = String(value).padStart(3, '0');
-    digits.forEach((digit, i) => {
-      digit.style.translate = `0 ${-Number(text[i]) * 10}%`;
-    });
+    if (counter) setFlow(counter, value);
   };
 
   getLenis()?.stop();

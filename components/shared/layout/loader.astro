@@ -1,7 +1,6 @@
 ---
+import NumberFlow from '@/components/shared/ui/number-flow.astro';
 import { chars } from '@/utils/text';
-
-const digits = Array.from({ length: 10 }, (_, i) => i);
 ---
 
 <div class="fixed inset-0 z-[90] hidden" data-loader aria-hidden="true">
@@ -27,15 +26,7 @@ const digits = Array.from({ length: 10 }, (_, i) => i);
       <span
         class="flex font-mono text-[clamp(2rem,5vw,4.5rem)] leading-none text-bone tabular-nums opacity-0"
         data-loader-count>
-        {[0, 1, 2].map(() => (
-          <span class="odo">
-            <span class="odo-col [transition-duration:0.7s]" data-loader-digit>
-              {digits.map((d) => (
-                <span>{d}</span>
-              ))}
-            </span>
-          </span>
-        ))}
+        <NumberFlow value={0} duration={0.55} trigger="manual" grouping={false} />
         <span class="ml-1 text-signal">%</span>
       </span>
     </div>

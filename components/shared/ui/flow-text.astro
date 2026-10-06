@@ -1,0 +1,26 @@
+---
+import NumberFlow from '@/components/shared/ui/number-flow.astro';
+import { parseNumber } from '@/utils/number';
+
+interface Props {
+  text: string;
+  duration?: number;
+  class?: string;
+}
+
+const { text, duration, class: className } = Astro.props;
+const parsed = parseNumber(text);
+---
+
+{parsed ? (
+  <NumberFlow
+    value={parsed.value}
+    prefix={parsed.prefix}
+    suffix={parsed.suffix}
+    decimals={parsed.decimals}
+    duration={duration}
+    class={className}
+  />
+) : (
+  <span class={className}>{text}</span>
+)}

@@ -57,8 +57,8 @@ function createField(canvas: HTMLCanvasElement) {
   };
 
   const spawn = (x?: number, y?: number) => {
-    const px = x ?? width * (0.42 + Math.random() * 0.5);
-    const py = y ?? height * (0.14 + Math.random() * 0.46);
+    const px = x ?? width * (0.3 + Math.random() * 0.3);
+    const py = y ?? height * (0.12 + Math.random() * 0.4);
     const snapX = offsetX + Math.round((px - offsetX) / gap) * gap;
     const snapY = offsetY + Math.round((py - offsetY) / gap) * gap;
     pulses.push({ x: snapX, y: snapY, born: clock });
@@ -207,6 +207,14 @@ function createField(canvas: HTMLCanvasElement) {
     if ((event.target as Element).closest('a, button')) return;
     const box = canvas.getBoundingClientRect();
     spawn(event.clientX - box.left, event.clientY - box.top);
+  });
+
+  document.addEventListener('kairo:pulse', (event) => {
+    const { x, y } = (event as CustomEvent<{ x: number; y: number }>).detail;
+    const box = canvas.getBoundingClientRect();
+    if (x < box.left || x > box.right || y < box.top || y > box.bottom) return;
+    spawn(x - box.left, y - box.top);
+    nextPulse = clock + 2.6;
   });
 
   start();

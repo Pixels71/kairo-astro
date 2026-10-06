@@ -1,11 +1,11 @@
 ---
 import Media from '@/components/shared/ui/media.astro';
-import Odometer from '@/components/shared/ui/odometer.astro';
+import NumberFlow from '@/components/shared/ui/number-flow.astro';
 
 const results = [
-  { value: '9', suffix: ' days', label: 'earlier warning on the problems that matter, on average' },
-  { value: '3', suffix: ' in 4', label: 'briefs acted on within one working day' },
-  { value: '20', suffix: ' min', label: 'from sign-up to the first connected source' },
+  { value: 9, suffix: ' days', label: 'earlier warning on the problems that matter, on average' },
+  { value: 3, suffix: ' in 4', label: 'briefs acted on within one working day' },
+  { value: 20, suffix: ' min', label: 'from sign-up to the first connected source' },
 ];
 ---
 
@@ -29,7 +29,7 @@ const results = [
         <div class="border-t border-line py-8 md:border-t-0 md:px-8 md:py-2 md:first:pl-0" data-reveal>
           <dt class="sr-only">{result.label}</dt>
           <dd class="flex items-baseline font-display text-display font-extrabold text-bone">
-            <Odometer value={result.value} />
+            <NumberFlow value={result.value} />
             <span class="ml-2 text-subtitle font-bold text-signal">{result.suffix.trim()}</span>
           </dd>
           <dd class="mt-4 max-w-[28ch] text-mute">{result.label}</dd>

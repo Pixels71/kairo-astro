@@ -1,7 +1,7 @@
 ---
 import Icon from '@/components/shared/icons/icon.astro';
 import Button from '@/components/shared/ui/button.astro';
-import Odometer from '@/components/shared/ui/odometer.astro';
+import NumberFlow from '@/components/shared/ui/number-flow.astro';
 import { plans } from '@/data/pricing';
 import { cn } from '@/utils/cn';
 ---
@@ -58,13 +58,7 @@ import { cn } from '@/utils/cn';
         <p class="mt-3 min-h-12 text-mute">{plan.description}</p>
         <p class="mt-10 flex items-end gap-2">
           <span class="font-display text-[clamp(3.5rem,5vw,4.75rem)] leading-[0.85] font-extrabold tracking-[-0.04em] text-bone">
-            <span class="sr-only" data-price-label>
-              ${plan.monthly} per month
-            </span>
-            <span aria-hidden="true" class="flex">
-              $
-              <Odometer value={String(plan.monthly)} class="[&_.odo-col]:[transition-duration:0.9s]" />
-            </span>
+            <NumberFlow value={plan.monthly} prefix="$" duration={1.1} />
           </span>
           <span class="pb-1 text-sm text-mute" data-price-unit>
             {plan.monthly === 0 ? 'free forever' : '/ month'}

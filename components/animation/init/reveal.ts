@@ -35,7 +35,12 @@ export default function init() {
         { clipPath: 'inset(100% 0% 0% 0%)' },
         { clipPath: 'inset(0% 0% 0% 0%)', duration: 1.5, ease: 'expo.inOut' },
       );
-      if (image && !image.dataset.parallax && !image.hasAttribute('data-pan-parallax')) {
+      if (
+        image &&
+        !image.dataset.parallax &&
+        !image.hasAttribute('data-pan-parallax') &&
+        !image.hasAttribute('data-moment-image')
+      ) {
         tl.fromTo(image, { scale: 1.3 }, { scale: 1, duration: 1.9, ease: 'expo.out', clearProps: 'scale' }, 0.1);
       }
     });

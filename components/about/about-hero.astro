@@ -1,11 +1,12 @@
 ---
 import Media from '@/components/shared/ui/media.astro';
+import NumberFlow from '@/components/shared/ui/number-flow.astro';
 
 const lines = ['We build for', 'the minute before', 'it matters.'];
-const facts = [
-  { value: '2021', label: 'Founded in Berlin' },
-  { value: '64', label: 'People on the team' },
-  { value: '1,200+', label: 'Teams on Kairo' },
+const facts: { value: number; from?: number; suffix?: string; grouping?: boolean; label: string }[] = [
+  { value: 2021, from: 2001, grouping: false, label: 'Founded in Berlin' },
+  { value: 64, label: 'People on the team' },
+  { value: 1200, suffix: '+', label: 'Teams on Kairo' },
 ];
 ---
 
@@ -39,7 +40,9 @@ const facts = [
     {facts.map((fact) => (
       <div data-reveal>
         <dt class="text-sm text-mute">{fact.label}</dt>
-        <dd class="mt-2 font-display text-subtitle font-bold text-bone">{fact.value}</dd>
+        <dd class="mt-2 font-display text-title font-bold text-bone">
+          <NumberFlow value={fact.value} from={fact.from} suffix={fact.suffix} grouping={fact.grouping} duration={2} />
+        </dd>
       </div>
     ))}
   </dl>
