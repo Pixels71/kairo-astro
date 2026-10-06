@@ -1,0 +1,95 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import Button from '@/components/shared/ui/button.astro';
+import Odometer from '@/components/shared/ui/odometer.astro';
+import { plans } from '@/data/pricing';
+import { cn } from '@/utils/cn';
+---
+
+<section class="shell pb-24 md:pb-32" data-pricing aria-labelledby="plans-title">
+  <h2 id="plans-title" class="sr-only">Plans</h2>
+  <div class="flex flex-col gap-6 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between" data-reveal>
+    <div
+      class="relative inline-flex rounded-full border border-line bg-ink-2 p-1"
+      role="radiogroup"
+      aria-label="Billing period">
+      <span
+        class="absolute inset-y-1 left-1 rounded-full bg-bone transition-[translate,width] duration-500 ease-(--ease-out-expo)"
+        data-billing-knob
+        aria-hidden="true"></span>
+      <button
+        type="button"
+        role="radio"
+        aria-checked="true"
+        class="relative z-10 h-10 rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 aria-checked:text-ink"
+        data-billing="monthly">Monthly</button
+      >
+      <button
+        type="button"
+        role="radio"
+        aria-checked="false"
+        class="relative z-10 flex h-10 items-center gap-2 rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 aria-checked:text-ink"
+        data-billing="yearly">
+        Yearly <span class="rounded-full bg-signal px-2 py-0.5 font-mono text-[0.6875rem] text-ink">-20%</span>
+      </button>
+    </div>
+    <p class="text-sm text-mute">Prices per workspace. Unlimited viewers on every plan.</p>
+  </div>
+
+  <div class="mt-10 grid grid-cols-1 gap-3 lg:grid-cols-3">
+    {
+      plans.map((plan) => (
+        <article
+          class={cn(
+            'relative flex flex-col border p-6 md:p-8',
+            plan.featured ? 'border-signal bg-ink-2' : 'border-line bg-ink',
+          )}
+          data-reveal>
+          <div class="flex items-center justify-between gap-4">
+            <h3 class="font-display text-subtitle font-bold text-bone">{plan.name}</h3>
+            {plan.featured && (
+              <span class="rounded-full bg-signal-soft px-3 py-1 font-mono text-[0.6875rem] text-signal uppercase">Most teams start here</span>
+            )}
+          </div>
+          <p class="mt-3 min-h-12 text-mute">{plan.description}</p>
+          <p class="mt-10 flex items-end gap-2">
+            <span class="font-display text-[clamp(3.5rem,5vw,4.75rem)] leading-[0.85] font-extrabold tracking-[-0.04em] text-bone">
+              <span class="sr-only" data-price-label>
+                ${plan.monthly} per month
+              </span>
+              <span aria-hidden="true" class="flex">
+                $
+                <Odometer value={String(plan.monthly)} class="[&_.odo-col]:[transition-duration:0.9s]" />
+              </span>
+            </span>
+            <span class="pb-1 text-sm text-mute" data-price-unit>
+              {plan.monthly === 0 ? 'free forever' : '/ month'}
+            </span>
+          </p>
+          <p class="mt-3 h-5 text-sm text-dim" data-price-note data-monthly={plan.monthly} data-yearly={plan.yearly}>
+            {plan.monthly === 0 ? 'No card needed' : 'Billed monthly'}
+          </p>
+          <div class="mt-8">
+            <Button
+              label={plan.cta}
+              href={plan.cta === 'Book a demo' ? '/pricing?intent=demo#sales' : plan.href}
+              variant={plan.featured ? 'signal' : 'outline'}
+              class="w-full"
+            />
+          </div>
+          <ul class="mt-10 flex flex-col gap-3 border-t border-line pt-8">
+            {plan.features.map((feature) => (
+              <li class="flex items-start gap-3 text-sm text-bone">
+                <Icon name="check" class="mt-0.5 text-signal" />
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+  <p class="mt-8 text-center text-sm text-mute" data-reveal>
+    Running more than ten teams? <a href="/pricing?intent=demo#sales" class="text-bone underline decoration-signal underline-offset-4">Talk to us about Enterprise</a>.
+  </p>
+</section>

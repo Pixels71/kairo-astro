@@ -1,0 +1,29 @@
+---
+import { cn } from '@/utils/cn';
+import { chars } from '@/utils/text';
+
+interface Props {
+  value: string;
+  class?: string;
+}
+
+const { value, class: className } = Astro.props;
+const digits = Array.from({ length: 10 }, (_, i) => i);
+let index = 0;
+---
+
+<span class={cn('odo', className)} data-odo aria-label={value} role="img">
+  {
+    chars(value).map((c) =>
+      /\d/.test(c) ? (
+        <span class="odo-col" data-digit={c} style={`--i:${index++}`} aria-hidden="true">
+          {digits.map((d) => (
+            <span>{d}</span>
+          ))}
+        </span>
+      ) : (
+        <span aria-hidden="true">{c}</span>
+      ),
+    )
+  }
+</span>

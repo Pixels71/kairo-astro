@@ -1,0 +1,35 @@
+---
+import { render } from 'astro:content';
+import Button from '@/components/shared/ui/button.astro';
+import type { Story } from '@/utils/collections';
+
+interface Props {
+  story: Story;
+}
+
+const { story } = Astro.props;
+const { Content } = await render(story);
+---
+
+<section class="shell pb-20 md:pb-28">
+  <div class="grid grid-cols-1 gap-14 lg:grid-cols-12">
+    <aside class="lg:col-span-4">
+      <div class="flex flex-col gap-8 lg:sticky lg:top-28" data-reveal>
+        <p class="text-lead text-bone">{story.data.summary}</p>
+        <figure class="border-l-2 border-signal pl-5">
+          <blockquote class="text-mute">
+            <p>&ldquo;{story.data.quote.text}&rdquo;</p>
+          </blockquote>
+          <figcaption class="mt-4 text-sm">
+            <span class="block text-bone">{story.data.quote.name}</span>
+            <span class="text-mute">{story.data.quote.role}, {story.data.client}</span>
+          </figcaption>
+        </figure>
+        <Button label="Start free" href="/pricing#sales" class="self-start" />
+      </div>
+    </aside>
+    <article class="prose-kairo lg:col-span-7 lg:col-start-6" data-reveal>
+      <Content />
+    </article>
+  </div>
+</section>

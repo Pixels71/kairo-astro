@@ -1,0 +1,189 @@
+---
+import { Image } from 'astro:assets';
+import BrandIcon from '@/components/shared/icons/brand-icon.astro';
+import Icon from '@/components/shared/icons/icon.astro';
+import { integrations } from '@/data/logos';
+import { resolveImage } from '@/utils/image';
+
+const W = 600;
+const H = 220;
+const count = 64;
+const spikeAt = 46;
+const series = Array.from({ length: count }, (_, i) => {
+  const base = 120 + Math.sin(i * 0.45) * 14 + Math.sin(i * 1.7) * 6 + Math.cos(i * 0.9) * 5;
+  const spike = Math.exp(-((i - spikeAt) ** 2) / 6) * 92;
+  return base - spike;
+});
+const x = (i: number) => (i / (count - 1)) * W;
+const line = series.map((y, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)} ${y.toFixed(1)}`).join(' ');
+const bandTop = series.map((_, i) => `${x(i).toFixed(1)} ${(120 + Math.sin(i * 0.45) * 14 - 26).toFixed(1)}`);
+const bandBottom = series
+  .map((_, i) => `${x(i).toFixed(1)} ${(120 + Math.sin(i * 0.45) * 14 + 26).toFixed(1)}`)
+  .reverse();
+const band = `M${bandTop.join(' L')} L${bandBottom.join(' L')} Z`;
+const anomaly = series
+  .slice(spikeAt - 6, spikeAt + 7)
+  .map((y, k) => `${k ? 'L' : 'M'}${x(spikeAt - 6 + k).toFixed(1)} ${y.toFixed(1)}`)
+  .join(' ');
+const peak = { x: x(spikeAt), y: series[spikeAt] };
+
+const orbit = integrations.map((icon, i) => {
+  const angle = (i / integrations.length) * Math.PI * 2 - Math.PI / 2;
+  return { icon, left: 50 + Math.cos(angle) * 40, top: 50 + Math.sin(angle) * 40 };
+});
+
+const priorities = [
+  { title: 'Enterprise renewals slipping', value: '$48k at risk' },
+  { title: 'Checkout errors in Germany', value: '212 orders' },
+  { title: 'Onboarding drop-off on step 3', value: '-9% this week' },
+];
+
+const brief =
+  'Checkout errors in Germany tripled after Tuesday’s release. 212 orders failed. Likely cause: the new address check. Suggested owner: Payments.';
+---
+
+<section id="capabilities" class="shell py-28 md:py-40" aria-labelledby="capabilities-title">
+  <h2 id="capabilities-title" class="max-w-[16ch] font-display text-title font-bold text-bone" data-split>
+    Everything it takes to act first.
+  </h2>
+
+  <div class="mt-14 grid grid-cols-1 gap-3 md:mt-20 md:grid-cols-2 lg:grid-cols-12">
+    <article
+      class="group relative flex min-h-[26rem] flex-col justify-between overflow-hidden border border-line bg-ink-2 p-6 md:col-span-2 md:p-8 lg:col-span-7"
+      data-reveal>
+      <div class="max-w-[34ch]">
+        <h3 class="font-display text-subtitle font-bold text-bone">Spots the shift</h3>
+        <p class="mt-3 text-mute">Every metric gets its own normal range. Kairo flags what breaks it, with the likely cause.</p>
+      </div>
+      <figure class="relative -mx-2 mt-8" data-chart>
+        <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full overflow-visible" role="img" aria-label="A metric line leaves its normal range in a sharp spike">
+          <path d={band} fill="var(--color-bone)" opacity="0.05"></path>
+          <path
+            d={line}
+            fill="none"
+            stroke="var(--color-bone)"
+            stroke-opacity="0.55"
+            stroke-width="1.5"
+            pathLength="1"
+            stroke-dasharray="1"
+            stroke-dashoffset="1"
+            data-chart-line></path>
+          <path
+            d={anomaly}
+            fill="none"
+            stroke="var(--color-signal)"
+            stroke-width="2.5"
+            pathLength="1"
+            stroke-dasharray="1"
+            stroke-dashoffset="1"
+            data-chart-anomaly></path>
+          <g opacity="0" data-chart-marker>
+            <circle cx={peak.x} cy={peak.y} r="16" fill="var(--color-signal)" opacity="0.18" class="chart-ping"></circle>
+            <circle cx={peak.x} cy={peak.y} r="4.5" fill="var(--color-signal)"></circle>
+          </g>
+          <line x1="0" x2="0" y1="0" y2={H} stroke="var(--color-bone)" stroke-opacity="0.18" data-chart-scan></line>
+        </svg>
+        <figcaption
+          class="absolute rounded-full bg-signal px-3 py-1 font-mono text-[0.6875rem] text-ink opacity-0"
+          style={`left:${(peak.x / W) * 100}%; top:${(peak.y / H) * 100}%; transform: translate(-50%, -190%)`}
+          data-chart-label>
+          Checkout errors 3x
+        </figcaption>
+      </figure>
+    </article>
+
+    <article
+      class="relative flex min-h-[26rem] flex-col justify-between overflow-hidden border border-line bg-ink-2 p-6 md:p-8 lg:col-span-5"
+      data-reveal>
+      <Image
+        src={resolveImage('/images/capability-lights.jpg')}
+        alt=""
+        widths={[600, 1000]}
+        sizes="(min-width: 1024px) 40vw, 100vw"
+        class="absolute inset-0 size-full object-cover opacity-35"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/30 to-ink/90"></div>
+      <div class="relative max-w-[30ch]">
+        <h3 class="font-display text-subtitle font-bold text-bone">Plugs into your stack</h3>
+        <p class="mt-3 text-mute">Billing, CRM, support, product analytics and your warehouse. Read-only, connected in minutes.</p>
+      </div>
+      <div class="relative mx-auto mt-6 aspect-square w-full max-w-[17rem]" aria-label="Supported integrations" role="img">
+        <div class="absolute inset-[10%] rounded-full border border-dashed border-line-strong"></div>
+        <div class="absolute inset-0 animate-[spin_48s_linear_infinite]">
+          {
+            orbit.map((item) => (
+              <span
+                class="absolute grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-ink/80 text-bone backdrop-blur"
+                style={`left:${item.left}%; top:${item.top}%`}>
+                <span class="grid animate-[spin_48s_linear_infinite_reverse] place-items-center">
+                  <BrandIcon icon={item.icon} class="size-5" label={false} />
+                </span>
+              </span>
+            ))
+          }
+        </div>
+        <div class="absolute inset-0 grid place-items-center">
+          <span class="grid size-16 place-items-center rounded-full bg-signal text-ink">
+            <svg viewBox="0 0 32 32" class="size-8" aria-hidden="true">
+              <circle cx="16" cy="16" r="11" fill="none" stroke="currentColor" stroke-width="2.2"></circle>
+              <circle cx="16" cy="5" r="3.2" fill="var(--color-ink)"></circle>
+            </svg>
+          </span>
+        </div>
+      </div>
+    </article>
+
+    <article class="flex min-h-[24rem] flex-col justify-between border border-line bg-ink-2 p-6 md:p-8 lg:col-span-4" data-reveal>
+      <div>
+        <h3 class="font-display text-subtitle font-bold text-bone">Ranks by impact</h3>
+        <p class="mt-3 text-mute">Changes are sorted by what they cost, so the biggest one is always on top.</p>
+      </div>
+      <ul class="mt-8 flex flex-col gap-2" data-priority>
+        {
+          priorities.map((item, i) => (
+            <li
+              class="flex items-center justify-between gap-4 border border-line bg-ink-3 px-4 py-3 data-[top=true]:border-signal/60"
+              data-priority-item
+              data-top={i === 0 ? 'true' : 'false'}>
+              <span class="truncate text-sm text-bone">{item.title}</span>
+              <span class="shrink-0 font-mono text-xs text-mute">{item.value}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </article>
+
+    <article class="flex min-h-[24rem] flex-col justify-between bg-signal p-6 text-ink md:p-8 lg:col-span-4" data-reveal>
+      <div>
+        <h3 class="font-display text-subtitle font-bold">Writes the brief</h3>
+        <p class="mt-3 text-ink/75">One short message with the cause, the size and an owner. Sent where that person works.</p>
+      </div>
+      <p class="mt-8 min-h-[7.5rem] border-t border-ink/20 pt-5 font-mono text-[0.8125rem] leading-relaxed" data-type={brief}>
+        <span data-type-text>{brief}</span><span
+          class="ml-0.5 inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] animate-pulse bg-ink"
+          aria-hidden="true"></span>
+      </p>
+    </article>
+
+    <article
+      class="relative flex min-h-[24rem] flex-col justify-between overflow-hidden border border-line bg-ink-2 p-6 md:col-span-2 md:p-8 lg:col-span-4"
+      data-reveal>
+      <div
+        class="absolute inset-0 opacity-60 [background-image:radial-gradient(var(--color-line-strong)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(circle_at_50%_70%,#000,transparent_70%)]"
+        aria-hidden="true">
+      </div>
+      <div class="relative">
+        <h3 class="font-display text-subtitle font-bold text-bone">Private by default</h3>
+        <p class="mt-3 text-mute">SSO, audit logs and field-level redaction. Your data never trains shared models.</p>
+      </div>
+      <div class="relative mx-auto mt-8 grid size-36 place-items-center">
+        <svg viewBox="0 0 100 100" class="absolute inset-0 size-full animate-[spin_24s_linear_infinite]" aria-hidden="true">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="var(--color-signal)" stroke-width="0.8" stroke-dasharray="2 6"></circle>
+        </svg>
+        <span class="grid size-20 place-items-center rounded-full border border-line-strong bg-ink text-bone">
+          <Icon name="shield" class="size-8" />
+        </span>
+      </div>
+    </article>
+  </div>
+</section>

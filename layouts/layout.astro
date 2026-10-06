@@ -1,0 +1,128 @@
+---
+import '@/styles/global.css';
+import { Font } from 'astro:assets';
+import Footer from '@/components/shared/layout/footer.astro';
+import Loader from '@/components/shared/layout/loader.astro';
+import Menu from '@/components/shared/layout/menu.astro';
+import Navbar from '@/components/shared/layout/navbar.astro';
+import Transition from '@/components/shared/layout/transition.astro';
+import ViewChip from '@/components/shared/layout/view-chip.astro';
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME } from '@/utils/generate-meta-data';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, image } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#0b0c0b" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="generator" content={Astro.generator} />
+    <Font cssVariable="--font-display-face" preload />
+    <Font cssVariable="--font-body-face" preload />
+    <Font cssVariable="--font-mono-face" />
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        root.classList.add('js');
+        try {
+          if (sessionStorage.getItem('kairo:transition')) root.classList.add('is-arriving');
+          else if (!sessionStorage.getItem('kairo:loaded')) root.classList.add('is-loading');
+        } catch (e) {}
+      })();
+    </script>
+    <style is:inline>
+      html.is-loading [data-loader] {
+        display: block;
+      }
+      html.is-arriving [data-transition] {
+        visibility: visible;
+      }
+      [data-transition-col] {
+        transform: translateY(101%);
+      }
+      html.is-arriving [data-transition-col] {
+        transform: none;
+      }
+      .js [data-intro] {
+        opacity: 0;
+      }
+      .js [data-hero-line] > * {
+        transform: translateY(110%);
+      }
+      .js [data-split],
+      .js [data-words] {
+        visibility: hidden;
+      }
+      .js [data-reveal] {
+        opacity: 0;
+        transform: translateY(2.5rem);
+      }
+      .js [data-reveal-media] {
+        clip-path: inset(100% 0 0 0);
+      }
+      .js [data-nav-item] {
+        opacity: 0;
+      }
+      .js [data-product-media] {
+        clip-path: inset(30% 33% 30% 33%);
+      }
+      .js [data-product-caption],
+      .js [data-product-shade] {
+        opacity: 0;
+      }
+      @media (max-width: 767px) {
+        .js [data-product-media] {
+          clip-path: inset(30% 12% 30% 12%);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="fixed top-3 left-3 z-[110] -translate-y-24 rounded-full bg-bone px-4 py-2 text-sm text-ink focus:translate-y-0"
+      >Skip to content</a
+    >
+    <Loader />
+    <Transition />
+    <Navbar />
+    <Menu />
+    <ViewChip />
+    <div class="relative z-10 bg-ink" data-page>
+      <main id="main">
+        <slot />
+      </main>
+    </div>
+    <Footer />
+    <script>
+      import '@/components/animation/main';
+    </script>
+  </body>
+</html>

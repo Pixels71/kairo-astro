@@ -1,0 +1,60 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import { compareGroups, plans } from '@/data/pricing';
+---
+
+<section class="shell pb-24 md:pb-36" aria-labelledby="compare-title">
+  <h2 id="compare-title" class="max-w-[16ch] font-display text-title font-bold text-bone" data-split>Compare every plan.</h2>
+  <div class="no-scrollbar -mx-4 mt-14 overflow-x-auto px-4 md:mx-0 md:px-0" data-reveal>
+    <table class="w-full min-w-[640px] border-collapse text-left">
+      <caption class="sr-only">Feature comparison across plans</caption>
+      <thead class="sticky top-0">
+        <tr>
+          <th scope="col" class="w-2/5 pb-6 font-normal text-mute">Feature</th>
+          {
+            plans.map((plan) => (
+              <th scope="col" class="pb-6 font-display text-xl font-bold text-bone">
+                {plan.name}
+              </th>
+            ))
+          }
+        </tr>
+      </thead>
+      {
+        compareGroups.map((group) => (
+          <tbody>
+            <tr>
+              <th scope="colgroup" colspan="4" class="border-t border-line-strong pt-10 pb-4 font-mono text-label font-normal text-signal uppercase">
+                {group.title}
+              </th>
+            </tr>
+            {group.rows.map((row) => (
+              <tr class="transition-colors duration-300 hover:bg-ink-2">
+                <th scope="row" class="py-3.5 pr-6 font-normal text-bone">
+                  {row.feature}
+                </th>
+                {row.values.map((value) => (
+                  <td class="py-3.5 text-mute">
+                    {value === true ? (
+                      <>
+                        <Icon name="check" class="text-signal" />
+                        <span class="sr-only">Included</span>
+                      </>
+                    ) : value === false ? (
+                      <>
+                        <Icon name="minus" class="text-dim" />
+                        <span class="sr-only">Not included</span>
+                      </>
+                    ) : (
+                      <span class="text-bone">{value}</span>
+                    )}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        ))
+      }
+    </table>
+  </div>
+</section>

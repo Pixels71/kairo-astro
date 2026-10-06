@@ -1,0 +1,34 @@
+---
+import Media from '@/components/shared/ui/media.astro';
+import Odometer from '@/components/shared/ui/odometer.astro';
+
+const results = [
+  { value: '9', suffix: ' days', label: 'earlier warning on the problems that matter, on average' },
+  { value: '3', suffix: ' in 4', label: 'briefs acted on within one working day' },
+  { value: '20', suffix: ' min', label: 'from sign-up to the first connected source' },
+];
+---
+
+<section class="relative isolate overflow-hidden py-28 md:py-40" aria-labelledby="results-title">
+  <Media src="/images/gallery-corridor.jpg" alt="" class="absolute inset-0 -z-20" imgClass="opacity-30" sizes="100vw" parallax={0.25} reveal={false} />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/60 to-ink" aria-hidden="true"></div>
+  <div class="shell">
+    <h2 id="results-title" class="max-w-[18ch] font-display text-title font-bold text-bone" data-split>
+      What changes in the first ninety days.
+    </h2>
+    <dl class="mt-16 grid grid-cols-1 border-line md:mt-24 md:grid-cols-3 md:divide-x md:divide-line">
+      {
+        results.map((result) => (
+          <div class="border-t border-line py-8 md:border-t-0 md:px-8 md:py-2 md:first:pl-0" data-reveal>
+            <dt class="sr-only">{result.label}</dt>
+            <dd class="flex items-baseline font-display text-display font-extrabold text-bone">
+              <Odometer value={result.value} />
+              <span class="ml-2 text-subtitle font-bold text-signal">{result.suffix.trim()}</span>
+            </dd>
+            <dd class="mt-4 max-w-[28ch] text-mute">{result.label}</dd>
+          </div>
+        ))
+      }
+    </dl>
+  </div>
+</section>

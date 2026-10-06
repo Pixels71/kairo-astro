@@ -1,0 +1,47 @@
+---
+import arrowDown from '@phosphor-icons/core/regular/arrow-down.svg?raw';
+import arrowLeft from '@phosphor-icons/core/regular/arrow-left.svg?raw';
+import arrowRight from '@phosphor-icons/core/regular/arrow-right.svg?raw';
+import arrowUp from '@phosphor-icons/core/regular/arrow-up.svg?raw';
+import arrowUpRight from '@phosphor-icons/core/regular/arrow-up-right.svg?raw';
+import check from '@phosphor-icons/core/regular/check.svg?raw';
+import githubLogo from '@phosphor-icons/core/regular/github-logo.svg?raw';
+import linkedinLogo from '@phosphor-icons/core/regular/linkedin-logo.svg?raw';
+import lockKey from '@phosphor-icons/core/regular/lock-key.svg?raw';
+import minus from '@phosphor-icons/core/regular/minus.svg?raw';
+import plus from '@phosphor-icons/core/regular/plus.svg?raw';
+import shieldCheck from '@phosphor-icons/core/regular/shield-check.svg?raw';
+import sparkle from '@phosphor-icons/core/regular/sparkle.svg?raw';
+import x from '@phosphor-icons/core/regular/x.svg?raw';
+import xLogo from '@phosphor-icons/core/regular/x-logo.svg?raw';
+import { cn } from '@/utils/cn';
+
+const icons = {
+  'arrow-down': arrowDown,
+  'arrow-left': arrowLeft,
+  'arrow-right': arrowRight,
+  'arrow-up': arrowUp,
+  'arrow-up-right': arrowUpRight,
+  check,
+  github: githubLogo,
+  linkedin: linkedinLogo,
+  lock: lockKey,
+  minus,
+  plus,
+  shield: shieldCheck,
+  sparkle,
+  x,
+  'x-logo': xLogo,
+};
+
+export type IconName = keyof typeof icons;
+
+interface Props {
+  name: IconName;
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<span class={cn('icon inline-block size-4 shrink-0', className)} aria-hidden="true" set:html={icons[name]} />

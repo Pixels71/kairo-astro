@@ -1,0 +1,41 @@
+@theme {
+  --color-ink: #0b0c0b;
+  --color-ink-2: #121312;
+  --color-ink-3: #1b1c1a;
+  --color-line: rgb(235 233 226 / 0.12);
+  --color-line-strong: rgb(235 233 226 / 0.24);
+  --color-bone: #ebe9e2;
+  --color-mute: #a3a199;
+  --color-dim: #75736c;
+  --color-signal: #ff5b1f;
+  --color-signal-soft: rgb(255 91 31 / 0.14);
+
+  --font-display: var(--font-display-face), sans-serif;
+  --font-body: var(--font-body-face), sans-serif;
+  --font-mono: var(--font-mono-face), monospace;
+
+  --text-hero: clamp(3.25rem, 11.4vw, 15rem);
+  --text-hero--line-height: 0.9;
+  --text-hero--letter-spacing: -0.045em;
+  --text-display: clamp(2.75rem, 6.4vw, 7.5rem);
+  --text-display--line-height: 0.92;
+  --text-display--letter-spacing: -0.04em;
+  --text-title: clamp(2.25rem, 4.4vw, 4.75rem);
+  --text-title--line-height: 0.98;
+  --text-title--letter-spacing: -0.035em;
+  --text-subtitle: clamp(1.5rem, 2.2vw, 2.25rem);
+  --text-subtitle--line-height: 1.08;
+  --text-subtitle--letter-spacing: -0.02em;
+  --text-lead: clamp(1.0625rem, 1.2vw, 1.25rem);
+  --text-lead--line-height: 1.5;
+  --text-label: 0.75rem;
+  --text-label--line-height: 1.2;
+  --text-label--letter-spacing: 0.06em;
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.35, 0.64, 1);
+
+  --breakpoint-xs: 30rem;
+}

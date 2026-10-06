@@ -1,0 +1,25 @@
+<div class="pointer-events-none invisible fixed inset-0 z-[80]" data-transition aria-hidden="true">
+  <div class="absolute inset-0 flex">
+    {
+      Array.from({ length: 5 }).map(() => (
+        <div class="relative h-full flex-1 bg-ink-2" data-transition-col>
+          <span class="absolute inset-y-0 right-0 w-px bg-line" />
+        </div>
+      ))
+    }
+  </div>
+  <div class="absolute inset-0 grid place-items-center overflow-hidden px-4">
+    <div class="overflow-hidden pb-[0.08em]">
+      <span
+        class="block font-display text-display font-bold text-bone"
+        data-transition-label>Kairo</span>
+    </div>
+  </div>
+  <div class="absolute inset-x-0 bottom-0 h-0.5 origin-left bg-signal" style="transform: scaleX(0)" data-transition-bar></div>
+</div>
+<script is:inline>
+  try {
+    var pending = JSON.parse(sessionStorage.getItem('kairo:transition') || 'null');
+    if (pending && pending.label) document.querySelector('[data-transition-label]').textContent = pending.label;
+  } catch (e) {}
+</script>

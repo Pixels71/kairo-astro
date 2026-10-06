@@ -1,0 +1,27 @@
+---
+import Media from '@/components/shared/ui/media.astro';
+import { team } from '@/data/about';
+---
+
+<section class="shell pb-24 md:pb-36" aria-labelledby="team-title">
+  <h2 id="team-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>The people behind the briefs.</h2>
+  <ul class="mt-14 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:mt-20 lg:grid-cols-3 lg:[&>li:nth-child(3n+2)]:mt-24">
+    {
+      team.map((member) => (
+        <li class="group">
+          <Media
+            src={member.image}
+            alt={`Portrait of ${member.name}`}
+            class="media-zoom aspect-[4/5]"
+            imgClass="grayscale transition-[filter,scale] duration-1000 group-hover:grayscale-0"
+            sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 100vw"
+          />
+          <div class="mt-5 flex items-baseline justify-between gap-4">
+            <h3 class="font-display text-xl font-bold tracking-[-0.02em] text-bone">{member.name}</h3>
+            <p class="text-right text-sm text-mute">{member.role}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

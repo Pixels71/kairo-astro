@@ -1,0 +1,48 @@
+---
+import Media from '@/components/shared/ui/media.astro';
+
+const lines = ['We build for', 'the minute before', 'it matters.'];
+const facts = [
+  { value: '2021', label: 'Founded in Berlin' },
+  { value: '64', label: 'People on the team' },
+  { value: '1,200+', label: 'Teams on Kairo' },
+];
+---
+
+<section class="shell pt-36 pb-20 md:pt-44 md:pb-28" aria-labelledby="about-title">
+  <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
+    <div class="lg:col-span-8">
+      <h1 id="about-title" class="font-display text-[clamp(3rem,8vw,10rem)] leading-[0.9] font-extrabold tracking-[-0.05em] text-bone">
+        {
+          lines.map((line, i) => (
+            <span class="block overflow-hidden pb-[0.06em]" data-hero-line>
+              <span class={i === 2 ? 'block text-signal' : 'block'}>{line}</span>
+            </span>
+          ))
+        }
+      </h1>
+      <p class="mt-10 max-w-[46ch] text-lead text-mute md:mt-14" data-intro>
+        Kairo started with a list of every problem our last company found out about too late. We are building the tool we
+        wished we had then.
+      </p>
+    </div>
+    <Media
+      src="/images/about-hero.jpg"
+      alt="A lone figure walking under a concrete overpass in black and white"
+      class="aspect-[4/5] lg:col-span-4 lg:mt-24"
+      sizes="(min-width: 1024px) 33vw, 100vw"
+      parallax={0.2}
+      priority
+    />
+  </div>
+  <dl class="mt-20 grid grid-cols-1 gap-8 border-t border-line pt-8 sm:grid-cols-3 md:mt-28">
+    {
+      facts.map((fact) => (
+        <div data-reveal>
+          <dt class="text-sm text-mute">{fact.label}</dt>
+          <dd class="mt-2 font-display text-subtitle font-bold text-bone">{fact.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>

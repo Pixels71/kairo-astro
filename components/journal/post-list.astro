@@ -1,0 +1,66 @@
+---
+import { Image } from 'astro:assets';
+import Icon from '@/components/shared/icons/icon.astro';
+import FilterBar from '@/components/shared/ui/filter-bar.astro';
+import type { Post } from '@/utils/collections';
+import { resolveImage } from '@/utils/image';
+import { formatDate } from '@/utils/text';
+
+interface Props {
+  posts: Post[];
+}
+
+const { posts } = Astro.props;
+const categories = [...new Set(posts.map((post) => post.data.category))];
+---
+
+<section class="shell pb-28 md:pb-40" data-filter data-list-preview aria-labelledby="posts-title">
+  <div class="flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-center md:justify-between" data-reveal>
+    <h2 id="posts-title" class="font-display text-subtitle font-bold text-bone">All writing</h2>
+    <FilterBar options={categories} label="Filter articles by topic" />
+  </div>
+  <ul class="mt-6" data-filter-grid>
+    {
+      posts.map((post) => (
+        <li data-filter-item data-category={post.data.category}>
+          <a
+            href={`/journal/${post.id}`}
+            class="group grid grid-cols-[1fr_auto] items-center gap-x-6 gap-y-2 border-b border-line py-7 md:grid-cols-12 md:py-9"
+            data-label="Journal"
+            data-preview={post.id}>
+            <span class="order-2 col-span-2 font-mono text-label text-mute uppercase md:order-none md:col-span-2">
+              {formatDate(post.data.date)}
+            </span>
+            <span class="col-span-1 font-display text-[clamp(1.5rem,2.6vw,2.5rem)] leading-[1.05] font-bold tracking-[-0.03em] text-bone transition-[translate,color] duration-700 ease-(--ease-out-expo) group-hover:translate-x-3 group-hover:text-signal md:col-span-7">
+              {post.data.title}
+            </span>
+            <span class="hidden font-mono text-label text-mute uppercase md:col-span-2 md:block">{post.data.category}</span>
+            <span class="grid size-10 place-items-center justify-self-end rounded-full border border-line text-bone transition-[background-color,color,rotate] duration-500 group-hover:-rotate-45 group-hover:bg-bone group-hover:text-ink md:col-span-1">
+              <Icon name="arrow-right" />
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-16 hidden text-mute" data-filter-empty>Nothing in this topic yet.</p>
+
+  <div
+    class="pointer-events-none fixed top-0 left-0 z-[55] hidden aspect-[4/5] w-[18rem] overflow-hidden [@media(hover:hover)_and_(pointer:fine)]:block"
+    style="transform: translate(-50%, -50%) scale(0)"
+    data-preview-frame
+    aria-hidden="true">
+    {
+      posts.map((post) => (
+        <Image
+          src={resolveImage(post.data.cover)}
+          alt=""
+          widths={[400, 600]}
+          sizes="18rem"
+          class="absolute inset-0 size-full object-cover opacity-0"
+          data-preview-image={post.id}
+        />
+      ))
+    }
+  </div>
+</section>

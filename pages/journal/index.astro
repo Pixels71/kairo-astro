@@ -1,0 +1,23 @@
+---
+import FeaturedPost from '@/components/journal/featured-post.astro';
+import PostList from '@/components/journal/post-list.astro';
+import PageHero from '@/components/shared/page-hero.astro';
+import Layout from '@/layouts/layout.astro';
+import { getPosts } from '@/utils/collections';
+import { pageTitle } from '@/utils/generate-meta-data';
+
+const posts = await getPosts();
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const rest = posts.filter((post) => post.id !== featured.id);
+---
+
+<Layout
+  title={pageTitle('Journal')}
+  description="Writing from the Kairo team on operations, anomaly detection and the craft of telling people what matters.">
+  <PageHero
+    lines={['Notes on', 'acting early.']}
+    intro="Essays and research from the team building Kairo, on operations, signal detection and writing briefs people read."
+  />
+  <FeaturedPost post={featured} />
+  <PostList posts={rest} />
+</Layout>

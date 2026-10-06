@@ -1,0 +1,37 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import Media from '@/components/shared/ui/media.astro';
+import type { Story } from '@/utils/collections';
+
+interface Props {
+  story: Story;
+}
+
+const { story } = Astro.props;
+---
+
+<section class="border-t border-line" aria-label="Next story">
+  <a
+    href={`/customers/${story.id}`}
+    class="group shell grid grid-cols-1 items-center gap-10 py-20 md:grid-cols-12 md:py-28"
+    data-label={story.data.client}>
+    <div class="md:col-span-7">
+      <p class="font-mono text-label text-mute uppercase">Next story</p>
+      <p
+        class="mt-6 font-display text-display font-extrabold text-bone transition-colors duration-500 group-hover:text-signal">
+        {story.data.client}
+      </p>
+      <p class="mt-6 max-w-[40ch] text-mute">{story.data.summary}</p>
+      <span
+        class="mt-10 inline-grid size-14 place-items-center rounded-full border border-line-strong text-bone transition-[background-color,color,rotate] duration-500 ease-(--ease-out-expo) group-hover:rotate-45 group-hover:bg-bone group-hover:text-ink">
+        <Icon name="arrow-up-right" class="size-5" />
+      </span>
+    </div>
+    <div class="md:col-span-5">
+      <div
+        class="overflow-hidden transition-[clip-path] duration-1000 ease-(--ease-in-out-quart) [clip-path:inset(12%_12%_12%_12%)] group-hover:[clip-path:inset(0%_0%_0%_0%)]">
+        <Media src={story.data.cover} alt="" class="media-zoom aspect-[4/3]" sizes="(min-width: 768px) 40vw, 100vw" reveal={false} />
+      </div>
+    </div>
+  </a>
+</section>

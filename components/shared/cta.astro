@@ -1,0 +1,50 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import Media from '@/components/shared/ui/media.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+
+interface Props {
+  title?: string;
+  body?: string;
+}
+
+const {
+  title = 'Catch the next one before it lands.',
+  body = 'Connect your first source in twenty minutes. Free for small teams, no card needed.',
+} = Astro.props;
+---
+
+<section class="relative isolate overflow-hidden" data-cta aria-labelledby="cta-title">
+  <Media
+    src="/images/cta-spark.jpg"
+    alt=""
+    class="absolute inset-0 -z-20 bg-ink"
+    imgClass="object-[50%_18%] opacity-90"
+    sizes="100vw"
+    parallax={0.2}
+    reveal={false}
+  />
+  <div class="absolute inset-0 -z-10 bg-gradient-to-r from-ink via-ink/75 to-ink/10" aria-hidden="true"></div>
+  <div class="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-ink to-transparent" aria-hidden="true"></div>
+  <div class="shell flex min-h-[100dvh] flex-col justify-center gap-12 py-32 md:flex-row md:items-center md:justify-between">
+    <div>
+      <h2 id="cta-title" class="max-w-[11ch] font-display text-display font-extrabold text-bone" data-split>{title}</h2>
+      <p class="mt-8 max-w-[40ch] text-lead text-mute" data-reveal>{body}</p>
+    </div>
+    <div class="shrink-0 md:pr-[4vw]" data-reveal>
+      <span class="inline-flex" data-magnetic="0.45">
+        <a
+          href="/pricing#sales"
+          class="btn group size-40 flex-col gap-3 rounded-full bg-signal px-0 text-lg text-ink md:size-52 md:text-xl"
+          data-btn>
+          <span class="btn-fill bg-bone" aria-hidden="true"></span>
+          <span class="btn-icon size-6">
+            <Icon name="arrow-up-right" class="size-6" />
+            <Icon name="arrow-up-right" class="size-6" />
+          </span>
+          <TextRoll text="Start free" />
+        </a>
+      </span>
+    </div>
+  </div>
+</section>

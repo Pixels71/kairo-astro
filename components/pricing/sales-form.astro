@@ -1,0 +1,100 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import Media from '@/components/shared/ui/media.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+
+const sizes = ['1-10 people', '11-50 people', '51-200 people', '201-1,000 people', 'More than 1,000'];
+const field =
+  'h-13 w-full rounded-none border-0 border-b border-line-strong bg-transparent px-0 text-bone placeholder:text-dim transition-colors duration-300 focus:border-bone focus:outline-none aria-invalid:border-signal';
+---
+
+<section id="sales" class="relative scroll-mt-24 border-t border-line" aria-labelledby="sales-title">
+  <div class="shell grid grid-cols-1 gap-14 py-24 md:py-32 lg:grid-cols-12">
+    <div class="flex flex-col justify-between gap-10 lg:col-span-5">
+      <div>
+        <h2 id="sales-title" class="max-w-[12ch] font-display text-title font-bold text-bone" data-split>
+          Tell us where to start.
+        </h2>
+        <p class="mt-6 max-w-[40ch] text-mute" data-reveal>
+          Open a free workspace now, or book thirty minutes with someone who has set Kairo up for teams like yours.
+        </p>
+      </div>
+      <Media src="/images/gallery-window.jpg" alt="A laptop on a desk by a window at sunset" class="hidden aspect-[4/3] lg:block" sizes="40vw" />
+    </div>
+
+    <form class="lg:col-span-6 lg:col-start-7" novalidate data-sales-form>
+      <fieldset>
+        <legend class="font-mono text-label text-mute uppercase">I want to</legend>
+        <div class="mt-4 inline-flex rounded-full border border-line bg-ink-2 p-1">
+          <label class="relative cursor-pointer">
+            <input type="radio" name="intent" value="free" class="peer sr-only" checked data-intent-input />
+            <span class="flex h-10 items-center rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 peer-checked:bg-bone peer-checked:text-ink peer-focus-visible:outline-2 peer-focus-visible:outline-signal">
+              Start free
+            </span>
+          </label>
+          <label class="relative cursor-pointer">
+            <input type="radio" name="intent" value="demo" class="peer sr-only" data-intent-input />
+            <span class="flex h-10 items-center rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 peer-checked:bg-bone peer-checked:text-ink peer-focus-visible:outline-2 peer-focus-visible:outline-signal">
+              Book a demo
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
+      <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2" data-sales-fields>
+        <div class="flex flex-col gap-2">
+          <label for="sales-name" class="text-sm text-bone">Full name</label>
+          <input id="sales-name" name="name" autocomplete="name" required class={field} placeholder="Amara Diallo" aria-describedby="sales-name-error" />
+          <p id="sales-name-error" class="min-h-5 text-sm text-signal" data-error-for="name"></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-email" class="text-sm text-bone">Work email</label>
+          <input
+            id="sales-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            class={field}
+            placeholder="amara@company.com"
+            aria-describedby="sales-email-error"
+          />
+          <p id="sales-email-error" class="min-h-5 text-sm text-signal" data-error-for="email"></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-company" class="text-sm text-bone">Company</label>
+          <input id="sales-company" name="company" autocomplete="organization" required class={field} placeholder="Halden Freight" aria-describedby="sales-company-error" />
+          <p id="sales-company-error" class="min-h-5 text-sm text-signal" data-error-for="company"></p>
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="sales-size" class="text-sm text-bone">Company size</label>
+          <select id="sales-size" name="size" class={`${field} appearance-none bg-ink`}>
+            {sizes.map((size) => <option>{size}</option>)}
+          </select>
+          <p class="min-h-5 text-sm text-dim">Helps us pick the right person.</p>
+        </div>
+        <div class="flex flex-col gap-2 md:col-span-2" data-demo-only hidden>
+          <label for="sales-message" class="text-sm text-bone">What would you like Kairo to watch?</label>
+          <textarea id="sales-message" name="message" rows="3" class={`${field} h-auto resize-none py-3`} placeholder="Churn signals across our enterprise accounts"></textarea>
+        </div>
+      </div>
+
+      <div class="mt-12 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <button
+          type="submit"
+          class="btn group relative h-14 bg-signal px-8 text-ink disabled:opacity-70"
+          data-btn
+          data-sales-submit>
+          <span class="btn-fill bg-bone" aria-hidden="true"></span>
+          <span data-submit-label data-free="Create my workspace" data-demo="Request a demo"><TextRoll text="Create my workspace" /></span>
+          <span class="btn-icon" data-dir="right">
+            <Icon name="arrow-right" />
+            <Icon name="arrow-right" />
+          </span>
+        </button>
+        <p class="max-w-[30ch] text-sm text-mute">By continuing you agree to be contacted about Kairo. No spam.</p>
+      </div>
+      <p class="mt-6 min-h-6 text-sm" role="status" aria-live="polite" data-sales-status></p>
+    </form>
+  </div>
+</section>

@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import Media from '@/components/shared/ui/media.astro';
+import type { Post } from '@/utils/collections';
+import { resolveImage } from '@/utils/image';
+import { formatDate } from '@/utils/text';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<div class="fixed inset-x-0 top-0 z-[75] h-0.5 origin-left bg-signal" style="transform: scaleX(0)" data-reading-progress aria-hidden="true"></div>
+<header class="shell pt-36 md:pt-44">
+  <div class="mx-auto max-w-5xl">
+    <p class="font-mono text-label text-mute uppercase" data-intro>
+      <a href="/journal" class="text-bone hover:text-signal">Journal</a><span class="mx-2 text-dim">/</span>{post.data.category}
+    </p>
+    <h1 class="mt-6 font-display text-[clamp(2.5rem,6vw,6rem)] leading-[0.95] font-bold tracking-[-0.04em] text-bone" data-split="intro">
+      {post.data.title}
+    </h1>
+    <div class="mt-10 flex flex-wrap items-center justify-between gap-6 border-t border-line pt-6" data-intro>
+      <div class="flex items-center gap-3">
+        <Image
+          src={resolveImage(post.data.author.image)}
+          alt=""
+          widths={[96]}
+          sizes="44px"
+          class="size-11 rounded-full object-cover grayscale"
+        />
+        <div class="text-sm">
+          <p class="text-bone">{post.data.author.name}</p>
+          <p class="text-mute">{post.data.author.role}</p>
+        </div>
+      </div>
+      <p class="text-sm text-mute">
+        {formatDate(post.data.date)}<span class="mx-2 text-dim">/</span>{post.data.readTime}
+      </p>
+    </div>
+  </div>
+  <Media src={post.data.cover} alt="" class="mt-14 aspect-[16/9] md:mt-20 md:aspect-[21/9]" sizes="100vw" parallax={0.2} priority />
+</header>

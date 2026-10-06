@@ -1,0 +1,117 @@
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-ink);
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-bone);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-signal);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-signal);
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  .prose-kairo {
+    max-width: 68ch;
+    color: var(--color-mute);
+    font-size: var(--text-lead);
+    line-height: 1.65;
+  }
+
+  .prose-kairo > * + * {
+    margin-top: 1.25em;
+  }
+
+  .prose-kairo h2 {
+    margin-top: 2.4em;
+    color: var(--color-bone);
+    font-size: var(--text-subtitle);
+    line-height: var(--text-subtitle--line-height);
+    letter-spacing: var(--text-subtitle--letter-spacing);
+  }
+
+  .prose-kairo h3 {
+    margin-top: 2em;
+    color: var(--color-bone);
+    font-size: 1.375rem;
+    line-height: 1.2;
+  }
+
+  .prose-kairo strong {
+    color: var(--color-bone);
+    font-weight: 600;
+  }
+
+  .prose-kairo a {
+    color: var(--color-bone);
+    text-decoration: underline;
+    text-decoration-color: var(--color-signal);
+    text-underline-offset: 0.2em;
+  }
+
+  .prose-kairo ul {
+    list-style: none;
+    padding-left: 0;
+  }
+
+  .prose-kairo li {
+    position: relative;
+    padding-left: 1.5em;
+  }
+
+  .prose-kairo li + li {
+    margin-top: 0.6em;
+  }
+
+  .prose-kairo li::before {
+    content: '';
+    position: absolute;
+    top: 0.75em;
+    left: 0;
+    width: 0.75em;
+    height: 1px;
+    background-color: var(--color-signal);
+  }
+
+  .prose-kairo blockquote {
+    margin-block: 2em;
+    border-left: 2px solid var(--color-signal);
+    padding-left: 1.25em;
+    color: var(--color-bone);
+    font-family: var(--font-display);
+    font-size: var(--text-subtitle);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+}

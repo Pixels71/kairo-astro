@@ -1,0 +1,18 @@
+---
+import { render } from 'astro:content';
+import type { Post } from '@/utils/collections';
+
+interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<article class="shell py-20 md:py-28" data-reading-body>
+  <div class="prose-kairo mx-auto" data-reveal>
+    <p class="text-[1.375rem] leading-normal text-bone">{post.data.excerpt}</p>
+    <Content />
+  </div>
+</article>

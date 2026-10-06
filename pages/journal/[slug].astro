@@ -1,0 +1,31 @@
+---
+import PostBody from '@/components/journal-details/post-body.astro';
+import PostHeader from '@/components/journal-details/post-header.astro';
+import RelatedPosts from '@/components/journal-details/related-posts.astro';
+import Cta from '@/components/shared/cta.astro';
+import Layout from '@/layouts/layout.astro';
+import { getPosts, type Post } from '@/utils/collections';
+import { pageTitle } from '@/utils/generate-meta-data';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post, i) => ({
+    params: { slug: post.id },
+    props: { post, related: [posts[(i + 1) % posts.length], posts[(i + 2) % posts.length]] },
+  }));
+}
+
+interface Props {
+  post: Post;
+  related: Post[];
+}
+
+const { post, related } = Astro.props;
+---
+
+<Layout title={pageTitle(post.data.title)} description={post.data.excerpt}>
+  <PostHeader post={post} />
+  <PostBody post={post} />
+  <RelatedPosts posts={related} />
+  <Cta />
+</Layout>

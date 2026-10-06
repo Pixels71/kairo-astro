@@ -1,0 +1,127 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+import { footerGroups, socialLinks } from '@/data/footer';
+import { chars } from '@/utils/text';
+---
+
+<footer class="relative z-0 overflow-hidden bg-ink-2 lg:sticky lg:bottom-0" data-footer>
+  <div class="shell pt-20 md:pt-24" data-footer-inner>
+    <div class="grid grid-cols-1 gap-14 md:grid-cols-12">
+      <div class="md:col-span-6 lg:col-span-5">
+        <h2 class="max-w-[14ch] font-display text-subtitle font-bold text-bone">
+          One short email a week on acting before it is too late.
+        </h2>
+        <form class="mt-8 max-w-md" data-newsletter novalidate>
+          <label for="newsletter-email" class="font-mono text-label text-mute uppercase">Work email</label>
+          <div
+            class="mt-3 flex items-center gap-2 rounded-full border border-line-strong bg-ink p-1.5 pl-5 transition-colors duration-300 focus-within:border-bone data-[state=error]:border-signal"
+            data-newsletter-field>
+            <input
+              id="newsletter-email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              placeholder="you@company.com"
+              class="min-w-0 flex-1 bg-transparent text-bone placeholder:text-dim focus:outline-none"
+              aria-describedby="newsletter-status"
+            />
+            <button
+              type="submit"
+              class="group relative grid size-11 shrink-0 place-items-center overflow-hidden rounded-full bg-bone text-ink transition-[scale] duration-300 active:scale-95"
+              aria-label="Subscribe"
+              data-newsletter-submit>
+              <span class="btn-icon" data-dir="right">
+                <Icon name="arrow-right" />
+                <Icon name="arrow-right" />
+              </span>
+            </button>
+          </div>
+          <p id="newsletter-status" class="mt-3 min-h-6 text-sm text-mute" role="status" data-newsletter-status>
+            No spam. Unsubscribe in one click.
+          </p>
+        </form>
+      </div>
+      <div class="grid grid-cols-2 gap-10 md:col-span-6 lg:col-span-5 lg:col-start-8 lg:grid-cols-3">
+        {
+          footerGroups.map((group) => (
+            <div>
+              <h3 class="font-mono text-label font-normal text-mute uppercase">{group.title}</h3>
+              <ul class="mt-5 flex flex-col gap-3">
+                {group.links.map((link) => (
+                  <li>
+                    <a href={link.href} class="group inline-flex text-bone">
+                      <TextRoll text={link.label} />
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
+        <div>
+          <h3 class="font-mono text-label font-normal text-mute uppercase">Follow</h3>
+          <ul class="mt-5 flex flex-col gap-3">
+            {
+              socialLinks.map((social) => (
+                <li>
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener"
+                    aria-label={social.label}
+                    class="group inline-flex items-center gap-2 text-bone">
+                    <Icon name={social.icon === 'x' ? 'x-logo' : social.icon} class="text-mute" />
+                    <TextRoll text={social.icon === 'x' ? 'X' : social.icon === 'linkedin' ? 'LinkedIn' : 'GitHub'} />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-20 flex items-center justify-between gap-6 border-t border-line pt-6 text-sm text-mute md:mt-20">
+      <p>&copy; 2026 Kairo Labs, Inc.</p>
+      <button type="button" class="group flex items-center gap-3 text-bone" data-back-top aria-label="Back to top">
+        <span class="hidden sm:inline"><TextRoll text="Back to top" /></span>
+        <span class="relative grid size-11 place-items-center">
+          <svg viewBox="0 0 44 44" class="absolute inset-0 size-full -rotate-90" aria-hidden="true">
+            <circle cx="22" cy="22" r="21" fill="none" stroke="var(--color-line-strong)" stroke-width="1"></circle>
+            <circle
+              cx="22"
+              cy="22"
+              r="21"
+              fill="none"
+              stroke="var(--color-signal)"
+              stroke-width="1.5"
+              pathLength="1"
+              stroke-dasharray="1"
+              stroke-dashoffset="1"
+              data-back-top-ring></circle>
+          </svg>
+          <span class="btn-icon" data-dir="up">
+            <Icon name="arrow-up" />
+            <Icon name="arrow-up" />
+          </span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <div class="relative mt-6 overflow-hidden" aria-hidden="true">
+    <p
+      class="-ml-[0.04em] flex justify-center font-display text-[30.5vw] leading-[0.7] font-extrabold tracking-[-0.075em] text-bone"
+      data-footer-word>
+      {
+        chars('KAIRO').map((c) => (
+          <span class="inline-block transition-colors duration-500 hover:text-signal" data-footer-letter>
+            {c}
+          </span>
+        ))
+      }
+    </p>
+  </div>
+</footer>

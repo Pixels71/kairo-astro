@@ -1,0 +1,20 @@
+---
+import ResultsBand from '@/components/customers/results-band.astro';
+import StoryGrid from '@/components/customers/story-grid.astro';
+import Cta from '@/components/shared/cta.astro';
+import PageHero from '@/components/shared/page-hero.astro';
+import Layout from '@/layouts/layout.astro';
+import { pageTitle } from '@/utils/generate-meta-data';
+---
+
+<Layout
+  title={pageTitle('Customers')}
+  description="How freight networks, labs, energy operators and payment companies use Kairo to act on problems while they are still small.">
+  <PageHero
+    lines={['Stories from teams', 'that moved first.']}
+    intro="Six operators on what changed when they stopped waiting for the monthly review to tell them what went wrong."
+  />
+  <StoryGrid />
+  <ResultsBand />
+  <Cta title="Be the next story." body="Most teams see their first useful brief within a week of connecting." />
+</Layout>

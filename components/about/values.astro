@@ -1,0 +1,23 @@
+---
+import { values } from '@/data/about';
+---
+
+<section class="shell py-24 md:py-36" aria-labelledby="values-title">
+  <h2 id="values-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>What we hold ourselves to.</h2>
+  <ul class="mt-14 md:mt-20">
+    {
+      values.map((value) => (
+        <li class="group border-t border-line last:border-b" tabindex="0" data-reveal>
+          <div class="grid grid-cols-1 gap-4 py-8 md:grid-cols-12 md:gap-6 md:py-10">
+            <h3 class="font-display text-[clamp(2rem,4.4vw,4.5rem)] leading-[1] font-bold tracking-[-0.04em] text-bone/45 transition-[color,translate] duration-700 ease-(--ease-out-expo) group-hover:translate-x-4 group-hover:text-bone group-focus:text-bone md:col-span-8 [@media(hover:none)]:text-bone">
+              {value.title}
+            </h3>
+            <div class="grid grid-rows-[1fr] transition-[grid-template-rows] duration-700 ease-(--ease-out-expo) md:col-span-4 md:grid-rows-[0fr] md:group-hover:grid-rows-[1fr] md:group-focus:grid-rows-[1fr] [@media(hover:none)]:grid-rows-[1fr]">
+              <p class="overflow-hidden text-mute">{value.body}</p>
+            </div>
+          </div>
+        </li>
+      ))
+    }
+  </ul>
+</section>

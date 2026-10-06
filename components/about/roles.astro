@@ -1,0 +1,36 @@
+---
+import Icon from '@/components/shared/icons/icon.astro';
+import { roles } from '@/data/about';
+---
+
+<section id="roles" class="scroll-mt-24 border-t border-line" aria-labelledby="roles-title">
+  <div class="shell grid grid-cols-1 gap-12 py-24 md:py-32 lg:grid-cols-12">
+    <div class="lg:col-span-4">
+      <h2 id="roles-title" class="max-w-[10ch] font-display text-title font-bold text-bone" data-split>Join the team.</h2>
+      <p class="mt-6 max-w-[34ch] text-mute" data-reveal>
+        Remote-first, with hubs in Berlin and London. We hire people who would rather fix it early.
+      </p>
+    </div>
+    <ul class="lg:col-span-7 lg:col-start-6">
+      {
+        roles.map((role) => (
+          <li data-reveal>
+            <a
+              href={`mailto:careers@kairo.app?subject=${encodeURIComponent(role.title)}`}
+              class="group grid grid-cols-[1fr_auto] items-center gap-4 border-b border-line py-6 md:grid-cols-12">
+              <span class="font-display text-xl font-bold tracking-[-0.02em] text-bone transition-colors duration-300 group-hover:text-signal md:col-span-6 md:text-2xl">
+                {role.title}
+              </span>
+              <span class="order-3 col-span-2 text-sm text-mute md:order-none md:col-span-5">
+                {role.team}<span class="mx-2 text-dim">/</span>{role.location}
+              </span>
+              <span class="grid size-10 place-items-center justify-self-end rounded-full border border-line text-bone transition-[background-color,color,rotate] duration-500 group-hover:rotate-45 group-hover:bg-bone group-hover:text-ink md:col-span-1">
+                <Icon name="arrow-up-right" />
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

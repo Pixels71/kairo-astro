@@ -1,0 +1,33 @@
+---
+import NextStory from '@/components/customers-details/next-story.astro';
+import StoryBody from '@/components/customers-details/story-body.astro';
+import StoryGallery from '@/components/customers-details/story-gallery.astro';
+import StoryHero from '@/components/customers-details/story-hero.astro';
+import StoryResults from '@/components/customers-details/story-results.astro';
+import Layout from '@/layouts/layout.astro';
+import { getStories, type Story } from '@/utils/collections';
+import { pageTitle } from '@/utils/generate-meta-data';
+
+export async function getStaticPaths() {
+  const stories = await getStories();
+  return stories.map((story, i) => ({
+    params: { slug: story.id },
+    props: { story, next: stories[(i + 1) % stories.length] },
+  }));
+}
+
+interface Props {
+  story: Story;
+  next: Story;
+}
+
+const { story, next } = Astro.props;
+---
+
+<Layout title={pageTitle(`${story.data.client} customer story`)} description={story.data.summary}>
+  <StoryHero story={story} />
+  <StoryResults story={story} />
+  <StoryBody story={story} />
+  <StoryGallery story={story} />
+  <NextStory story={next} />
+</Layout>

@@ -1,0 +1,27 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+  options: string[];
+  label: string;
+  class?: string;
+}
+
+const { options, label, class: className } = Astro.props;
+---
+
+<div class={cn('no-scrollbar -mx-4 overflow-x-auto px-4 md:mx-0 md:px-0', className)} role="group" aria-label={label}>
+  <div class="flex w-max items-center gap-2">
+    {
+      ['All', ...options].map((option, i) => (
+        <button
+          type="button"
+          class="h-10 rounded-full border border-line px-4 text-sm text-mute transition-[color,background-color,border-color,scale] duration-300 hover:border-line-strong hover:text-bone active:scale-95 aria-pressed:border-bone aria-pressed:bg-bone aria-pressed:text-ink"
+          aria-pressed={i === 0 ? 'true' : 'false'}
+          data-filter-button={option}>
+          {option}
+        </button>
+      ))
+    }
+  </div>
+</div>

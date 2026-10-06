@@ -1,0 +1,45 @@
+---
+import { Image } from 'astro:assets';
+import { cn } from '@/utils/cn';
+import { resolveImage } from '@/utils/image';
+
+interface Props {
+  src: string;
+  alt: string;
+  sizes?: string;
+  class?: string;
+  imgClass?: string;
+  reveal?: boolean;
+  parallax?: number;
+  priority?: boolean;
+  imgData?: Record<string, string>;
+}
+
+const {
+  src,
+  alt,
+  sizes = '(min-width: 1024px) 50vw, 100vw',
+  class: className,
+  imgClass,
+  reveal = true,
+  parallax,
+  priority = false,
+  imgData = {},
+} = Astro.props;
+const image = resolveImage(src);
+const widths = [480, 800, 1200, 1600, 2000].filter((w) => w <= image.width);
+---
+
+<div class={cn('relative overflow-hidden bg-ink-3', className)} data-reveal-media={reveal ? '' : undefined}>
+  <Image
+    src={image}
+    alt={alt}
+    widths={widths}
+    sizes={sizes}
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : undefined}
+    class={cn('absolute inset-0 size-full object-cover', parallax && 'scale-[1.18]', imgClass)}
+    data-parallax={parallax}
+    {...imgData}
+  />
+</div>

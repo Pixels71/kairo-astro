@@ -1,0 +1,28 @@
+---
+import BrandIcon from '@/components/shared/icons/brand-icon.astro';
+import { customerLogos } from '@/data/logos';
+---
+
+<section class="border-y border-line py-10 md:py-12" aria-label="Customers">
+  <div class="shell flex flex-col gap-8 md:flex-row md:items-center md:gap-14">
+    <p class="max-w-[18ch] shrink-0 text-sm text-mute" data-reveal>Trusted by teams who would rather hear it first</p>
+    <div
+      class="relative min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]"
+      data-marquee>
+      <div class="flex w-max" data-marquee-track>
+        {
+          [0, 1].map((copy) => (
+            <ul class="flex shrink-0 items-center gap-14 pr-14 md:gap-20 md:pr-20" aria-hidden={copy === 1 ? 'true' : undefined}>
+              {customerLogos.map((logo) => (
+                <li class="flex items-center gap-2.5 text-bone/55 transition-colors duration-500 hover:text-bone">
+                  <BrandIcon icon={logo} class="size-6" label={false} />
+                  <span class="font-display text-xl font-bold tracking-[-0.02em]">{logo.title}</span>
+                </li>
+              ))}
+            </ul>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

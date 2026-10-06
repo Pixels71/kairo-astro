@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Icon, { type IconName } from '@/components/shared/icons/icon.astro';
+import TextRoll from '@/components/shared/ui/text-roll.astro';
+import { cn } from '@/utils/cn';
+
+type Variant = 'signal' | 'bone' | 'outline';
+
+interface Props extends Omit<HTMLAttributes<'a'>, 'class'> {
+  label: string;
+  href?: string;
+  variant?: Variant;
+  icon?: IconName | false;
+  magnetic?: boolean;
+  type?: 'button' | 'submit';
+  class?: string;
+}
+
+const {
+  label,
+  href,
+  variant = 'signal',
+  icon = 'arrow-up-right',
+  magnetic = true,
+  type = 'button',
+  class: className,
+  ...rest
+} = Astro.props;
+
+const variants: Record<Variant, { base: string; fill: string }> = {
+  signal: { base: 'bg-signal text-ink', fill: 'bg-bone' },
+  bone: { base: 'bg-bone text-ink', fill: 'bg-signal' },
+  outline: { base: 'border border-line-strong text-bone hover:text-ink', fill: 'bg-bone' },
+};
+
+const classes = cn('btn group', variants[variant].base, className);
+const Tag = href ? 'a' : 'button';
+---
+
+<span class="inline-flex" data-magnetic={magnetic ? '' : undefined}>
+  <Tag href={href} type={href ? undefined : type} class={classes} data-btn {...rest}>
+    <span class={cn('btn-fill', variants[variant].fill)} aria-hidden="true"></span>
+    <TextRoll text={label} />
+    {
+      icon && (
+        <span class="btn-icon">
+          <Icon name={icon} />
+          <Icon name={icon} />
+        </span>
+      )
+    }
+  </Tag>
+</span>

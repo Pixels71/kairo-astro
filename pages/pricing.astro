@@ -1,0 +1,23 @@
+---
+import Compare from '@/components/pricing/compare.astro';
+import Faq from '@/components/pricing/faq.astro';
+import Plans from '@/components/pricing/plans.astro';
+import SalesForm from '@/components/pricing/sales-form.astro';
+import PageHero from '@/components/shared/page-hero.astro';
+import Layout from '@/layouts/layout.astro';
+import { pageTitle } from '@/utils/generate-meta-data';
+---
+
+<Layout
+  title={pageTitle('Pricing')}
+  description="Start free with five sources. Upgrade when Kairo is catching problems worth more than it costs.">
+  <PageHero
+    lines={['Start free.', 'Pay when it pays off.']}
+    accent={1}
+    intro="Every plan includes anomaly detection and weekly briefs. Upgrade for real-time alerts, deeper history and admin controls."
+  />
+  <Plans />
+  <Compare />
+  <Faq />
+  <SalesForm />
+</Layout>
