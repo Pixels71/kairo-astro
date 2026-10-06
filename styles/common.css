@@ -241,3 +241,8 @@ body::after {
 .group:focus-visible .pulse-underline {
   stroke-dashoffset: 0;
 }
+
+.pin-spacer > * {
+  will-change: transform;
+  backface-visibility: hidden;
+}

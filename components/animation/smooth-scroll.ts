@@ -9,6 +9,7 @@ export default function initSmoothScroll() {
   const lenis = new Lenis({ duration: 1.15, autoRaf: false });
   setLenis(lenis);
   lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add((time) => lenis.raf(time * 1000));
+  ScrollTrigger.config({ ignoreMobileResize: true });
+  gsap.ticker.add((time) => lenis.raf(time * 1000), false, true);
   gsap.ticker.lagSmoothing(0);
 }

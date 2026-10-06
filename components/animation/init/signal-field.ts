@@ -39,10 +39,9 @@ function createField(canvas: HTMLCanvasElement) {
   let last = performance.now();
 
   const resize = () => {
-    const box = canvas.getBoundingClientRect();
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    width = box.width;
-    height = box.height;
+    width = canvas.clientWidth;
+    height = canvas.clientHeight;
     canvas.width = Math.round(width * dpr);
     canvas.height = Math.round(height * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -190,10 +189,17 @@ function createField(canvas: HTMLCanvasElement) {
 
   document.addEventListener('visibilitychange', () => (document.hidden ? stop() : start()));
 
-  host.addEventListener('pointermove', (event) => {
+  const toLocal = (clientX: number, clientY: number) => {
     const box = canvas.getBoundingClientRect();
-    mouse.tx = event.clientX - box.left;
-    mouse.ty = event.clientY - box.top;
+    const scaleX = box.width / (width || 1);
+    const scaleY = box.height / (height || 1);
+    return { x: (clientX - box.left) / scaleX, y: (clientY - box.top) / scaleY, box };
+  };
+
+  host.addEventListener('pointermove', (event) => {
+    const point = toLocal(event.clientX, event.clientY);
+    mouse.tx = point.x;
+    mouse.ty = point.y;
     if (mouse.power < 0.05) {
       mouse.x = mouse.tx;
       mouse.y = mouse.ty;
@@ -205,15 +211,16 @@ function createField(canvas: HTMLCanvasElement) {
   });
   host.addEventListener('click', (event) => {
     if ((event.target as Element).closest('a, button')) return;
-    const box = canvas.getBoundingClientRect();
-    spawn(event.clientX - box.left, event.clientY - box.top);
+    const point = toLocal(event.clientX, event.clientY);
+    spawn(point.x, point.y);
   });
 
   document.addEventListener('kairo:pulse', (event) => {
     const { x, y } = (event as CustomEvent<{ x: number; y: number }>).detail;
-    const box = canvas.getBoundingClientRect();
+    const point = toLocal(x, y);
+    const box = point.box;
     if (x < box.left || x > box.right || y < box.top || y > box.bottom) return;
-    spawn(x - box.left, y - box.top);
+    spawn(point.x, point.y);
     nextPulse = clock + 2.6;
   });
 

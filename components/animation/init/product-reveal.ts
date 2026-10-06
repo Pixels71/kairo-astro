@@ -129,7 +129,6 @@ export default function init() {
       end: '+=320%',
       pin: true,
       scrub: 0.9,
-      anticipatePin: 1,
       invalidateOnRefresh: true,
       onRefresh: placeFrame,
       onUpdate: (self) => {
