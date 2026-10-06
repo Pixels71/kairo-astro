@@ -62,6 +62,9 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
       html.is-loading [data-loader] {
         display: block;
       }
+      html.is-loading [data-nav] [data-logo-mark] {
+        opacity: 0;
+      }
       html.is-arriving [data-transition] {
         visibility: visible;
       }

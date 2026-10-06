@@ -48,7 +48,14 @@ const frames = [
     <div class="absolute top-1/2 left-1/2 size-[min(62vw,24rem)] -translate-x-1/2 -translate-y-1/2">
       <div class="relative size-full" data-loader-ring>
         <svg viewBox="0 0 100 100" class="absolute inset-0 size-full -rotate-90 overflow-visible" aria-hidden="true">
-          <circle cx="50" cy="50" r="48" fill="none" stroke="var(--color-line-strong)" stroke-width="0.3"></circle>
+          <circle
+            cx="50"
+            cy="50"
+            r="48"
+            fill="none"
+            stroke="var(--color-line-strong)"
+            stroke-width="0.3"
+            data-loader-track></circle>
           <circle
             cx="50"
             cy="50"
@@ -62,7 +69,9 @@ const frames = [
             data-loader-arc></circle>
         </svg>
         <div class="absolute inset-0" data-loader-hand>
-          <span class="absolute top-[2%] left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal shadow-[0_0_24px_rgb(255_91_31/0.7)]"></span>
+          <span
+            class="absolute top-[2%] left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal shadow-[0_0_24px_rgb(255_91_31/0.7)]"
+            data-loader-dot></span>
         </div>
         <div class="absolute inset-[13%] overflow-hidden rounded-full bg-ink-3" data-loader-lens>
           {frames.map((frame) => (

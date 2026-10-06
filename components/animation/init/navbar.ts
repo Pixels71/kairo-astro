@@ -20,7 +20,8 @@ export default function init() {
       { opacity: 0, y: -24 },
       { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.08, clearProps: 'transform' },
     );
-    if (mark) gsap.fromTo(mark, { rotation: -180 }, { rotation: 0, duration: 1.6, ease: 'expo.out' });
+    if (mark && document.documentElement.dataset.ringHandoff === undefined)
+      gsap.fromTo(mark, { rotation: -180 }, { rotation: 0, duration: 1.6, ease: 'expo.out' });
   });
 
   if (pill && highlight) {

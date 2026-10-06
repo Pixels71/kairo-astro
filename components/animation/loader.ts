@@ -129,8 +129,65 @@ export default function playLoader(done: () => void) {
       'open+=0.15',
     )
     .to(modules, { opacity: 0, y: -12, duration: 0.5, ease: 'power2.in', stagger: 0.04 }, 'open+=0.1')
-    .to([ring, readout], { opacity: 0, scale: 1.25, duration: 0.9, ease: 'power3.in' }, 'open+=0.15')
-    .set(content, { opacity: 0 }, 'open+=1.1');
+    .to(readout, { opacity: 0, y: 16, duration: 0.5, ease: 'power3.in' }, 'open+=0.1');
+
+  const mark = $('[data-nav] [data-logo-mark]');
+  const track = $('[data-loader-track]', loader);
+  const dot = $('[data-loader-dot]', loader);
+  if (ring && mark && arc) {
+    const flight = () => {
+      const from = ring.getBoundingClientRect();
+      const to = mark.getBoundingClientRect();
+      const scale = (to.width * (25 / 32)) / (from.width * 0.96);
+      return {
+        x: to.left + to.width / 2 - (from.left + from.width / 2),
+        y: to.top + to.height / 2 - (from.top + from.height / 2),
+        scale,
+        stroke: (to.width * (2 / 32)) / ((from.width * scale) / 100),
+        dot: (to.width * (7 / 32)) / ((dot?.offsetWidth || 14) * scale),
+      };
+    };
+    let path = flight();
+    tl.call(
+      () => {
+        path = flight();
+        root.dataset.ringHandoff = '';
+      },
+      [],
+      'open+=0.2',
+    )
+      .to(ring, { x: () => path.x, duration: 1.3, ease: 'power3.inOut' }, 'open+=0.25')
+      .to(ring, { y: () => path.y, duration: 1.3, ease: 'expo.inOut' }, 'open+=0.25')
+      .to(ring, { scale: () => path.scale, rotation: 0, duration: 1.3, ease: 'expo.inOut' }, 'open+=0.25')
+      .to(arc, { attr: { 'stroke-width': () => path.stroke }, duration: 1.3, ease: 'expo.inOut' }, 'open+=0.25')
+      .to(track, { opacity: 0, duration: 0.4 }, 'open+=0.25')
+      .to(hand, { rotation: 360, duration: 1.3, ease: 'expo.inOut' }, 'open+=0.25')
+      .to(
+        dot,
+        { scale: () => path.dot, boxShadow: '0 0 0 rgb(255 91 31 / 0)', duration: 1.3, ease: 'expo.inOut' },
+        'open+=0.25',
+      )
+      .call(
+        () => {
+          mark.style.opacity = '1';
+          gsap.set(ring, { opacity: 0 });
+          gsap.fromTo(
+            mark,
+            { scale: 1.25 },
+            { scale: 1, duration: 0.6, ease: 'back.out(3)', transformOrigin: '50% 50%' },
+          );
+        },
+        [],
+        'open+=1.55',
+      )
+      .set(content, { opacity: 0 }, 'open+=1.6');
+  } else {
+    tl.to(ring, { opacity: 0, scale: 1.25, duration: 0.9, ease: 'power3.in' }, 'open+=0.15').set(
+      content,
+      { opacity: 0 },
+      'open+=1.1',
+    );
+  }
 
   if (page) {
     tl.fromTo(
