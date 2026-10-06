@@ -4,7 +4,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 export default defineConfig({
   srcDir: './',
   site: 'https://kairo-astro.pixels71.workers.dev',
-  vite: { plugins: [tailwindcss()], optimizeDeps: { include: ['matter-js', 'number-flow'] } },
+  vite: { plugins: [tailwindcss()], optimizeDeps: { include: ['number-flow'] } },
   image: { responsiveStyles: false },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },
   fonts: [

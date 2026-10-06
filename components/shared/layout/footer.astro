@@ -116,25 +116,23 @@ import { chars } from '@/utils/text';
     </div>
   </div>
 
-  <div
-    class="relative mt-2 h-[clamp(12rem,21vw,23rem)] touch-pan-y overflow-hidden select-none"
-    data-footer-mark
-    aria-hidden="true">
+  <div class="relative mt-4 overflow-hidden" data-footer-mark aria-hidden="true">
     <p
-      class="absolute inset-x-0 bottom-0 flex justify-center font-display text-[24vw] leading-[0.74] font-extrabold tracking-[-0.06em] text-bone"
+      class="-ml-[0.04em] flex justify-center font-display text-[25vw] leading-[0.78] font-extrabold tracking-[-0.075em] text-bone"
       data-footer-word>
       {chars('KAIRO').map((c) => (
-        <span
-          class="inline-block cursor-grab transition-colors duration-300 will-change-transform active:cursor-grabbing data-[grab=true]:text-signal"
-          data-footer-letter>
-          {c}
+        <span class="relative inline-block overflow-hidden pt-[0.02em]" data-footer-cell>
+          <span class="block" data-footer-letter>
+            {c}
+          </span>
+          <span
+            class="absolute inset-x-0 top-[0.02em] block text-signal"
+            style="transform: translateY(105%)"
+            data-footer-alt>
+            {c}
+          </span>
         </span>
       ))}
-    </p>
-    <p
-      class="pointer-events-none absolute top-3 right-4 font-mono text-label text-dim uppercase opacity-0 md:right-8"
-      data-footer-hint>
-      Grab a letter. Double-click to tidy up.
     </p>
   </div>
 </footer>
