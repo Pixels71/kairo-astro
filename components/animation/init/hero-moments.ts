@@ -80,10 +80,22 @@ export default function init() {
 
     swapText(current);
     if (flow) {
-      setFlow(flow, Number(current.dataset.value), {
-        prefix: current.dataset.prefix ?? '',
-        suffix: current.dataset.suffix ?? '',
-      });
+      const value = Number(current.dataset.value);
+      const affix = { prefix: current.dataset.prefix ?? '', suffix: current.dataset.suffix ?? '' };
+      if (affix.suffix === flow.numberSuffix && affix.prefix === flow.numberPrefix) {
+        setFlow(flow, value);
+      } else {
+        gsap
+          .timeline()
+          .to(flow, { opacity: 0, y: -12, duration: 0.25, ease: 'power2.in' })
+          .call(() => {
+            flow.animated = false;
+            setFlow(flow, 0, affix);
+            flow.animated = true;
+          })
+          .to(flow, { opacity: 1, y: 0, duration: 0.35, ease: 'power3.out' })
+          .call(() => setFlow(flow, value), [], '-=0.2');
+      }
     }
     gsap.delayedCall(0.45, pulse);
     hold();
