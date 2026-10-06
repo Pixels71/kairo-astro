@@ -1,0 +1,31 @@
+---
+const brief =
+  'Checkout errors in Germany tripled after Tuesday’s release. 212 orders failed. Likely cause: the new address check.';
+---
+
+<div
+  class="absolute inset-x-5 bottom-5 border border-line-strong bg-ink/85 p-5 shadow-[0_40px_80px_-30px_rgb(0_0_0/0.9)] backdrop-blur-xl md:inset-x-auto md:right-8 md:bottom-8 md:w-[23rem]"
+  data-step-brief
+  aria-hidden="true">
+  <div class="flex items-center gap-3">
+    <span class="grid size-9 place-items-center rounded-full bg-signal text-ink">
+      <svg viewBox="0 0 32 32" class="size-5">
+        <circle cx="16" cy="17" r="10" fill="none" stroke="currentColor" stroke-width="2.6"></circle>
+        <circle cx="16" cy="7" r="3.4" fill="currentColor"></circle>
+      </svg>
+    </span>
+    <div class="min-w-0">
+      <p class="text-sm font-medium text-bone">Kairo brief</p>
+      <p class="text-xs text-mute">For Payments, 7:02</p>
+    </div>
+    <span class="ml-auto rounded-full bg-signal-soft px-2.5 py-1 font-mono text-[0.6875rem] text-signal">High</span>
+  </div>
+  <p class="mt-4 min-h-[4.5rem] text-sm leading-relaxed text-bone" data-type={brief}>
+    <span data-type-text>{brief}</span>
+    <span class="ml-0.5 inline-block h-[1em] w-[0.45em] translate-y-[0.15em] animate-pulse bg-signal"></span>
+  </p>
+  <div class="mt-4 flex gap-2">
+    <span class="rounded-full border border-line-strong px-3 py-1.5 text-xs text-mute">See evidence</span>
+    <span class="rounded-full bg-bone px-3 py-1.5 text-xs font-medium text-ink">Assign to Lena</span>
+  </div>
+</div>

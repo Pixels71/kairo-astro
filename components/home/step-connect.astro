@@ -1,0 +1,62 @@
+---
+import { integrations } from '@/data/logos';
+
+const nodes = integrations.slice(0, 5).map((icon, i) => ({ icon, y: 70 + i * 65 }));
+const hub = { x: 470, y: 200 };
+const curve = (y: number) => `M92 ${y} C 260 ${y}, 300 ${hub.y}, ${hub.x - 34} ${hub.y}`;
+---
+
+<div class="absolute inset-0" data-step-connect aria-hidden="true">
+  <svg viewBox="0 0 600 400" class="absolute inset-0 size-full" preserveAspectRatio="xMidYMid meet">
+    {nodes.map((node) => (
+      <path
+        d={curve(node.y)}
+        fill="none"
+        stroke="var(--color-bone)"
+        stroke-opacity="0.45"
+        stroke-width="1.2"
+        pathLength="1"
+        stroke-dasharray="1"
+        stroke-dashoffset="1"
+        data-connect-wire
+      />
+    ))}
+    {nodes.map((node) => (
+      <path
+        d={curve(node.y)}
+        fill="none"
+        stroke="var(--color-signal)"
+        stroke-width="2.4"
+        stroke-linecap="round"
+        pathLength="1"
+        stroke-dasharray="0.07 0.93"
+        stroke-dashoffset="1"
+        opacity="0"
+        data-connect-packet
+      />
+    ))}
+    {nodes.map((node) => (
+      <g data-connect-node>
+        <circle
+          cx="64"
+          cy={node.y}
+          r="24"
+          fill="var(--color-ink)"
+          fill-opacity="0.85"
+          stroke="var(--color-line-strong)"
+        />
+        <path
+          d={node.icon.path}
+          fill="var(--color-bone)"
+          transform={`translate(${64 - 10} ${node.y - 10}) scale(${20 / 24})`}
+        />
+      </g>
+    ))}
+    <g data-connect-hub>
+      <circle cx={hub.x} cy={hub.y} r="34" fill="none" stroke="var(--color-signal)" class="chart-ping"></circle>
+      <circle cx={hub.x} cy={hub.y} r="34" fill="var(--color-signal)"></circle>
+      <circle cx={hub.x} cy={hub.y + 2} r="14" fill="none" stroke="var(--color-ink)" stroke-width="3"></circle>
+      <circle cx={hub.x} cy={hub.y - 12} r="4.5" fill="var(--color-ink)"></circle>
+    </g>
+  </svg>
+</div>

@@ -106,7 +106,12 @@ export default function playLoader(done: () => void) {
     [],
     end + 0.1,
   )
-    .fromTo(hand, { scale: 1 }, { scale: 1.6, duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out' }, end + 0.1)
+    .fromTo(
+      '[data-loader-dot]',
+      { scale: 1 },
+      { scale: 1.8, duration: 0.25, yoyo: true, repeat: 1, ease: 'power2.out' },
+      end + 0.1,
+    )
     .add('open', end + 0.65)
     .call(
       () => {

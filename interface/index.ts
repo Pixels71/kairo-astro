@@ -16,6 +16,8 @@ export interface SocialLink {
 
 export interface Step {
   verb: string;
+  tag: string;
+  visual: 'connect' | 'watch' | 'brief';
   title: string;
   body: string;
   points: string[];

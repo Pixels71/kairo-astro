@@ -1,47 +1,71 @@
 ---
+import StepBrief from '@/components/home/step-brief.astro';
+import StepConnect from '@/components/home/step-connect.astro';
 import Icon from '@/components/shared/icons/icon.astro';
 import Media from '@/components/shared/ui/media.astro';
+import SignalLine from '@/components/shared/ui/signal-line.astro';
 import { steps } from '@/data/steps';
 ---
 
 <section id="how" class="relative" aria-labelledby="how-title">
-  <div class="shell pt-12 pb-10 md:pb-6">
+  <div class="shell pt-12 pb-6">
     <h2 id="how-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>
       Up and running in an afternoon.
     </h2>
   </div>
   <div class="shell" data-stack>
     {steps.map((step, i) => (
-      <div class="relative flex items-center py-3 md:h-[100dvh] md:py-0" style={`z-index:${i + 1}`} data-stack-card>
+      <div
+        class="relative py-3 md:flex md:h-[100dvh] md:items-start md:py-0"
+        style={`z-index:${i + 1}; --offset:${i * 3.75}rem`}
+        data-stack-card>
         <article
-          class="grid w-full grid-cols-1 overflow-hidden border border-line bg-ink-2 md:h-[82dvh] md:grid-cols-12"
+          class="relative w-full overflow-hidden border border-line bg-ink-2 [transform-style:preserve-3d] md:mt-[calc(6rem+var(--offset))] md:h-[min(40rem,calc(100dvh-9rem-var(--offset)))]"
           data-stack-inner>
-          <Media
-            src={step.image}
-            alt=""
-            class="aspect-[4/3] md:col-span-6 md:aspect-auto md:h-full lg:col-span-7"
-            sizes="(min-width: 768px) 55vw, 100vw"
-            reveal={false}
-          />
-          <div class="flex flex-col justify-between gap-10 p-6 md:col-span-6 md:p-10 lg:col-span-5 lg:p-14">
-            <div>
-              <p class="font-display text-[clamp(3.5rem,7vw,7rem)] leading-[0.9] font-extrabold tracking-[-0.05em] text-signal">
-                {step.verb}
-              </p>
-              <h3 class="mt-6 max-w-[18ch] font-display text-subtitle font-bold text-bone">{step.title}</h3>
-              <p class="mt-4 max-w-[44ch] text-mute">{step.body}</p>
+          <header class="flex h-[3.75rem] items-center justify-between gap-4 border-b border-line px-5 md:px-8">
+            <p class="font-display text-lg font-bold text-bone">{step.verb}</p>
+            <span class="font-mono text-label text-mute uppercase">{step.tag}</span>
+          </header>
+          <div class="grid h-[calc(100%-3.75rem)] grid-cols-1 md:grid-cols-12">
+            <div class="flex flex-col justify-between gap-8 p-6 md:col-span-5 md:p-10 lg:p-12">
+              <div>
+                <p class="font-display text-[clamp(3.5rem,6.5vw,6.5rem)] leading-[0.88] font-extrabold tracking-[-0.055em] text-signal">
+                  {step.verb}
+                </p>
+                <h3 class="mt-5 max-w-[18ch] font-display text-subtitle font-bold text-bone">{step.title}</h3>
+                <p class="mt-4 max-w-[42ch] text-mute">{step.body}</p>
+              </div>
+              <ul class="flex flex-wrap gap-2">
+                {step.points.map((point) => (
+                  <li class="flex items-center gap-2 rounded-full border border-line px-3 py-1.5 text-xs text-bone">
+                    <Icon name="check" class="size-3 text-signal" />
+                    {point}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <ul class="flex flex-col gap-3 border-t border-line pt-6">
-              {step.points.map((point) => (
-                <li class="flex items-center gap-3 text-sm text-bone">
-                  <span class="grid size-6 shrink-0 place-items-center rounded-full bg-signal-soft text-signal">
-                    <Icon name="check" class="size-3.5" />
-                  </span>
-                  {point}
-                </li>
-              ))}
-            </ul>
+            <div class="relative min-h-[22rem] overflow-hidden md:col-span-7 md:min-h-0" data-stack-visual>
+              <Media
+                src={step.image}
+                alt=""
+                class="absolute inset-0 scale-110"
+                imgClass="brightness-[0.8] saturate-[1.15]"
+                sizes="(min-width: 768px) 55vw, 100vw"
+                reveal={false}
+                imgData={{ 'data-stack-image': '' }}
+              />
+              <div class="absolute inset-0 bg-gradient-to-r from-ink-2 via-ink-2/10 to-transparent" />
+              {step.visual === 'connect' && <StepConnect />}
+              {step.visual === 'watch' && (
+                <div class="absolute inset-x-0 bottom-0 h-1/2">
+                  <SignalLine class="absolute inset-x-0 bottom-10 h-40" spike={0.62} />
+                  <p class="absolute right-6 bottom-4 font-mono text-label text-bone/70 uppercase">Drag the line</p>
+                </div>
+              )}
+              {step.visual === 'brief' && <StepBrief />}
+            </div>
           </div>
+          <span class="pointer-events-none absolute inset-0 bg-ink opacity-0" data-stack-shade />
         </article>
       </div>
     ))}
