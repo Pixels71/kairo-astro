@@ -32,6 +32,7 @@ const values = {
   TITLE_ITALIC: args.italic ?? 'engineered for scale',
   TAGLINE: args.tagline ?? 'Operational frameworks · Capital deployment · Cross-border compliance',
   CTA: args.cta ?? 'Review capabilities',
+  TITLE_SIZE: args.size ?? '104px',
 };
 
 const html = fs

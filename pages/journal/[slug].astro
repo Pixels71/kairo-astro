@@ -23,7 +23,7 @@ interface Props {
 const { post, related } = Astro.props;
 ---
 
-<Layout title={pageTitle(post.data.title)} description={post.data.excerpt}>
+<Layout title={pageTitle(post.data.title)} description={post.data.excerpt} image={`/images/og/journal-${post.id}.jpg`}>
   <PostHeader post={post} />
   <PostBody post={post} />
   <RelatedPosts posts={related} />

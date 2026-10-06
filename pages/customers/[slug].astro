@@ -24,7 +24,10 @@ interface Props {
 const { story, next } = Astro.props;
 ---
 
-<Layout title={pageTitle(`${story.data.client} customer story`)} description={story.data.summary}>
+<Layout
+  title={pageTitle(`${story.data.client} customer story`)}
+  description={story.data.summary}
+  image={`/images/og/customers-${story.id}.jpg`}>
   <StoryHero story={story} />
   <StoryResults story={story} />
   <StoryBody story={story} />

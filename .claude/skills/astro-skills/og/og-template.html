@@ -66,7 +66,7 @@
         top: 290px;
         font-family: 'Cabinet Grotesk', sans-serif;
         font-weight: 800;
-        font-size: 104px;
+        font-size: {{TITLE_SIZE}};
         line-height: 0.92;
         letter-spacing: -0.045em;
       }
@@ -87,7 +87,12 @@
         font-size: 20px;
         color: rgba(235, 233, 226, 0.64);
       }
+      .foot > span:first-child {
+        max-width: 640px;
+        line-height: 1.35;
+      }
       .pill {
+        flex-shrink: 0;
         display: inline-flex;
         align-items: center;
         gap: 14px;
