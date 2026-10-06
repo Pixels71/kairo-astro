@@ -12,9 +12,6 @@ export default function playLoader(done: () => void) {
   const finish = () => {
     root.classList.remove('is-loading');
     loader?.remove();
-    try {
-      sessionStorage.setItem('kairo:loaded', '1');
-    } catch {}
     getLenis()?.start();
   };
   if (!loader) {

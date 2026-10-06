@@ -13,15 +13,16 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  preloader?: boolean;
 }
 
-const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, image } = Astro.props;
+const { title = DEFAULT_TITLE, description = DEFAULT_DESCRIPTION, image, preloader = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-preloader={preloader ? '' : undefined}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -53,7 +54,7 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
         root.classList.add('js');
         try {
           if (sessionStorage.getItem('kairo:transition')) root.classList.add('is-arriving');
-          else if (!sessionStorage.getItem('kairo:loaded')) root.classList.add('is-loading');
+          else if (root.hasAttribute('data-preloader')) root.classList.add('is-loading');
         } catch (e) {}
       })();
     </script>
@@ -104,7 +105,7 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
       class="fixed top-3 left-3 z-[110] -translate-y-24 rounded-full bg-bone px-4 py-2 text-sm text-ink focus:translate-y-0">
       Skip to content
     </a>
-    <Loader />
+    {preloader && <Loader />}
     <Transition />
     <Navbar />
     <Menu />
