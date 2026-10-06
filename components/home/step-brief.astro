@@ -1,6 +1,7 @@
 ---
-const brief =
-  'Checkout errors in Germany tripled after Tuesday’s release. 212 orders failed. Likely cause: the new address check.';
+import { briefPreview } from '@/data/steps';
+
+const brief = briefPreview.text;
 ---
 
 <div
@@ -15,10 +16,12 @@ const brief =
       </svg>
     </span>
     <div class="min-w-0">
-      <p class="text-sm font-medium text-bone">Kairo brief</p>
-      <p class="text-xs text-mute">For Payments, 7:02</p>
+      <p class="text-sm font-medium text-bone">{briefPreview.title}</p>
+      <p class="text-xs text-mute">{briefPreview.meta}</p>
     </div>
-    <span class="ml-auto rounded-full bg-signal-soft px-2.5 py-1 font-mono text-[0.6875rem] text-signal">High</span>
+    <span class="ml-auto rounded-full bg-signal-soft px-2.5 py-1 font-mono text-[0.6875rem] text-signal">
+      {briefPreview.priority}
+    </span>
   </div>
   <p class="mt-4 min-h-[4.5rem] text-sm leading-relaxed text-bone" data-type={brief}>
     <span class="relative block">
@@ -32,7 +35,9 @@ const brief =
     </span>
   </p>
   <div class="mt-4 flex gap-2">
-    <span class="rounded-full border border-line-strong px-3 py-1.5 text-xs text-mute">See evidence</span>
-    <span class="rounded-full bg-bone px-3 py-1.5 text-xs font-medium text-ink">Assign to Lena</span>
+    <span class="rounded-full border border-line-strong px-3 py-1.5 text-xs text-mute">
+      {briefPreview.actions.secondary}
+    </span>
+    <span class="rounded-full bg-bone px-3 py-1.5 text-xs font-medium text-ink">{briefPreview.actions.primary}</span>
   </div>
 </div>

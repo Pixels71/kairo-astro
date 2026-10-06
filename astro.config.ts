@@ -1,9 +1,10 @@
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig, fontProviders } from 'astro/config';
+import { site } from './data/site';
 
 export default defineConfig({
   srcDir: './',
-  site: 'https://kairo-astro.pixels71.workers.dev',
+  site: site.url,
   vite: { plugins: [tailwindcss()], optimizeDeps: { include: ['number-flow'] } },
   image: { responsiveStyles: false },
   prefetch: { prefetchAll: true, defaultStrategy: 'hover' },

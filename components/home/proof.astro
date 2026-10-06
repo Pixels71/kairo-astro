@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import Icon from '@/components/shared/icons/icon.astro';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
+import { proofSection } from '@/data/home';
 import { testimonials } from '@/data/proof';
 import { resolveImage } from '@/utils/image';
 
@@ -17,7 +18,7 @@ const payload = testimonials.map(({ quote, name, role, company, metric }) => ({ 
   aria-labelledby="proof-title">
   <div class="shell flex items-end justify-between gap-8">
     <h2 id="proof-title" class="max-w-[12ch] font-display text-title font-bold text-bone" data-split>
-      In their own words.
+      {proofSection.title}
     </h2>
     <div class="flex items-center gap-3">
       <button

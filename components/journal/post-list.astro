@@ -1,4 +1,5 @@
 ---
+import { journalPage } from '@/data/pages';
 import { Image } from 'astro:assets';
 import Icon from '@/components/shared/icons/icon.astro';
 import FilterBar from '@/components/shared/ui/filter-bar.astro';
@@ -17,9 +18,9 @@ const categories = [...new Set(posts.map((post) => post.data.category))];
 <section class="shell pb-28 md:pb-40" data-filter data-list-preview aria-labelledby="posts-title">
   <div class="flex flex-col gap-6 border-t border-line pt-8 md:flex-row md:items-center md:justify-between" data-reveal>
     <h2 id="posts-title" class="font-display text-subtitle font-bold text-bone">
-      All writing
+      {journalPage.list.title}
     </h2>
-    <FilterBar options={categories} label="Filter articles by topic" />
+    <FilterBar options={categories} label={journalPage.list.filterLabel} />
   </div>
   <ul class="mt-6" data-filter-grid>
     {posts.map((post) => (
@@ -46,7 +47,7 @@ const categories = [...new Set(posts.map((post) => post.data.category))];
     ))}
   </ul>
   <p class="mt-16 hidden text-mute" data-filter-empty>
-    Nothing in this topic yet.
+    {journalPage.list.empty}
   </p>
 
   <div

@@ -1,4 +1,5 @@
 ---
+import { storyPage } from '@/data/pages';
 import NextStory from '@/components/customers-details/next-story.astro';
 import StoryBody from '@/components/customers-details/story-body.astro';
 import StoryGallery from '@/components/customers-details/story-gallery.astro';
@@ -25,7 +26,7 @@ const { story, next } = Astro.props;
 ---
 
 <Layout
-  title={pageTitle(`${story.data.client} customer story`)}
+  title={pageTitle(`${story.data.client} ${storyPage.metaSuffix}`)}
   description={story.data.summary}
   image={`/images/og/customers-${story.id}.jpg`}>
   <StoryHero story={story} />

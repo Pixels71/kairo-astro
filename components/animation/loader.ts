@@ -2,6 +2,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { setFlow, type Flow } from '@/components/animation/init/number-flow';
 import { getLenis } from '@/components/animation/lenis-instance';
+import { loader as copy } from '@/data/loader';
 import { $, $$ } from '@/utils/dom';
 
 const steps = [0, 7, 18, 26, 41, 53, 62, 78, 86, 94, 100];
@@ -83,7 +84,7 @@ export default function playLoader(done: () => void) {
     tl.fromTo(module, { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 0.6, ease: 'expo.out' }, at)
       .call(
         () => {
-          if (status) status.textContent = 'Syncing';
+          if (status) status.textContent = copy.status.syncing;
           if (flow) setFlow(flow, Number(module.dataset.count));
         },
         [],
@@ -92,7 +93,7 @@ export default function playLoader(done: () => void) {
       .call(
         () => {
           if (!status) return;
-          status.textContent = 'Live';
+          status.textContent = copy.status.live;
           status.classList.replace('text-dim', 'text-signal');
         },
         [],
@@ -103,7 +104,7 @@ export default function playLoader(done: () => void) {
   const end = 0.4 + (steps.length - 1) * STEP;
   tl.call(
     () => {
-      if (caption) caption.textContent = 'Signal locked';
+      if (caption) caption.textContent = copy.caption.done;
     },
     [],
     end + 0.1,

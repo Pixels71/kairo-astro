@@ -1,4 +1,5 @@
 ---
+import { storyPage } from '@/data/pages';
 import Media from '@/components/shared/ui/media.astro';
 import type { Story } from '@/utils/collections';
 
@@ -8,9 +9,9 @@ interface Props {
 
 const { story } = Astro.props;
 const meta = [
-  { label: 'Industry', value: story.data.industry },
-  { label: 'Team', value: story.data.team },
-  { label: 'Customer since', value: story.data.year },
+  { label: storyPage.labels.industry, value: story.data.industry },
+  { label: storyPage.labels.team, value: story.data.team },
+  { label: storyPage.labels.since, value: story.data.year },
 ];
 ---
 

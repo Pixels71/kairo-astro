@@ -3,23 +3,7 @@ import { Image } from 'astro:assets';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
 import { cn } from '@/utils/cn';
 import { resolveImage } from '@/utils/image';
-
-const pool = [
-  'gallery-corridor',
-  'journal-noise',
-  'gallery-street',
-  'manifesto-city',
-  'gallery-desk',
-  'journal-light',
-  'gallery-tower',
-  'product-reveal',
-  'journal-blur',
-  'gallery-road',
-  'capability-lights',
-  'journal-swirl',
-  'about-city',
-  'gallery-window',
-];
+import { productStory } from '@/data/home';
 
 const slots = [
   { left: 6, top: 14, w: 11 },
@@ -38,31 +22,8 @@ const slots = [
   { left: 48, top: 78, w: 8 },
 ];
 
-const tiles = pool.map((name, i) => ({ src: `/images/${name}.jpg`, ...slots[i], mobile: i % 2 === 0 }));
-
-const acts = [
-  {
-    tab: 'Collect',
-    title: 'Every signal, in one place.',
-    body: 'Metrics, tickets, calls and docs stream in from the tools your team already uses.',
-    count: 12480,
-    unit: 'signals today',
-  },
-  {
-    tab: 'Filter',
-    title: 'The noise, filtered out.',
-    body: 'Kairo knows what normal looks like for each number, so routine movement stays quiet.',
-    count: 37,
-    unit: 'real changes',
-  },
-  {
-    tab: 'Flag',
-    title: 'The moment, flagged.',
-    body: 'One change worth acting on, sent to the person who owns it, with the cause attached.',
-    count: 1,
-    unit: 'brief sent',
-  },
-];
+const { acts, title } = productStory;
+const tiles = productStory.tiles.map((src, i) => ({ src, ...slots[i % slots.length], mobile: i % 2 === 0 }));
 ---
 
 <section
@@ -75,8 +36,9 @@ const acts = [
     id="product-title"
     class="pointer-events-none absolute inset-0 flex flex-col items-center justify-center text-center font-display text-[clamp(3.5rem,13vw,15rem)] leading-[0.86] font-extrabold tracking-[-0.055em] text-bone/[0.07]"
     data-product-words>
-    <span>Signal,</span>
-    <span>not noise.</span>
+    {title.map((line) => (
+      <span>{line}</span>
+    ))}
   </h2>
 
   <div class="absolute inset-0" data-product-stage aria-hidden="true">
@@ -99,7 +61,7 @@ const acts = [
       data-product-anchor></div>
     <div class="absolute inset-0" data-product-hero>
       <Image
-        src={resolveImage('/images/journal-face.jpg')}
+        src={resolveImage(productStory.heroImage)}
         alt=""
         widths={[800, 1200, 1400]}
         sizes="100vw"

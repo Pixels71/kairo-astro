@@ -1,6 +1,7 @@
 ---
 import Media from '@/components/shared/ui/media.astro';
 import { milestones } from '@/data/about';
+import { aboutPage } from '@/data/pages';
 ---
 
 <section class="relative overflow-hidden border-t border-line py-24 lg:py-0" data-pan aria-labelledby="timeline-title">
@@ -9,10 +10,10 @@ import { milestones } from '@/data/about';
     data-pan-track>
     <div class="flex w-[78vw] shrink-0 snap-start flex-col justify-center md:w-[40vw] lg:w-[26vw]">
       <h2 id="timeline-title" class="font-display text-title font-bold text-bone" data-split>
-        How we got here.
+        {aboutPage.timeline.title}
       </h2>
       <p class="mt-6 max-w-[32ch] text-mute" data-reveal>
-        Five years, one stubborn idea: the warning should arrive before the damage.
+        {aboutPage.timeline.body}
       </p>
     </div>
     {milestones.map((milestone, i) => (

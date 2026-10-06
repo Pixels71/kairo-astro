@@ -1,12 +1,10 @@
 ---
 import Media from '@/components/shared/ui/media.astro';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
+import { customersPage } from '@/data/pages';
 
-const results = [
-  { value: 9, suffix: ' days', label: 'earlier warning on the problems that matter, on average' },
-  { value: 3, suffix: ' in 4', label: 'briefs acted on within one working day' },
-  { value: 20, suffix: ' min', label: 'from sign-up to the first connected source' },
-];
+const { results: copy } = customersPage;
+const results = copy.items;
 ---
 
 <section class="relative isolate overflow-hidden py-28 md:py-40" aria-labelledby="results-title">
@@ -22,7 +20,7 @@ const results = [
   <div class="absolute inset-0 -z-10 bg-gradient-to-b from-ink via-ink/60 to-ink" aria-hidden="true"></div>
   <div class="shell">
     <h2 id="results-title" class="max-w-[18ch] font-display text-title font-bold text-bone" data-split>
-      What changes in the first ninety days.
+      {copy.title}
     </h2>
     <dl class="mt-16 grid grid-cols-1 border-line md:mt-24 md:grid-cols-3 md:divide-x md:divide-line">
       {results.map((result) => (
@@ -30,7 +28,7 @@ const results = [
           <dt class="sr-only">{result.label}</dt>
           <dd class="flex items-baseline font-display text-display font-extrabold text-bone">
             <NumberFlow value={result.value} />
-            <span class="ml-2 text-subtitle font-bold text-signal">{result.suffix.trim()}</span>
+            <span class="ml-2 text-subtitle font-bold text-signal">{result.suffix}</span>
           </dd>
           <dd class="mt-4 max-w-[28ch] text-mute">{result.label}</dd>
         </div>

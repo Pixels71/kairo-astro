@@ -7,7 +7,10 @@ import Menu from '@/components/shared/layout/menu.astro';
 import Navbar from '@/components/shared/layout/navbar.astro';
 import Transition from '@/components/shared/layout/transition.astro';
 import ViewChip from '@/components/shared/layout/view-chip.astro';
+import { site } from '@/data/site';
 import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, SITE_NAME } from '@/utils/generate-meta-data';
+
+const accentVars = `:root{--color-signal:${site.accent};--color-signal-soft:color-mix(in srgb, ${site.accent} 14%, transparent);}`;
 
 interface Props {
   title?: string;
@@ -44,6 +47,7 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
     <meta name="generator" content={Astro.generator} />
+    <style is:inline set:html={accentVars}></style>
     <Font cssVariable="--font-display-face" preload />
     <Font cssVariable="--font-body-face" preload />
     <Font cssVariable="--font-mono-face" />

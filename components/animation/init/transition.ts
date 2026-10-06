@@ -1,11 +1,12 @@
 import { scrollToTarget } from '@/components/animation/lenis-instance';
 import { leavePage, resetTransition } from '@/components/animation/page-transition';
 import { routeLabels } from '@/data/navbar';
+import { site } from '@/data/site';
 
 const labelFor = (link: HTMLAnchorElement, url: URL) => {
   if (link.dataset.label) return link.dataset.label;
   const path = url.pathname.replace(/\/$/, '') || '/';
-  return routeLabels[path] ?? routeLabels[`/${path.split('/')[1]}`] ?? 'Kairo';
+  return routeLabels[path] ?? routeLabels[`/${path.split('/')[1]}`] ?? site.name;
 };
 
 export default function init() {

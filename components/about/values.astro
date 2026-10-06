@@ -1,10 +1,11 @@
 ---
 import { values } from '@/data/about';
+import { aboutPage } from '@/data/pages';
 ---
 
 <section class="shell py-24 md:py-36" aria-labelledby="values-title">
   <h2 id="values-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>
-    What we hold ourselves to.
+    {aboutPage.values.title}
   </h2>
   <ul class="mt-14 md:mt-20">
     {values.map((value) => (

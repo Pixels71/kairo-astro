@@ -3,6 +3,7 @@ import Logo from '@/components/shared/icons/logo.astro';
 import Button from '@/components/shared/ui/button.astro';
 import TextRoll from '@/components/shared/ui/text-roll.astro';
 import { navLinks } from '@/data/navbar';
+import { site } from '@/data/site';
 import { cn } from '@/utils/cn';
 
 const path = Astro.url.pathname.replace(/\/$/, '') || '/';
@@ -11,7 +12,12 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
 
 <header class="pointer-events-none fixed inset-x-0 top-0 z-[70]" data-nav>
   <div class="shell flex h-20 items-center justify-between gap-6">
-    <a href="/" class="group pointer-events-auto text-bone" aria-label="Kairo home" data-nav-item data-label="Home">
+    <a
+      href="/"
+      class="group pointer-events-auto text-bone"
+      aria-label={`${site.name} home`}
+      data-nav-item
+      data-label="Home">
       <Logo />
     </a>
     <nav aria-label="Primary" class="pointer-events-auto hidden lg:block" data-nav-item>
@@ -45,13 +51,13 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
     </nav>
     <div class="pointer-events-auto flex items-center gap-2" data-nav-item>
       <Button
-        label="Book a demo"
-        href="/pricing?intent=demo#sales"
+        label={site.cta.secondary.label}
+        href={site.cta.secondary.href}
         variant="outline"
         icon={false}
         class="hidden h-11 xl:inline-flex"
       />
-      <Button label="Start free" href="/pricing#sales" class="h-11 max-xs:px-4" />
+      <Button label={site.cta.primary.label} href={site.cta.primary.href} class="h-11 max-xs:px-4" />
       <button
         type="button"
         class="grid size-11 place-items-center rounded-full border border-line bg-ink-2/70 backdrop-blur-xl lg:hidden"

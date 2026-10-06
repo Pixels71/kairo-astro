@@ -1,11 +1,12 @@
 ---
 import Media from '@/components/shared/ui/media.astro';
 import { team } from '@/data/about';
+import { aboutPage } from '@/data/pages';
 ---
 
 <section class="shell pb-24 md:pb-36" aria-labelledby="team-title">
   <h2 id="team-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>
-    The people behind the briefs.
+    {aboutPage.team.title}
   </h2>
   <ul class="mt-14 grid grid-cols-1 gap-x-6 gap-y-12 sm:grid-cols-2 md:mt-20 lg:grid-cols-3 lg:[&>li:nth-child(3n+2)]:mt-24">
     {team.map((member) => (

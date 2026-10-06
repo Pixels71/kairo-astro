@@ -2,7 +2,7 @@
 import Icon from '@/components/shared/icons/icon.astro';
 import Media from '@/components/shared/ui/media.astro';
 import TextRoll from '@/components/shared/ui/text-roll.astro';
-import { socialLinks } from '@/data/footer';
+import { site } from '@/data/site';
 import { menuLinks } from '@/data/navbar';
 
 const previews: Record<string, string> = {
@@ -38,18 +38,18 @@ const previews: Record<string, string> = {
         ))}
       </ul>
       <div class="flex flex-wrap items-center gap-3" data-menu-meta>
-        {socialLinks.map((social) => (
+        {site.socials.map((social) => (
           <a
             href={social.href}
             target="_blank"
             rel="noopener"
-            aria-label={social.label}
+            aria-label={`${site.name} on ${social.label}`}
             class="grid size-11 place-items-center rounded-full border border-line text-mute transition-colors duration-300 hover:border-bone hover:text-bone">
             <Icon name={social.icon === 'x' ? 'x-logo' : social.icon} class="size-5" />
           </a>
         ))}
-        <a href="mailto:hello@kairo.app" class="group ml-auto text-sm text-mute hover:text-bone">
-          <TextRoll text="hello@kairo.app" />
+        <a href={`mailto:${site.email}`} class="group ml-auto text-sm text-mute hover:text-bone">
+          <TextRoll text={site.email} />
         </a>
       </div>
     </nav>

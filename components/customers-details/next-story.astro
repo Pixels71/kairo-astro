@@ -1,4 +1,5 @@
 ---
+import { storyPage } from '@/data/pages';
 import Icon from '@/components/shared/icons/icon.astro';
 import Media from '@/components/shared/ui/media.astro';
 import type { Story } from '@/utils/collections';
@@ -16,7 +17,7 @@ const { story } = Astro.props;
     class="group shell grid grid-cols-1 items-center gap-10 py-20 md:grid-cols-12 md:py-28"
     data-label={story.data.client}>
     <div class="md:col-span-7">
-      <p class="font-mono text-label text-mute uppercase">Next story</p>
+      <p class="font-mono text-label text-mute uppercase">{storyPage.labels.next}</p>
       <p class="mt-6 font-display text-display font-extrabold text-bone transition-colors duration-500 group-hover:text-signal">
         {story.data.client}
       </p>

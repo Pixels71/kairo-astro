@@ -1,6 +1,7 @@
 ---
 import Button from '@/components/shared/ui/button.astro';
 import Media from '@/components/shared/ui/media.astro';
+import { storiesSection } from '@/data/home';
 import { getStories } from '@/utils/collections';
 
 const stories = (await getStories()).slice(0, 4);
@@ -12,13 +13,11 @@ const stories = (await getStories()).slice(0, 4);
     data-pan-track>
     <div class="flex w-[78vw] shrink-0 snap-start flex-col justify-between gap-10 md:w-[42vw] lg:h-[70dvh] lg:w-[28vw]">
       <h2 id="stories-title" class="font-display text-title font-bold text-bone" data-split>
-        Teams that saw it coming.
+        {storiesSection.title}
       </h2>
       <div class="flex flex-col items-start gap-6" data-reveal>
-        <p class="max-w-[34ch] text-mute">
-          Freight networks, labs and payment companies use Kairo to hear about problems while they are still small.
-        </p>
-        <Button label="All customer stories" href="/customers" variant="outline" />
+        <p class="max-w-[34ch] text-mute">{storiesSection.body}</p>
+        <Button label={storiesSection.cta.label} href={storiesSection.cta.href} variant="outline" />
       </div>
     </div>
     {stories.map((story) => (

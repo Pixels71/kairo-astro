@@ -1,4 +1,5 @@
 ---
+import { pricingPage } from '@/data/pages';
 import Icon from '@/components/shared/icons/icon.astro';
 import { faqs } from '@/data/pricing';
 ---
@@ -6,7 +7,7 @@ import { faqs } from '@/data/pricing';
 <section class="shell pb-24 md:pb-36" aria-labelledby="faq-title">
   <div class="grid grid-cols-1 gap-12 lg:grid-cols-12">
     <h2 id="faq-title" class="max-w-[12ch] font-display text-title font-bold text-bone lg:col-span-4" data-split>
-      Questions, answered.
+      {pricingPage.faq.title}
     </h2>
     <div class="lg:col-span-7 lg:col-start-6" data-accordion>
       {faqs.map((faq, i) => (

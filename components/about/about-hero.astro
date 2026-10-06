@@ -1,13 +1,9 @@
 ---
 import Media from '@/components/shared/ui/media.astro';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
+import { aboutPage } from '@/data/pages';
 
-const lines = ['We build for', 'the minute before', 'it matters.'];
-const facts: { value: number; from?: number; suffix?: string; grouping?: boolean; label: string }[] = [
-  { value: 2021, from: 2001, grouping: false, label: 'Founded in Berlin' },
-  { value: 64, label: 'People on the team' },
-  { value: 1200, suffix: '+', label: 'Teams on Kairo' },
-];
+const { lines, facts, intro, image, imageAlt, accent } = aboutPage.hero;
 ---
 
 <section class="shell pt-36 pb-20 md:pt-44 md:pb-28" aria-labelledby="about-title">
@@ -18,18 +14,17 @@ const facts: { value: number; from?: number; suffix?: string; grouping?: boolean
         class="font-display text-[clamp(3rem,8vw,10rem)] leading-[0.9] font-extrabold tracking-[-0.05em] text-bone">
         {lines.map((line, i) => (
           <span class="block overflow-hidden pb-[0.06em]" data-hero-line>
-            <span class={i === 2 ? 'block text-signal' : 'block'}>{line}</span>
+            <span class={i === accent ? 'block text-signal' : 'block'}>{line}</span>
           </span>
         ))}
       </h1>
       <p class="mt-10 max-w-[46ch] text-lead text-mute md:mt-14" data-intro>
-        Kairo started with a list of every problem our last company found out about too late. We are building the tool
-        we wished we had then.
+        {intro}
       </p>
     </div>
     <Media
-      src="/images/about-hero.jpg"
-      alt="A lone figure walking under a concrete overpass in black and white"
+      src={image}
+      alt={imageAlt}
       class="aspect-[4/5] lg:col-span-4 lg:mt-24"
       sizes="(min-width: 1024px) 33vw, 100vw"
       parallax={0.2}

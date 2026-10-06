@@ -2,16 +2,15 @@
 import Icon from '@/components/shared/icons/icon.astro';
 import Media from '@/components/shared/ui/media.astro';
 import TextRoll from '@/components/shared/ui/text-roll.astro';
+import { closingCta } from '@/data/home';
+import { site } from '@/data/site';
 
 interface Props {
   title?: string;
   body?: string;
 }
 
-const {
-  title = 'Catch the next one before it lands.',
-  body = 'Connect your first source in twenty minutes. Free for small teams, no card needed.',
-} = Astro.props;
+const { title = closingCta.title, body = closingCta.body } = Astro.props;
 ---
 
 <section class="relative isolate overflow-hidden" data-cta aria-labelledby="cta-title">
@@ -38,7 +37,7 @@ const {
     <div class="shrink-0 md:pr-[4vw]" data-reveal>
       <span class="inline-flex" data-magnetic="0.45">
         <a
-          href="/pricing#sales"
+          href={site.cta.primary.href}
           class="btn group size-40 flex-col gap-3 rounded-full bg-signal px-0 text-lg text-ink md:size-52 md:text-xl"
           data-btn>
           <span class="btn-fill bg-bone" aria-hidden="true"></span>
@@ -46,7 +45,7 @@ const {
             <Icon name="arrow-up-right" class="size-6" />
             <Icon name="arrow-up-right" class="size-6" />
           </span>
-          <TextRoll text="Start free" />
+          <TextRoll text={site.cta.primary.label} />
         </a>
       </span>
     </div>

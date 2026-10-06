@@ -28,13 +28,13 @@ export default function init() {
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       if (!EMAIL.test(input.value.trim())) {
-        setState('error', 'That email looks incomplete. Try name@company.com.');
+        setState('error', form.dataset.msgError ?? '');
         input.focus();
         return;
       }
-      setState('loading', 'Subscribing...');
+      setState('loading', form.dataset.msgLoading ?? '');
       setTimeout(() => {
-        setState('success', 'You are in. The first issue lands on Friday.');
+        setState('success', form.dataset.msgSuccess ?? '');
         form.closest('footer')?.querySelector('[data-signal-line]')?.dispatchEvent(new CustomEvent('signal:pulse'));
         input.value = '';
         input.disabled = true;

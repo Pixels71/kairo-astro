@@ -9,7 +9,6 @@ export default function init() {
     const items = $$('[data-filter-item]', root);
     const count = $('[data-filter-count]', root);
     const empty = $('[data-filter-empty]', root);
-    const noun = count?.textContent?.replace(/^\d+\s*/, '').replace(/s$/, '') ?? 'item';
 
     const apply = (value: string) => {
       const state = Flip.getState(items, { props: 'opacity' });
@@ -19,7 +18,7 @@ export default function init() {
         item.hidden = !match;
         if (match) shown++;
       });
-      if (count) count.textContent = `${shown} ${noun}${shown === 1 ? '' : 's'}`;
+      if (count) count.textContent = `${shown} ${shown === 1 ? count.dataset.one : count.dataset.many}`;
       empty?.classList.toggle('hidden', shown > 0);
 
       if (motionEnabled()) {

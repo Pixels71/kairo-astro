@@ -1,12 +1,13 @@
 ---
-import BrandIcon from '@/components/shared/icons/brand-icon.astro';
+import LogoMark from '@/components/shared/icons/logo-mark.astro';
+import { logosSection } from '@/data/home';
 import { customerLogos } from '@/data/logos';
 ---
 
 <section class="border-y border-line py-10 md:py-12" aria-label="Customers">
   <div class="shell flex flex-col gap-8 md:flex-row md:items-center md:gap-14">
     <p class="max-w-[18ch] shrink-0 text-sm text-mute" data-reveal>
-      Trusted by teams who would rather hear it first
+      {logosSection.label}
     </p>
     <div
       class="relative min-w-0 flex-1 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]"
@@ -18,8 +19,8 @@ import { customerLogos } from '@/data/logos';
             aria-hidden={copy === 1 ? 'true' : undefined}>
             {customerLogos.map((logo) => (
               <li class="flex items-center gap-2.5 text-bone/55 transition-colors duration-500 hover:text-bone">
-                <BrandIcon icon={logo} class="size-6" label={false} />
-                <span class="font-display text-xl font-bold tracking-[-0.02em]">{logo.title}</span>
+                <LogoMark shape={logo.shape} />
+                <span class="font-display text-xl font-bold tracking-[-0.02em]">{logo.name}</span>
               </li>
             ))}
           </ul>

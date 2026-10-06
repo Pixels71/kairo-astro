@@ -4,19 +4,13 @@ import Faq from '@/components/pricing/faq.astro';
 import Plans from '@/components/pricing/plans.astro';
 import SalesForm from '@/components/pricing/sales-form.astro';
 import PageHero from '@/components/shared/page-hero.astro';
+import { pricingPage as page } from '@/data/pages';
 import Layout from '@/layouts/layout.astro';
 import { pageTitle } from '@/utils/generate-meta-data';
 ---
 
-<Layout
-  title={pageTitle('Pricing')}
-  image="/images/og/pricing.jpg"
-  description="Start free with five sources. Upgrade when Kairo is catching problems worth more than it costs.">
-  <PageHero
-    lines={['Start free.', 'Pay when it pays off.']}
-    accent={1}
-    intro="Every plan includes anomaly detection and weekly briefs. Upgrade for real-time alerts, deeper history and admin controls."
-  />
+<Layout title={pageTitle(page.meta.title)} image="/images/og/pricing.jpg" description={page.meta.description}>
+  <PageHero lines={page.hero.lines} accent={page.hero.accent} intro={page.hero.intro} />
   <Plans />
   <Compare />
   <Faq />

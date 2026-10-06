@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import BrandIcon from '@/components/shared/icons/brand-icon.astro';
 import Icon from '@/components/shared/icons/icon.astro';
+import { capabilities as copy } from '@/data/home';
 import { integrations } from '@/data/logos';
 import { resolveImage } from '@/utils/image';
 
@@ -27,24 +27,18 @@ const anomaly = series
   .join(' ');
 const peak = { x: x(spikeAt), y: series[spikeAt] };
 
-const orbit = integrations.map((icon, i) => {
+const orbit = integrations.map((item, i) => {
   const angle = (i / integrations.length) * Math.PI * 2 - Math.PI / 2;
-  return { icon, left: 50 + Math.cos(angle) * 40, top: 50 + Math.sin(angle) * 40 };
+  return { ...item, left: 50 + Math.cos(angle) * 40, top: 50 + Math.sin(angle) * 40 };
 });
 
-const priorities = [
-  { title: 'Enterprise renewals slipping', value: '$48k at risk' },
-  { title: 'Checkout errors in Germany', value: '212 orders' },
-  { title: 'Onboarding drop-off on step 3', value: '-9% this week' },
-];
-
-const brief =
-  'Checkout errors in Germany tripled after Tuesday’s release. 212 orders failed. Likely cause: the new address check. Suggested owner: Payments.';
+const priorities = copy.rank.items;
+const brief = copy.brief.text;
 ---
 
 <section id="capabilities" class="shell py-28 md:py-40" aria-labelledby="capabilities-title">
   <h2 id="capabilities-title" class="max-w-[16ch] font-display text-title font-bold text-bone" data-split>
-    Everything it takes to act first.
+    {copy.title}
   </h2>
 
   <div class="mt-14 grid grid-cols-1 gap-3 md:mt-20 md:grid-cols-2 lg:grid-cols-12">
@@ -52,10 +46,8 @@ const brief =
       class="group relative flex min-h-[26rem] flex-col justify-between overflow-hidden border border-line bg-ink-2 p-6 md:col-span-2 md:p-8 lg:col-span-7"
       data-reveal>
       <div class="max-w-[34ch]">
-        <h3 class="font-display text-subtitle font-bold text-bone">Spots the shift</h3>
-        <p class="mt-3 text-mute">
-          Every metric gets its own normal range. Kairo flags what breaks it, with the likely cause.
-        </p>
+        <h3 class="font-display text-subtitle font-bold text-bone">{copy.detect.title}</h3>
+        <p class="mt-3 text-mute">{copy.detect.body}</p>
       </div>
       <figure class="relative -mx-2 mt-8" data-chart>
         <svg
@@ -99,7 +91,7 @@ const brief =
           class="absolute rounded-full bg-signal px-3 py-1 font-mono text-[0.6875rem] text-ink opacity-0"
           style={`left:${(peak.x / W) * 100}%; top:${(peak.y / H) * 100}%; transform: translate(-50%, -190%)`}
           data-chart-label>
-          Checkout errors 3x
+          {copy.detect.label}
         </figcaption>
       </figure>
     </article>
@@ -108,7 +100,7 @@ const brief =
       class="relative flex min-h-[26rem] flex-col justify-between overflow-hidden border border-line bg-ink-2 p-6 md:p-8 lg:col-span-5"
       data-reveal>
       <Image
-        src={resolveImage('/images/capability-lights.jpg')}
+        src={resolveImage(copy.connect.image)}
         alt=""
         widths={[600, 1000]}
         sizes="(min-width: 1024px) 40vw, 100vw"
@@ -116,10 +108,8 @@ const brief =
       />
       <div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/30 to-ink/90"></div>
       <div class="relative max-w-[30ch]">
-        <h3 class="font-display text-subtitle font-bold text-bone">Plugs into your stack</h3>
-        <p class="mt-3 text-mute">
-          Billing, CRM, support, product analytics and your warehouse. Read-only, connected in minutes.
-        </p>
+        <h3 class="font-display text-subtitle font-bold text-bone">{copy.connect.title}</h3>
+        <p class="mt-3 text-mute">{copy.connect.body}</p>
       </div>
       <div
         class="relative mx-auto mt-6 aspect-square w-full max-w-[17rem]"
@@ -132,7 +122,7 @@ const brief =
               class="absolute grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-ink/80 text-bone backdrop-blur"
               style={`left:${item.left}%; top:${item.top}%`}>
               <span class="grid animate-[spin_48s_linear_infinite_reverse] place-items-center">
-                <BrandIcon icon={item.icon} class="size-5" label={false} />
+                <Icon name={item.icon} class="size-5" />
               </span>
             </span>
           ))}
@@ -152,8 +142,8 @@ const brief =
       class="flex min-h-[24rem] flex-col justify-between border border-line bg-ink-2 p-6 md:p-8 lg:col-span-4"
       data-reveal>
       <div>
-        <h3 class="font-display text-subtitle font-bold text-bone">Ranks by impact</h3>
-        <p class="mt-3 text-mute">Changes are sorted by what they cost, so the biggest one is always on top.</p>
+        <h3 class="font-display text-subtitle font-bold text-bone">{copy.rank.title}</h3>
+        <p class="mt-3 text-mute">{copy.rank.body}</p>
       </div>
       <ul class="mt-8 flex flex-col gap-2" data-priority>
         {priorities.map((item, i) => (
@@ -172,10 +162,8 @@ const brief =
       class="flex min-h-[24rem] flex-col justify-between bg-signal p-6 text-ink md:p-8 lg:col-span-4"
       data-reveal>
       <div>
-        <h3 class="font-display text-subtitle font-bold">Writes the brief</h3>
-        <p class="mt-3 text-ink/75">
-          One short message with the cause, the size and an owner. Sent where that person works.
-        </p>
+        <h3 class="font-display text-subtitle font-bold">{copy.brief.title}</h3>
+        <p class="mt-3 text-ink/75">{copy.brief.body}</p>
       </div>
       <p
         class="mt-8 min-h-[7.5rem] border-t border-ink/20 pt-5 font-mono text-[0.8125rem] leading-relaxed"
@@ -201,8 +189,8 @@ const brief =
         class="absolute inset-0 opacity-60 [background-image:radial-gradient(var(--color-line-strong)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(circle_at_50%_70%,#000,transparent_70%)]"
         aria-hidden="true"></div>
       <div class="relative">
-        <h3 class="font-display text-subtitle font-bold text-bone">Private by default</h3>
-        <p class="mt-3 text-mute">SSO, audit logs and field-level redaction. Your data never trains shared models.</p>
+        <h3 class="font-display text-subtitle font-bold text-bone">{copy.privacy.title}</h3>
+        <p class="mt-3 text-mute">{copy.privacy.body}</p>
       </div>
       <div class="relative mx-auto mt-8 grid size-36 place-items-center">
         <svg

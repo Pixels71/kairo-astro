@@ -3,23 +3,14 @@ import { Image } from 'astro:assets';
 import SignalLine from '@/components/shared/ui/signal-line.astro';
 import { resolveImage } from '@/utils/image';
 import { words } from '@/utils/text';
+import { manifesto } from '@/data/home';
 
-type Part = { text: string } | { image: string };
-
-const parts: Part[] = [
-  { text: 'Your company already knows what is about to go wrong.' },
-  { image: '/images/manifesto-face.jpg' },
-  { text: 'It is buried in a dashboard nobody opened, a ticket marked low,' },
-  { image: '/images/manifesto-city.jpg' },
-  { text: 'a call that ended early. Kairo listens to all of it' },
-  { image: '/images/manifesto-hand.jpg' },
-  { text: 'and tells you while there is still time to act.' },
-];
+const { parts } = manifesto;
 ---
 
 <section class="shell py-32 md:py-48" aria-labelledby="manifesto-title">
   <p class="font-mono text-label text-mute uppercase" data-reveal>
-    Why Kairo
+    {manifesto.eyebrow}
   </p>
   <h2
     id="manifesto-title"
@@ -54,6 +45,6 @@ const parts: Part[] = [
   </h2>
   <div class="relative mt-16 md:mt-24">
     <SignalLine class="h-36 md:h-52" />
-    <p class="mt-2 text-right font-mono text-label text-dim uppercase">Drag across the line, or tap it</p>
+    <p class="mt-2 text-right font-mono text-label text-dim uppercase">{manifesto.hint}</p>
   </div>
 </section>

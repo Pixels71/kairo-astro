@@ -1,9 +1,9 @@
+import { site } from '@/data/site';
 import type { Testimonial } from '@/interface';
 
 export const testimonials: Testimonial[] = [
   {
-    quote:
-      'We used to hear about churn in the quarterly review. Now Kairo flags it in week two, while the account is still saveable.',
+    quote: `We used to hear about churn in the quarterly review. Now ${site.name} flags it in week two, while the account is still saveable.`,
     name: 'Ines Okafor',
     role: 'VP Customer Success',
     company: 'Ledgerly',
@@ -45,7 +45,7 @@ export const testimonials: Testimonial[] = [
     metric: { value: 3, suffix: ' hrs', label: 'earlier view of staffing gaps' },
   },
   {
-    quote: 'Finance and engineering finally look at the same story. Kairo writes it for both of us.',
+    quote: `Finance and engineering finally look at the same story. ${site.name} writes it for both of us.`,
     name: 'Noor Haddad',
     role: 'VP Finance',
     company: 'Corvid Cloud',

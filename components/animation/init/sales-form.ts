@@ -55,9 +55,9 @@ export default function init() {
     const email = String(data.get('email') ?? '').trim();
     const company = String(data.get('company') ?? '').trim();
     const valid = [
-      setError('name', name ? '' : 'Tell us what to call you.'),
-      setError('email', EMAIL.test(email) ? '' : 'Use a work email like name@company.com.'),
-      setError('company', company ? '' : 'Add your company name.'),
+      setError('name', name ? '' : (form.dataset.errorName ?? '')),
+      setError('email', EMAIL.test(email) ? '' : (form.dataset.errorEmail ?? '')),
+      setError('company', company ? '' : (form.dataset.errorCompany ?? '')),
     ].every(Boolean);
 
     if (!valid) {
@@ -70,14 +70,13 @@ export default function init() {
     submit.disabled = true;
     submit.setAttribute('aria-busy', 'true');
     status.className = 'mt-6 min-h-6 text-sm text-mute';
-    status.textContent = 'Sending...';
+    status.textContent = form.dataset.sending ?? '';
 
     setTimeout(() => {
       const demo = data.get('intent') === 'demo';
       status.className = 'mt-6 min-h-6 text-sm text-bone';
-      status.textContent = demo
-        ? `Thanks, ${name.split(' ')[0]}. We will email ${email} within one working day to pick a time.`
-        : `Your workspace is on its way. Check ${email} for the sign-in link.`;
+      const template = (demo ? form.dataset.successDemo : form.dataset.successFree) ?? '';
+      status.textContent = template.replace('{name}', name.split(' ')[0]).replace('{email}', email);
       submit.removeAttribute('aria-busy');
       form.reset();
       setIntent(demo ? 'demo' : 'free');

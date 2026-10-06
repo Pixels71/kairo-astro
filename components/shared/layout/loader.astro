@@ -3,24 +3,9 @@ import { Image } from 'astro:assets';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
 import { cn } from '@/utils/cn';
 import { resolveImage } from '@/utils/image';
+import { loader } from '@/data/loader';
 
-const modules = [
-  { label: 'Metrics', count: 1284 },
-  { label: 'Tickets', count: 312 },
-  { label: 'Calls', count: 46 },
-  { label: 'Docs', count: 2051 },
-];
-
-const frames = [
-  'story-halden',
-  'manifesto-face',
-  'story-solvane',
-  'gallery-street',
-  'story-mirelab',
-  'journal-face',
-  'story-aerowin',
-  'manifesto-city',
-];
+const { modules, frames } = loader;
 ---
 
 <div class="fixed inset-0 z-[90] hidden" data-loader aria-hidden="true">
@@ -39,7 +24,7 @@ const frames = [
           <p
             class="mt-2 font-mono text-[0.6875rem] tracking-[0.06em] text-dim uppercase transition-colors duration-300"
             data-loader-status>
-            Waiting
+            {loader.status.waiting}
           </p>
         </div>
       ))}
@@ -76,7 +61,7 @@ const frames = [
         <div class="absolute inset-[13%] overflow-hidden rounded-full bg-ink-3" data-loader-lens>
           {frames.map((frame) => (
             <Image
-              src={resolveImage(`/images/${frame}.jpg`)}
+              src={resolveImage(frame)}
               alt=""
               widths={[320, 480]}
               sizes="20rem"
@@ -97,7 +82,7 @@ const frames = [
         <span class="ml-1 text-signal">%</span>
       </span>
       <span class="font-mono text-label text-mute uppercase" data-loader-caption>
-        Calibrating baselines
+        {loader.caption.loading}
       </span>
     </div>
   </div>

@@ -1,4 +1,5 @@
 ---
+import { site } from '@/data/site';
 import { render } from 'astro:content';
 import Button from '@/components/shared/ui/button.astro';
 import type { Story } from '@/utils/collections';
@@ -27,7 +28,7 @@ const { Content } = await render(story);
             </span>
           </figcaption>
         </figure>
-        <Button label="Start free" href="/pricing#sales" class="self-start" />
+        <Button label={site.cta.primary.label} href={site.cta.primary.href} class="self-start" />
       </div>
     </aside>
     <article class="prose-kairo lg:col-span-7 lg:col-start-6" data-reveal>

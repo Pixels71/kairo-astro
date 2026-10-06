@@ -1,4 +1,5 @@
 ---
+import { site } from '@/data/site';
 import { cn } from '@/utils/cn';
 
 interface Props {
@@ -7,7 +8,7 @@ interface Props {
 }
 
 const { class: className, mark = true } = Astro.props;
-const letters = Array.from('Kairo');
+const letters = Array.from(site.name);
 ---
 
 <span class={cn('inline-flex items-center gap-2.5', className)}>
@@ -26,5 +27,5 @@ const letters = Array.from('Kairo');
       </span>
     ))}
   </span>
-  <span class="sr-only">Kairo</span>
+  <span class="sr-only">{site.name}</span>
 </span>

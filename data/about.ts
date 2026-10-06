@@ -1,3 +1,4 @@
+import { site } from '@/data/site';
 import type { Milestone, Role, TeamMember, Value } from '@/interface';
 
 export const milestones: Milestone[] = [
@@ -22,7 +23,7 @@ export const milestones: Milestone[] = [
   {
     year: '2026',
     title: 'Teams on four continents',
-    body: 'Freight, energy, health and finance operators now start their day with a Kairo brief.',
+    body: `Freight, energy, health and finance operators now start their day with a ${site.name} brief.`,
     image: '/images/gallery-tower.jpg',
   },
 ];
@@ -34,7 +35,7 @@ export const values: Value[] = [
   },
   {
     title: 'Quiet by default',
-    body: 'Every alert costs someone their focus. Kairo stays silent unless it has something worth saying.',
+    body: `Every alert costs someone their focus. ${site.name} stays silent unless it has something worth saying.`,
   },
   {
     title: 'Show the evidence',

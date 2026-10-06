@@ -29,7 +29,9 @@ export default function init() {
       setFlow(flow, value);
       if (monthly > 0)
         note.textContent =
-          period === 'yearly' ? `$${(value * 12).toLocaleString('en-US')} billed yearly` : 'Billed monthly';
+          period === 'yearly'
+            ? `$${(value * 12).toLocaleString('en-US')} ${root.dataset.billedYearly ?? ''}`
+            : (root.dataset.billedMonthly ?? '');
     });
   };
 

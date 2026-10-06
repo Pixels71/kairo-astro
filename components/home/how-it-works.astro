@@ -4,13 +4,14 @@ import StepConnect from '@/components/home/step-connect.astro';
 import Icon from '@/components/shared/icons/icon.astro';
 import Media from '@/components/shared/ui/media.astro';
 import SignalLine from '@/components/shared/ui/signal-line.astro';
+import { howItWorks } from '@/data/home';
 import { steps } from '@/data/steps';
 ---
 
 <section id="how" class="relative" aria-labelledby="how-title">
   <div class="shell pt-12 pb-6">
     <h2 id="how-title" class="max-w-[14ch] font-display text-title font-bold text-bone" data-split>
-      Up and running in an afternoon.
+      {howItWorks.title}
     </h2>
   </div>
   <div class="shell" data-stack>
@@ -59,7 +60,9 @@ import { steps } from '@/data/steps';
               {step.visual === 'watch' && (
                 <div class="absolute inset-x-0 bottom-0 h-1/2">
                   <SignalLine class="absolute inset-x-0 bottom-10 h-40" spike={0.62} />
-                  <p class="absolute right-6 bottom-4 font-mono text-label text-bone/70 uppercase">Drag the line</p>
+                  <p class="absolute right-6 bottom-4 font-mono text-label text-bone/70 uppercase">
+                    {howItWorks.watchHint}
+                  </p>
                 </div>
               )}
               {step.visual === 'brief' && <StepBrief />}

@@ -1,19 +1,20 @@
 ---
+import { pricingPage } from '@/data/pages';
 import Icon from '@/components/shared/icons/icon.astro';
 import { compareGroups, plans } from '@/data/pricing';
 ---
 
 <section class="shell pb-24 md:pb-36" aria-labelledby="compare-title">
   <h2 id="compare-title" class="max-w-[16ch] font-display text-title font-bold text-bone" data-split>
-    Compare every plan.
+    {pricingPage.compare.title}
   </h2>
   <div class="no-scrollbar -mx-4 mt-14 overflow-x-auto px-4 md:mx-0 md:px-0" data-reveal>
     <table class="w-full min-w-[640px] border-collapse text-left">
-      <caption class="sr-only">Feature comparison across plans</caption>
+      <caption class="sr-only">{pricingPage.compare.caption}</caption>
       <thead class="sticky top-0">
         <tr>
           <th scope="col" class="w-2/5 pb-6 font-normal text-mute">
-            Feature
+            {pricingPage.compare.feature}
           </th>
           {plans.map((plan) => (
             <th scope="col" class="pb-6 font-display text-xl font-bold text-bone">
@@ -42,12 +43,12 @@ import { compareGroups, plans } from '@/data/pricing';
                   {value === true ? (
                     <>
                       <Icon name="check" class="text-signal" />
-                      <span class="sr-only">Included</span>
+                      <span class="sr-only">{pricingPage.compare.yes}</span>
                     </>
                   ) : value === false ? (
                     <>
                       <Icon name="minus" class="text-dim" />
-                      <span class="sr-only">Not included</span>
+                      <span class="sr-only">{pricingPage.compare.no}</span>
                     </>
                   ) : (
                     <span class="text-bone">{value}</span>

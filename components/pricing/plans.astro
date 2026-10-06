@@ -1,12 +1,21 @@
 ---
+import { pricingPage } from '@/data/pages';
+import { site } from '@/data/site';
 import Icon from '@/components/shared/icons/icon.astro';
 import Button from '@/components/shared/ui/button.astro';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
 import { plans } from '@/data/pricing';
 import { cn } from '@/utils/cn';
+
+const copy = pricingPage.plans;
 ---
 
-<section class="shell pb-24 md:pb-32" data-pricing aria-labelledby="plans-title">
+<section
+  class="shell pb-24 md:pb-32"
+  data-pricing
+  data-billed-monthly={copy.billedMonthly}
+  data-billed-yearly={copy.billedYearly}
+  aria-labelledby="plans-title">
   <h2 id="plans-title" class="sr-only">
     Plans
   </h2>
@@ -25,7 +34,7 @@ import { cn } from '@/utils/cn';
         aria-checked="true"
         class="relative z-10 h-10 rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 aria-checked:text-ink"
         data-billing="monthly">
-        Monthly
+        {copy.monthly}
       </button>
       <button
         type="button"
@@ -33,10 +42,11 @@ import { cn } from '@/utils/cn';
         aria-checked="false"
         class="relative z-10 flex h-10 items-center gap-2 rounded-full px-5 text-sm font-medium text-mute transition-colors duration-300 aria-checked:text-ink"
         data-billing="yearly">
-        Yearly <span class="rounded-full bg-signal px-2 py-0.5 font-mono text-[0.6875rem] text-ink">-20%</span>
+        {copy.yearly}
+        <span class="rounded-full bg-signal px-2 py-0.5 font-mono text-[0.6875rem] text-ink">{copy.yearlyBadge}</span>
       </button>
     </div>
-    <p class="text-sm text-mute">Prices per workspace. Unlimited viewers on every plan.</p>
+    <p class="text-sm text-mute">{copy.note}</p>
   </div>
 
   <div class="mt-10 grid grid-cols-1 gap-3 lg:grid-cols-3">
@@ -51,7 +61,7 @@ import { cn } from '@/utils/cn';
           <h3 class="font-display text-subtitle font-bold text-bone">{plan.name}</h3>
           {plan.featured && (
             <span class="rounded-full bg-signal-soft px-3 py-1 font-mono text-[0.6875rem] text-signal uppercase">
-              Most teams start here
+              {copy.featuredLabel}
             </span>
           )}
         </div>
@@ -61,19 +71,14 @@ import { cn } from '@/utils/cn';
             <NumberFlow value={plan.monthly} prefix="$" duration={1.1} />
           </span>
           <span class="pb-1 text-sm text-mute" data-price-unit>
-            {plan.monthly === 0 ? 'free forever' : '/ month'}
+            {plan.monthly === 0 ? copy.free : copy.perMonth}
           </span>
         </p>
         <p class="mt-3 h-5 text-sm text-dim" data-price-note data-monthly={plan.monthly} data-yearly={plan.yearly}>
-          {plan.monthly === 0 ? 'No card needed' : 'Billed monthly'}
+          {plan.monthly === 0 ? copy.noCard : copy.billedMonthly}
         </p>
         <div class="mt-8">
-          <Button
-            label={plan.cta}
-            href={plan.cta === 'Book a demo' ? '/pricing?intent=demo#sales' : plan.href}
-            variant={plan.featured ? 'signal' : 'outline'}
-            class="w-full"
-          />
+          <Button label={plan.cta} href={plan.href} variant={plan.featured ? 'signal' : 'outline'} class="w-full" />
         </div>
         <ul class="mt-10 flex flex-col gap-3 border-t border-line pt-8">
           {plan.features.map((feature) => (
@@ -87,9 +92,9 @@ import { cn } from '@/utils/cn';
     ))}
   </div>
   <p class="mt-8 text-center text-sm text-mute" data-reveal>
-    Running more than ten teams?{' '}
-    <a href="/pricing?intent=demo#sales" class="text-bone underline decoration-signal underline-offset-4">
-      Talk to us about Enterprise
+    {copy.enterprise.prompt}{' '}
+    <a href={site.cta.secondary.href} class="text-bone underline decoration-signal underline-offset-4">
+      {copy.enterprise.link}
     </a>
     .
   </p>

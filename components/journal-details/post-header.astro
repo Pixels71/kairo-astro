@@ -1,4 +1,5 @@
 ---
+import { journalPage } from '@/data/pages';
 import { Image } from 'astro:assets';
 import Media from '@/components/shared/ui/media.astro';
 import type { Post } from '@/utils/collections';
@@ -21,7 +22,7 @@ const { post } = Astro.props;
   <div class="mx-auto max-w-5xl">
     <p class="font-mono text-label text-mute uppercase" data-intro>
       <a href="/journal" class="text-bone hover:text-signal">
-        Journal
+        {journalPage.post.back}
       </a>
       <span class="mx-2 text-dim">/</span>
       {post.data.category}

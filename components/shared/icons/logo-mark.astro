@@ -1,0 +1,58 @@
+---
+import type { LogoShape } from '@/interface';
+import { cn } from '@/utils/cn';
+
+interface Props {
+  shape: LogoShape;
+  class?: string;
+}
+
+const { shape, class: className } = Astro.props;
+---
+
+<svg
+  viewBox="0 0 24 24"
+  class={cn('size-6 shrink-0', className)}
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  aria-hidden="true">
+  {shape === 'orbit' && (
+    <>
+      <circle cx="12" cy="12" r="8" />
+      <circle cx="12" cy="4" r="2.5" fill="currentColor" stroke="none" />
+    </>
+  )}
+  {shape === 'stack' && <path d="M4 7h16M4 12h12M4 17h8" stroke-linecap="round" />}
+  {shape === 'prism' && <path d="M12 4 20 19H4Z" stroke-linejoin="round" />}
+  {shape === 'grid' && (
+    <>
+      <rect x="4" y="4" width="6.5" height="6.5" rx="1.5" fill="currentColor" stroke="none" />
+      <rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5" />
+      <rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5" />
+      <rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5" fill="currentColor" stroke="none" />
+    </>
+  )}
+  {shape === 'wave' && <path d="M3 12c2.5-6 5.5-6 8 0s5.5 6 8 0" stroke-linecap="round" />}
+  {shape === 'split' && (
+    <>
+      <circle cx="12" cy="12" r="8" />
+      <path d="M12 4a8 8 0 0 1 0 16Z" fill="currentColor" stroke="none" />
+    </>
+  )}
+  {shape === 'spark' && (
+    <path d="M12 3c.8 5 4 8.2 9 9-5 .8-8.2 4-9 9-.8-5-4-8.2-9-9 5-.8 8.2-4 9-9Z" fill="currentColor" stroke="none" />
+  )}
+  {shape === 'loop' && (
+    <>
+      <circle cx="9" cy="12" r="5.5" />
+      <circle cx="15" cy="12" r="5.5" />
+    </>
+  )}
+  {shape === 'frame' && (
+    <>
+      <rect x="4" y="4" width="16" height="16" rx="3" />
+      <circle cx="12" cy="12" r="3" fill="currentColor" stroke="none" />
+    </>
+  )}
+</svg>

@@ -1,4 +1,5 @@
-import type { FooterGroup, SocialLink } from '@/interface';
+import { site } from '@/data/site';
+import type { FooterGroup } from '@/interface';
 
 export const footerGroups: FooterGroup[] = [
   {
@@ -7,7 +8,7 @@ export const footerGroups: FooterGroup[] = [
       { label: 'How it works', href: '/#how' },
       { label: 'Capabilities', href: '/#capabilities' },
       { label: 'Pricing', href: '/pricing' },
-      { label: 'Book a demo', href: '/pricing#sales' },
+      { label: site.cta.secondary.label, href: site.cta.secondary.href },
     ],
   },
   {
@@ -21,8 +22,17 @@ export const footerGroups: FooterGroup[] = [
   },
 ];
 
-export const socialLinks: SocialLink[] = [
-  { label: 'Kairo on X', href: 'https://x.com', icon: 'x' },
-  { label: 'Kairo on LinkedIn', href: 'https://www.linkedin.com', icon: 'linkedin' },
-  { label: 'Kairo on GitHub', href: 'https://github.com', icon: 'github' },
-];
+export const footerCopy = {
+  newsletter: {
+    title: 'One short email a week on acting before it is too late.',
+    label: 'Work email',
+    placeholder: 'you@company.com',
+    note: 'No spam. Unsubscribe in one click.',
+    loading: 'Subscribing...',
+    success: 'You are in. The first issue lands on Friday.',
+    error: 'That email looks incomplete. Try name@company.com.',
+  },
+  followTitle: 'Follow',
+  backToTop: 'Back to top',
+  legal: `© ${new Date().getFullYear()} ${site.legalName}`,
+};

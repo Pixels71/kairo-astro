@@ -7,11 +7,19 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = process.cwd();
 const force = process.argv.includes('--force');
 
+const siteSource = fs.readFileSync(path.join(root, 'data/site.ts'), 'utf8');
+const siteValue = (key, fallback) => siteSource.match(new RegExp(`${key}:\\s*'([^']+)'`))?.[1] ?? fallback;
+const brandName = siteValue('name', 'Brand');
+const accent = siteValue('accent', '#ff5b1f');
+const BRAND = brandName.toUpperCase();
+const hex = accent.replace('#', '');
+const rgb = [0, 2, 4].map((i) => parseInt(hex.slice(i, i + 2), 16)).join(',');
+
 const brand = {
   dark: '#0b0c0b',
   darkTop: '#141513',
-  accent: '#ff5b1f',
-  accentGlow: 'rgba(255,91,31,0.22)',
+  accent,
+  accentGlow: `rgba(${rgb},0.22)`,
   mutedGlow: 'rgba(235,233,226,0.06)',
 };
 
@@ -43,18 +51,18 @@ const size = (lines) => {
 };
 
 const jobs = [
-  { out: 'og-image.jpg', eyebrow: 'KAIRO / SIGNAL INTELLIGENCE', lines: ['Know the moment', 'before it passes.'], tagline: 'Metrics, tickets and calls, briefed in plain English', cta: 'Start free' },
-  { out: 'og/customers.jpg', eyebrow: 'KAIRO / CUSTOMERS', lines: ['Stories from teams', 'that moved first.'], tagline: 'Freight, energy, health, finance and mobility', cta: 'Read the stories' },
-  { out: 'og/pricing.jpg', eyebrow: 'KAIRO / PRICING', lines: ['Start free.', 'Pay when it pays off.'], tagline: 'Free for small teams. No card needed.', cta: 'See plans' },
-  { out: 'og/journal.jpg', eyebrow: 'KAIRO / JOURNAL', lines: ['Notes on', 'acting early.'], tagline: 'Operations, signal detection and writing briefs people read', cta: 'Read the journal' },
-  { out: 'og/about.jpg', eyebrow: 'KAIRO / ABOUT', lines: ['We build for the', 'minute before it matters.'], tagline: 'A remote-first team in Berlin and London', cta: 'Meet the team' },
+  { out: 'og-image.jpg', eyebrow: `${BRAND} / SIGNAL INTELLIGENCE`, lines: ['Know the moment', 'before it passes.'], tagline: 'Metrics, tickets and calls, briefed in plain English', cta: 'Start free' },
+  { out: 'og/customers.jpg', eyebrow: `${BRAND} / CUSTOMERS`, lines: ['Stories from teams', 'that moved first.'], tagline: 'Freight, energy, health, finance and mobility', cta: 'Read the stories' },
+  { out: 'og/pricing.jpg', eyebrow: `${BRAND} / PRICING`, lines: ['Start free.', 'Pay when it pays off.'], tagline: 'Free for small teams. No card needed.', cta: 'See plans' },
+  { out: 'og/journal.jpg', eyebrow: `${BRAND} / JOURNAL`, lines: ['Notes on', 'acting early.'], tagline: 'Operations, signal detection and writing briefs people read', cta: 'Read the journal' },
+  { out: 'og/about.jpg', eyebrow: `${BRAND} / ABOUT`, lines: ['We build for the', 'minute before it matters.'], tagline: 'A remote-first team in Berlin and London', cta: 'Meet the team' },
 ];
 
 for (const file of fs.readdirSync(path.join(root, 'data/customers'))) {
   const { read } = frontmatter(path.join(root, 'data/customers', file));
   jobs.push({
     out: `og/customers-${file.replace(/\.md$/, '')}.jpg`,
-    eyebrow: `KAIRO / CUSTOMER STORY / ${read('client').toUpperCase()}`,
+    eyebrow: `${BRAND} / CUSTOMER STORY / ${read('client').toUpperCase()}`,
     lines: split(read('title')),
     tagline: read('summary'),
     cta: 'Read the story',
@@ -65,7 +73,7 @@ for (const file of fs.readdirSync(path.join(root, 'data/journal'))) {
   const { read } = frontmatter(path.join(root, 'data/journal', file));
   jobs.push({
     out: `og/journal-${file.replace(/\.md$/, '')}.jpg`,
-    eyebrow: `KAIRO / JOURNAL / ${read('category').toUpperCase()}`,
+    eyebrow: `${BRAND} / JOURNAL / ${read('category').toUpperCase()}`,
     lines: split(read('title')),
     tagline: read('readTime'),
     cta: 'Read the article',
