@@ -1,0 +1,39 @@
+---
+import { cn } from '@/utils/cn';
+
+interface Props {
+  class?: string;
+  spike?: number;
+}
+
+const { class: className, spike = 0.68 } = Astro.props;
+---
+
+<div
+  class={cn('relative w-full touch-pan-y select-none', className)}
+  data-signal-line
+  data-spike={spike}
+  aria-hidden="true">
+  <svg class="absolute inset-0 size-full overflow-visible" preserveAspectRatio="none" viewBox="0 0 1000 200">
+    <path
+      d="M0 100 L1000 100"
+      fill="none"
+      stroke="var(--color-bone)"
+      stroke-opacity="0.35"
+      stroke-width="1.25"
+      pathLength="1"
+      stroke-dasharray="1"
+      stroke-dashoffset="1"
+      data-line-base></path>
+    <path
+      d="M0 100 L1000 100"
+      fill="none"
+      stroke="var(--color-signal)"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      pathLength="1"
+      stroke-dasharray="0.05 1"
+      stroke-dashoffset="1.05"
+      data-line-pulse></path>
+  </svg>
+</div>

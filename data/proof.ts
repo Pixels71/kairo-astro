@@ -1,4 +1,4 @@
-import type { Stat, Testimonial } from '@/interface';
+import type { Testimonial } from '@/interface';
 
 export const testimonials: Testimonial[] = [
   {
@@ -8,6 +8,7 @@ export const testimonials: Testimonial[] = [
     role: 'VP Customer Success',
     company: 'Ledgerly',
     image: '/images/portrait-ines.jpg',
+    metric: { value: 12, prefix: '+', suffix: ' pts', label: 'net revenue retention' },
   },
   {
     quote:
@@ -15,7 +16,8 @@ export const testimonials: Testimonial[] = [
     name: 'Tobi Mensah',
     role: 'Head of Revenue Operations',
     company: 'Halden Freight',
-    image: '/images/portrait-tobi.jpg',
+    image: '/images/story-halden.jpg',
+    metric: { value: 34, suffix: '%', label: 'fewer stockouts' },
   },
   {
     quote:
@@ -24,11 +26,30 @@ export const testimonials: Testimonial[] = [
     role: 'Chief Operating Officer',
     company: 'Mirelab',
     image: '/images/portrait-maren.jpg',
+    metric: { value: 19, suffix: '%', label: 'faster sample turnaround' },
   },
-];
-
-export const stats: Stat[] = [
-  { value: 3.4, decimals: 1, suffix: 'x', label: 'faster response to incidents' },
-  { value: 41, suffix: '%', label: 'fewer customer escalations' },
-  { value: 11, suffix: 'h', label: 'saved per team lead each week' },
+  {
+    quote: 'Our crews used to drive to sites that were fine. Now every visit starts with a reason and a part number.',
+    name: 'Elif Arslan',
+    role: 'Director of Field Operations',
+    company: 'Solvane Energy',
+    image: '/images/story-solvane.jpg',
+    metric: { value: 28, suffix: '%', label: 'fewer wasted truck rolls' },
+  },
+  {
+    quote: 'We see the bad afternoon coming at breakfast now. That is the whole difference.',
+    name: 'Callum Reyes',
+    role: 'Head of Ground Operations',
+    company: 'Aerowin',
+    image: '/images/portrait-tobi.jpg',
+    metric: { value: 3, suffix: ' hrs', label: 'earlier view of staffing gaps' },
+  },
+  {
+    quote: 'Finance and engineering finally look at the same story. Kairo writes it for both of us.',
+    name: 'Noor Haddad',
+    role: 'VP Finance',
+    company: 'Corvid Cloud',
+    image: '/images/story-corvid.jpg',
+    metric: { value: 17, suffix: '%', label: 'lower spend per customer' },
+  },
 ];

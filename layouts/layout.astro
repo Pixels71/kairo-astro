@@ -90,17 +90,11 @@ const ogImage = new URL(image ?? '/images/og-image.jpg', Astro.site);
       .js [data-nav-item] {
         opacity: 0;
       }
-      .js [data-product-media] {
-        clip-path: inset(30% 33% 30% 33%);
-      }
-      .js [data-product-caption],
-      .js [data-product-shade] {
+      .js [data-product-tile] {
         opacity: 0;
       }
-      @media (max-width: 767px) {
-        .js [data-product-media] {
-          clip-path: inset(30% 12% 30% 12%);
-        }
+      .js [data-product-hero] {
+        opacity: 0;
       }
     </style>
   </head>

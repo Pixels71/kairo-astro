@@ -1,95 +1,196 @@
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { SplitText } from 'gsap/SplitText';
-import { $, $$, fontsReady, motionEnabled } from '@/utils/dom';
+import { setFlow, type Flow } from '@/components/animation/init/number-flow';
+import { $, $$, motionEnabled } from '@/utils/dom';
 
-const DURATION = 7;
+interface Entry {
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  metric: { value: number; prefix?: string; suffix?: string; label: string };
+}
 
 export default function init() {
-  const section = $('[data-proof]');
+  const section = $('[data-ring-section]');
   if (!section) return;
-  const images = $$('[data-proof-image]', section);
-  const items = $$('[data-proof-item]', section);
-  const ring = $('[data-proof-ring]', section);
-  const prev = $('[data-proof-prev]', section);
-  const next = $('[data-proof-next]', section);
-  if (items.length < 2) return;
+  const stage = $('[data-ring-stage]', section);
+  const ring = $('[data-ring]', section);
+  const floor = $('[data-ring-floor]', section);
+  const cards = $$('[data-ring-card]', section);
+  const shades = cards.map((card) => $('[data-ring-shade]', card));
+  const quote = $('[data-ring-quote]', section);
+  const name = $('[data-ring-name]', section);
+  const role = $('[data-ring-role]', section);
+  const label = $('[data-ring-label]', section);
+  const flow = $<Flow>('[data-number-flow]', section);
+  const entries: Entry[] = JSON.parse(section.dataset.ringData ?? '[]');
+  if (!stage || !ring || !cards.length) return;
 
   const animate = motionEnabled();
-  let index = 0;
-  let timer: gsap.core.Tween | null = null;
-  const splits = new Map<HTMLElement, SplitText>();
+  const count = cards.length;
+  const step = 360 / count;
+  const state = { drag: 0, scroll: 0, current: 0 };
+  let radius = 0;
+  let active = 0;
 
-  const show = (to: number, direction = 1) => {
-    const from = index;
-    index = (to + items.length) % items.length;
-    if (from === index) return;
-    const outgoing = items[from];
-    const incoming = items[index];
-    outgoing.setAttribute('aria-hidden', 'true');
-    incoming.removeAttribute('aria-hidden');
-
-    if (!animate) {
-      gsap.set(outgoing, { visibility: 'hidden' });
-      gsap.set(incoming, { visibility: 'visible' });
-      gsap.set(images[from], { clipPath: 'inset(0 0 0 100%)' });
-      gsap.set(images[index], { clipPath: 'inset(0 0 0 0%)', zIndex: 1 });
-      return;
-    }
-
-    const outLines = splits.get(outgoing)?.lines ?? [];
-    const inLines = splits.get(incoming)?.lines ?? [];
-    const outMeta = $('[data-proof-meta]', outgoing);
-    const inMeta = $('[data-proof-meta]', incoming);
-
-    gsap
-      .timeline()
-      .to(outLines, { yPercent: -110, duration: 0.5, ease: 'power3.in', stagger: 0.04 })
-      .to(outMeta, { opacity: 0, duration: 0.3 }, 0)
-      .set(outgoing, { visibility: 'hidden' })
-      .set(incoming, { visibility: 'visible' })
-      .fromTo(inLines, { yPercent: 110 }, { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 })
-      .fromTo(inMeta, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, '-=0.6');
-
-    images.forEach((image, i) => gsap.set(image, { zIndex: i === index ? 2 : i === from ? 1 : 0 }));
-    gsap.fromTo(
-      images[index],
-      { clipPath: direction > 0 ? 'inset(0 0 0 100%)' : 'inset(0 100% 0 0)' },
-      { clipPath: 'inset(0 0% 0 0%)', duration: 1.2, ease: 'expo.inOut' },
-    );
-    gsap.fromTo(images[index], { scale: 1.2 }, { scale: 1, duration: 1.6, ease: 'expo.out' });
-    restart();
-  };
-
-  const restart = () => {
-    if (!animate || !ring) return;
-    timer?.kill();
-    timer = gsap.fromTo(
-      ring,
-      { attr: { 'stroke-dashoffset': 1 } },
-      { attr: { 'stroke-dashoffset': 0 }, duration: DURATION, ease: 'none', onComplete: () => show(index + 1) },
-    );
-  };
-
-  prev?.addEventListener('click', () => show(index - 1, -1));
-  next?.addEventListener('click', () => show(index + 1, 1));
-
-  if (!animate) return;
-
-  fontsReady().then(() => {
-    items.forEach((item) => {
-      const quote = $('[data-proof-quote]', item);
-      if (quote) splits.set(item, SplitText.create(quote, { type: 'lines', mask: 'lines' }));
+  const layout = () => {
+    const width = cards[0].offsetWidth;
+    radius = (width / 2 / Math.tan(((step / 2) * Math.PI) / 180)) * 1.1;
+    cards.forEach((card, i) => {
+      card.style.transform = `translate(-50%, -50%) rotateY(${-i * step}deg) translateZ(${-radius}px)`;
     });
+  };
+
+  const swap = (index: number) => {
+    const entry = entries[index];
+    if (!entry) return;
+    const texts: [HTMLElement | null, string][] = [
+      [quote, `“${entry.quote}”`],
+      [name, entry.name],
+      [role, `${entry.role}, ${entry.company}`],
+      [label, entry.metric.label],
+    ];
+    texts.forEach(([element, value], i) => {
+      if (!element) return;
+      if (!animate) {
+        element.textContent = value;
+        return;
+      }
+      gsap
+        .timeline({ delay: i * 0.04 })
+        .to(element, { opacity: 0, y: -14, filter: 'blur(6px)', duration: 0.25, ease: 'power2.in', overwrite: true })
+        .call(() => {
+          element.textContent = value;
+        })
+        .fromTo(
+          element,
+          { opacity: 0, y: 18, filter: 'blur(6px)' },
+          { opacity: 1, y: 0, filter: 'blur(0px)', duration: 0.7, ease: 'expo.out' },
+        );
+    });
+    if (flow)
+      setFlow(flow, entry.metric.value, { prefix: entry.metric.prefix ?? '', suffix: entry.metric.suffix ?? '' });
+  };
+
+  const render = () => {
+    const total = state.drag + state.scroll;
+    state.current += (total - state.current) * (animate ? 0.09 : 1);
+    ring.style.transform = `translateZ(${radius - 180}px) rotateY(${state.current}deg)`;
+    if (floor) floor.style.backgroundPosition = `${state.current * 7}px 0`;
+
+    cards.forEach((card, i) => {
+      const angle = ((((-i * step + state.current) % 360) + 540) % 360) - 180;
+      const away = Math.min(1, Math.abs(angle) / 80);
+      const shade = shades[i];
+      if (shade) shade.style.opacity = String(away * 0.7);
+      card.style.visibility = Math.abs(angle) > 100 ? 'hidden' : 'visible';
+    });
+
+    const front = (((Math.round(state.current / step) % count) + count) % count) % entries.length;
+    if (front !== active) {
+      active = front;
+      swap(active);
+    }
+  };
+
+  const snap = (velocity = 0) => {
+    const projected = state.drag + state.scroll + velocity;
+    const target = Math.round(projected / step) * step;
+    gsap.to(state, { drag: target - state.scroll, duration: 1, ease: 'expo.out', overwrite: true });
+  };
+
+  let pointerX = 0;
+  let startDrag = 0;
+  let lastX = 0;
+  let lastT = 0;
+  let velocity = 0;
+  let dragging = false;
+  let moved = false;
+
+  stage.addEventListener('pointerdown', (event) => {
+    dragging = true;
+    moved = false;
+    pointerX = lastX = event.clientX;
+    lastT = performance.now();
+    startDrag = state.drag;
+    velocity = 0;
+    gsap.killTweensOf(state);
+    stage.setPointerCapture(event.pointerId);
   });
 
+  stage.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    const dx = event.clientX - pointerX;
+    if (Math.abs(dx) > 4) moved = true;
+    state.drag = startDrag - dx * 0.12;
+    const now = performance.now();
+    velocity = ((event.clientX - lastX) / Math.max(1, now - lastT)) * 16;
+    lastX = event.clientX;
+    lastT = now;
+  });
+
+  const release = (event: PointerEvent) => {
+    if (!dragging) return;
+    dragging = false;
+    stage.releasePointerCapture(event.pointerId);
+    if (!moved) {
+      const card = (event.target as Element).closest<HTMLElement>('[data-ring-card]');
+      if (card) {
+        const angle = ((((-Number(card.dataset.slot) * step + state.current) % 360) + 540) % 360) - 180;
+        gsap.to(state, { drag: state.drag - angle, duration: 1.1, ease: 'expo.out', overwrite: true });
+      }
+      return;
+    }
+    snap(-velocity * 0.12 * 8);
+  };
+  stage.addEventListener('pointerup', release);
+  stage.addEventListener('pointercancel', release);
+
+  $('[data-ring-prev]', section)?.addEventListener('click', () =>
+    gsap.to(state, {
+      drag: Math.round((state.drag - step) / step) * step,
+      duration: 1,
+      ease: 'expo.out',
+      overwrite: true,
+    }),
+  );
+  $('[data-ring-next]', section)?.addEventListener('click', () =>
+    gsap.to(state, {
+      drag: Math.round((state.drag + step) / step) * step,
+      duration: 1,
+      ease: 'expo.out',
+      overwrite: true,
+    }),
+  );
+
+  layout();
+  window.addEventListener('resize', layout);
+  render();
+
+  let ticking = false;
+  let settle = 0;
+  const tick = () => render();
   ScrollTrigger.create({
     trigger: section,
-    start: 'top 70%',
+    start: 'top bottom',
     end: 'bottom top',
-    onEnter: restart,
-    onEnterBack: () => timer?.resume(),
-    onLeave: () => timer?.pause(),
-    onLeaveBack: () => timer?.pause(),
+    onUpdate: (self) => {
+      if (!animate) return;
+      state.scroll = self.progress * step * 3;
+      window.clearTimeout(settle);
+      settle = window.setTimeout(() => {
+        if (!dragging) snap();
+      }, 260);
+    },
+    onToggle: (self) => {
+      if (self.isActive && !ticking) {
+        gsap.ticker.add(tick);
+        ticking = true;
+      } else if (!self.isActive && ticking) {
+        gsap.ticker.remove(tick);
+        ticking = false;
+      }
+    },
   });
 }

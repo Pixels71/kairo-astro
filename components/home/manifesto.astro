@@ -1,5 +1,6 @@
 ---
 import { Image } from 'astro:assets';
+import SignalLine from '@/components/shared/ui/signal-line.astro';
 import { resolveImage } from '@/utils/image';
 import { words } from '@/utils/text';
 
@@ -51,4 +52,8 @@ const parts: Part[] = [
       ),
     )}
   </h2>
+  <div class="relative mt-16 md:mt-24">
+    <SignalLine class="h-36 md:h-52" />
+    <p class="mt-2 text-right font-mono text-label text-dim uppercase">Drag across the line, or tap it</p>
+  </div>
 </section>

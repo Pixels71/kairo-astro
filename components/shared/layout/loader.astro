@@ -1,33 +1,94 @@
 ---
+import { Image } from 'astro:assets';
 import NumberFlow from '@/components/shared/ui/number-flow.astro';
-import { chars } from '@/utils/text';
+import { cn } from '@/utils/cn';
+import { resolveImage } from '@/utils/image';
+
+const modules = [
+  { label: 'Metrics', count: 1284 },
+  { label: 'Tickets', count: 312 },
+  { label: 'Calls', count: 46 },
+  { label: 'Docs', count: 2051 },
+];
+
+const frames = [
+  'story-halden',
+  'manifesto-face',
+  'story-solvane',
+  'gallery-street',
+  'story-mirelab',
+  'journal-face',
+  'story-aerowin',
+  'manifesto-city',
+];
 ---
 
 <div class="fixed inset-0 z-[90] hidden" data-loader aria-hidden="true">
-  <div class="absolute inset-x-0 top-0 h-1/2 bg-ink" data-loader-panel="top"></div>
-  <div class="absolute inset-x-0 bottom-0 h-1/2 bg-ink" data-loader-panel="bottom"></div>
+  <div class="absolute inset-0 bg-ink" data-loader-veil></div>
   <div class="absolute inset-0" data-loader-content>
-    <div class="absolute inset-x-0 bottom-1/2 flex justify-center overflow-hidden">
-      <span class="flex font-display text-[clamp(5.5rem,24vw,24rem)] leading-[0.78] font-extrabold tracking-[-0.06em] text-bone">
-        {chars('Kairo').map((c) => (
-          <span class="inline-block" style="transform: translateY(100%)" data-loader-letter>
-            {c}
-          </span>
-        ))}
-      </span>
+    <div class="shell absolute inset-0 grid grid-cols-2 content-between pt-8 pb-8 md:pt-10 md:pb-10">
+      {modules.map((module, i) => (
+        <div
+          class={cn('opacity-0', i % 2 && 'justify-self-end text-right')}
+          data-loader-module
+          data-count={module.count}>
+          <p class="font-mono text-label text-mute uppercase">{module.label}</p>
+          <p class="mt-2 font-display text-[clamp(1.75rem,3vw,2.75rem)] leading-none font-bold tracking-[-0.03em] text-bone">
+            <NumberFlow value={0} trigger="manual" duration={0.9} />
+          </p>
+          <p
+            class="mt-2 font-mono text-[0.6875rem] tracking-[0.06em] text-dim uppercase transition-colors duration-300"
+            data-loader-status>
+            Waiting
+          </p>
+        </div>
+      ))}
     </div>
-    <div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-line">
-      <div class="h-full origin-left bg-signal" style="transform: scaleX(0)" data-loader-line></div>
+
+    <div class="absolute top-1/2 left-1/2 size-[min(62vw,24rem)] -translate-x-1/2 -translate-y-1/2">
+      <div class="relative size-full" data-loader-ring>
+        <svg viewBox="0 0 100 100" class="absolute inset-0 size-full -rotate-90 overflow-visible" aria-hidden="true">
+          <circle cx="50" cy="50" r="48" fill="none" stroke="var(--color-line-strong)" stroke-width="0.3"></circle>
+          <circle
+            cx="50"
+            cy="50"
+            r="48"
+            fill="none"
+            stroke="var(--color-bone)"
+            stroke-width="0.7"
+            pathLength="1"
+            stroke-dasharray="1"
+            stroke-dashoffset="1"
+            data-loader-arc></circle>
+        </svg>
+        <div class="absolute inset-0" data-loader-hand>
+          <span class="absolute top-[2%] left-1/2 size-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-signal shadow-[0_0_24px_rgb(255_91_31/0.7)]"></span>
+        </div>
+        <div class="absolute inset-[13%] overflow-hidden rounded-full bg-ink-3" data-loader-lens>
+          {frames.map((frame) => (
+            <Image
+              src={resolveImage(`/images/${frame}.jpg`)}
+              alt=""
+              widths={[320, 480]}
+              sizes="20rem"
+              loading="eager"
+              class="absolute inset-0 size-full object-cover opacity-0"
+              data-loader-frame
+            />
+          ))}
+        </div>
+      </div>
     </div>
-    <div class="shell absolute inset-x-0 top-1/2 flex items-start justify-between pt-5">
-      <span class="font-mono text-label text-mute uppercase opacity-0" data-loader-caption>
-        Reading signals
-      </span>
-      <span
-        class="flex font-mono text-[clamp(2rem,5vw,4.5rem)] leading-none text-bone tabular-nums opacity-0"
-        data-loader-count>
-        <NumberFlow value={0} duration={0.55} trigger="manual" grouping={false} />
+
+    <div
+      class="absolute inset-x-0 top-[calc(50%+min(31vw,12rem)+1.75rem)] flex flex-col items-center gap-2 opacity-0"
+      data-loader-readout>
+      <span class="flex items-baseline font-mono text-[clamp(2rem,4vw,3.25rem)] leading-none text-bone">
+        <NumberFlow value={0} trigger="manual" duration={0.5} grouping={false} />
         <span class="ml-1 text-signal">%</span>
+      </span>
+      <span class="font-mono text-label text-mute uppercase" data-loader-caption>
+        Calibrating baselines
       </span>
     </div>
   </div>

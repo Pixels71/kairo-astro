@@ -1,12 +1,13 @@
 ---
 import Icon from '@/components/shared/icons/icon.astro';
+import SignalLine from '@/components/shared/ui/signal-line.astro';
 import TextRoll from '@/components/shared/ui/text-roll.astro';
 import { footerGroups, socialLinks } from '@/data/footer';
 import { chars } from '@/utils/text';
 ---
 
 <footer class="relative z-0 overflow-hidden bg-ink-2 lg:sticky lg:bottom-0" data-footer>
-  <div class="shell pt-20 md:pt-24" data-footer-inner>
+  <div class="shell pt-16 md:pt-20" data-footer-inner>
     <div class="grid grid-cols-1 gap-14 md:grid-cols-12">
       <div class="md:col-span-6 lg:col-span-5">
         <h2 class="max-w-[14ch] font-display text-subtitle font-bold text-bone">
@@ -81,7 +82,8 @@ import { chars } from '@/utils/text';
       </div>
     </div>
 
-    <div class="mt-20 flex items-center justify-between gap-6 border-t border-line pt-6 text-sm text-mute md:mt-20">
+    <SignalLine class="mt-10 h-20 md:mt-12 md:h-24" spike={0.18} />
+    <div class="flex items-center justify-between gap-6 pt-4 text-sm text-mute">
       <p>&copy; 2026 Kairo Labs, Inc.</p>
       <button type="button" class="group flex items-center gap-3 text-bone" data-back-top aria-label="Back to top">
         <span class="hidden sm:inline">
@@ -111,12 +113,22 @@ import { chars } from '@/utils/text';
     </div>
   </div>
 
-  <div class="relative mt-6 overflow-hidden" aria-hidden="true">
+  <div class="relative mt-4 cursor-crosshair overflow-hidden" data-footer-mark aria-hidden="true">
     <p
-      class="-ml-[0.04em] flex justify-center font-display text-[30.5vw] leading-[0.7] font-extrabold tracking-[-0.075em] text-bone"
+      class="-ml-[0.04em] flex justify-center font-display text-[27vw] leading-[0.7] font-extrabold tracking-[-0.075em] text-bone/[0.04] [-webkit-text-stroke:1px_var(--color-line-strong)]"
       data-footer-word>
       {chars('KAIRO').map((c) => (
-        <span class="inline-block transition-colors duration-500 hover:text-signal" data-footer-letter>
+        <span class="inline-block origin-bottom" data-footer-letter>
+          {c}
+        </span>
+      ))}
+    </p>
+    <p
+      class="pointer-events-none absolute inset-0 -ml-[0.04em] flex justify-center font-display text-[27vw] leading-[0.7] font-extrabold tracking-[-0.075em] text-signal [mask-image:radial-gradient(circle_var(--mr,0px)_at_var(--mx,50%)_var(--my,50%),#000_55%,transparent_100%)]"
+      data-footer-word
+      data-footer-spot>
+      {chars('KAIRO').map((c) => (
+        <span class="inline-block origin-bottom" data-footer-letter>
           {c}
         </span>
       ))}

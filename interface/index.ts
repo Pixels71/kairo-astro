@@ -28,14 +28,7 @@ export interface Testimonial {
   role: string;
   company: string;
   image: string;
-}
-
-export interface Stat {
-  value: number;
-  prefix?: string;
-  suffix?: string;
-  decimals?: number;
-  label: string;
+  metric: { value: number; prefix?: string; suffix?: string; label: string };
 }
 
 export interface Plan {
