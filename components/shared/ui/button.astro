@@ -41,13 +41,11 @@ const Tag = href ? 'a' : 'button';
   <Tag href={href} type={href ? undefined : type} class={classes} data-btn {...rest}>
     <span class={cn('btn-fill', variants[variant].fill)} aria-hidden="true"></span>
     <TextRoll text={label} />
-    {
-      icon && (
-        <span class="btn-icon">
-          <Icon name={icon} />
-          <Icon name={icon} />
-        </span>
-      )
-    }
+    {icon && (
+      <span class="btn-icon">
+        <Icon name={icon} />
+        <Icon name={icon} />
+      </span>
+    )}
   </Tag>
 </span>

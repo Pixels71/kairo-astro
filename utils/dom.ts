@@ -8,4 +8,5 @@ export const motionEnabled = () => document.documentElement.classList.contains('
 
 export const finePointer = () => matchMedia('(hover: hover) and (pointer: fine)').matches;
 
-export const fontsReady = () => Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1200))]);
+export const fontsReady = () =>
+  Promise.race([document.fonts.ready, new Promise((resolve) => setTimeout(resolve, 1200))]);

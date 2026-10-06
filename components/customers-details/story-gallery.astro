@@ -12,7 +12,19 @@ const [wide, tall] = story.data.gallery;
 
 <section class="shell pb-24 md:pb-36" aria-label={`${story.data.client} in pictures`}>
   <div class="grid grid-cols-1 gap-6 md:grid-cols-12 md:items-start">
-    <Media src={wide} alt="" class="aspect-[16/11] md:col-span-8" sizes="(min-width: 768px) 66vw, 100vw" parallax={0.18} />
-    <Media src={tall} alt="" class="aspect-[4/5] md:col-span-4 md:mt-48" sizes="(min-width: 768px) 33vw, 100vw" parallax={0.25} />
+    <Media
+      src={wide}
+      alt=""
+      class="aspect-[16/11] md:col-span-8"
+      sizes="(min-width: 768px) 66vw, 100vw"
+      parallax={0.18}
+    />
+    <Media
+      src={tall}
+      alt=""
+      class="aspect-[4/5] md:col-span-4 md:mt-48"
+      sizes="(min-width: 768px) 33vw, 100vw"
+      parallax={0.25}
+    />
   </div>
 </section>

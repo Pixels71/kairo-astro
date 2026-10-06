@@ -11,18 +11,20 @@ const letters = Array.from('Kairo');
 ---
 
 <span class={cn('inline-flex items-center gap-2.5', className)}>
-  {
-    mark && (
-      <svg viewBox="0 0 32 32" class="size-7 shrink-0" aria-hidden="true" data-logo-mark>
-        <circle cx="16" cy="16" r="12.5" fill="none" stroke="currentColor" stroke-width="2" opacity="0.9" />
-        <g data-logo-hand style="transform-origin: 16px 16px">
-          <circle cx="16" cy="3.5" r="3.5" fill="var(--color-signal)" />
-        </g>
-      </svg>
-    )
-  }
+  {mark && (
+    <svg viewBox="0 0 32 32" class="size-7 shrink-0" aria-hidden="true" data-logo-mark>
+      <circle cx="16" cy="16" r="12.5" fill="none" stroke="currentColor" stroke-width="2" opacity="0.9" />
+      <g data-logo-hand style="transform-origin: 16px 16px">
+        <circle cx="16" cy="3.5" r="3.5" fill="var(--color-signal)" />
+      </g>
+    </svg>
+  )}
   <span class="roll font-display text-[1.375rem] font-bold tracking-[-0.03em]" aria-hidden="true">
-    {letters.map((c, i) => <span class="roll-char" data-c={c} style={`--i:${i}`}>{c}</span>)}
+    {letters.map((c, i) => (
+      <span class="roll-char" data-c={c} style={`--i:${i}`}>
+        {c}
+      </span>
+    ))}
   </span>
   <span class="sr-only">Kairo</span>
 </span>

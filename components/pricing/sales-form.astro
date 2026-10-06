@@ -19,7 +19,12 @@ const field =
           Open a free workspace now, or book thirty minutes with someone who has set Kairo up for teams like yours.
         </p>
       </div>
-      <Media src="/images/gallery-window.jpg" alt="A laptop on a desk by a window at sunset" class="hidden aspect-[4/3] lg:block" sizes="40vw" />
+      <Media
+        src="/images/gallery-window.jpg"
+        alt="A laptop on a desk by a window at sunset"
+        class="hidden aspect-[4/3] lg:block"
+        sizes="40vw"
+      />
     </div>
 
     <form class="lg:col-span-6 lg:col-start-7" novalidate data-sales-form>
@@ -43,12 +48,24 @@ const field =
 
       <div class="mt-12 grid grid-cols-1 gap-x-6 gap-y-10 md:grid-cols-2" data-sales-fields>
         <div class="flex flex-col gap-2">
-          <label for="sales-name" class="text-sm text-bone">Full name</label>
-          <input id="sales-name" name="name" autocomplete="name" required class={field} placeholder="Amara Diallo" aria-describedby="sales-name-error" />
+          <label for="sales-name" class="text-sm text-bone">
+            Full name
+          </label>
+          <input
+            id="sales-name"
+            name="name"
+            autocomplete="name"
+            required
+            class={field}
+            placeholder="Amara Diallo"
+            aria-describedby="sales-name-error"
+          />
           <p id="sales-name-error" class="min-h-5 text-sm text-signal" data-error-for="name"></p>
         </div>
         <div class="flex flex-col gap-2">
-          <label for="sales-email" class="text-sm text-bone">Work email</label>
+          <label for="sales-email" class="text-sm text-bone">
+            Work email
+          </label>
           <input
             id="sales-email"
             name="email"
@@ -62,20 +79,41 @@ const field =
           <p id="sales-email-error" class="min-h-5 text-sm text-signal" data-error-for="email"></p>
         </div>
         <div class="flex flex-col gap-2">
-          <label for="sales-company" class="text-sm text-bone">Company</label>
-          <input id="sales-company" name="company" autocomplete="organization" required class={field} placeholder="Halden Freight" aria-describedby="sales-company-error" />
+          <label for="sales-company" class="text-sm text-bone">
+            Company
+          </label>
+          <input
+            id="sales-company"
+            name="company"
+            autocomplete="organization"
+            required
+            class={field}
+            placeholder="Halden Freight"
+            aria-describedby="sales-company-error"
+          />
           <p id="sales-company-error" class="min-h-5 text-sm text-signal" data-error-for="company"></p>
         </div>
         <div class="flex flex-col gap-2">
-          <label for="sales-size" class="text-sm text-bone">Company size</label>
+          <label for="sales-size" class="text-sm text-bone">
+            Company size
+          </label>
           <select id="sales-size" name="size" class={`${field} appearance-none bg-ink`}>
-            {sizes.map((size) => <option>{size}</option>)}
+            {sizes.map((size) => (
+              <option>{size}</option>
+            ))}
           </select>
           <p class="min-h-5 text-sm text-dim">Helps us pick the right person.</p>
         </div>
         <div class="flex flex-col gap-2 md:col-span-2" data-demo-only hidden>
-          <label for="sales-message" class="text-sm text-bone">What would you like Kairo to watch?</label>
-          <textarea id="sales-message" name="message" rows="3" class={`${field} h-auto resize-none py-3`} placeholder="Churn signals across our enterprise accounts"></textarea>
+          <label for="sales-message" class="text-sm text-bone">
+            What would you like Kairo to watch?
+          </label>
+          <textarea
+            id="sales-message"
+            name="message"
+            rows="3"
+            class={`${field} h-auto resize-none py-3`}
+            placeholder="Churn signals across our enterprise accounts"></textarea>
         </div>
       </div>
 
@@ -86,7 +124,9 @@ const field =
           data-btn
           data-sales-submit>
           <span class="btn-fill bg-bone" aria-hidden="true"></span>
-          <span data-submit-label data-free="Create my workspace" data-demo="Request a demo"><TextRoll text="Create my workspace" /></span>
+          <span data-submit-label data-free="Create my workspace" data-demo="Request a demo">
+            <TextRoll text="Create my workspace" />
+          </span>
           <span class="btn-icon" data-dir="right">
             <Icon name="arrow-right" />
             <Icon name="arrow-right" />

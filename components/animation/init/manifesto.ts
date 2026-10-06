@@ -12,7 +12,12 @@ export default function init() {
     tokens.forEach((token, i) => {
       if (token.hasAttribute('data-word-media')) {
         const image = token.querySelector('img');
-        tl.fromTo(token, { clipPath: 'inset(0 50% 0 50%)' }, { clipPath: 'inset(0 0% 0 0%)', duration: 1.2, ease: 'power2.out' }, i * 0.12);
+        tl.fromTo(
+          token,
+          { clipPath: 'inset(0 50% 0 50%)' },
+          { clipPath: 'inset(0 0% 0 0%)', duration: 1.2, ease: 'power2.out' },
+          i * 0.12,
+        );
         if (image) tl.fromTo(image, { scale: 1.5 }, { scale: 1, duration: 1.4, ease: 'power2.out' }, i * 0.12);
         return;
       }

@@ -33,7 +33,13 @@ export const plans: Plan[] = [
     description: 'For operators running several teams, regions or product lines.',
     cta: 'Book a demo',
     href: '/pricing#sales',
-    features: ['Everything in Growth', 'Unlimited metrics', 'SSO and audit log', 'Custom data retention', 'A named analyst'],
+    features: [
+      'Everything in Growth',
+      'Unlimited metrics',
+      'SSO and audit log',
+      'Custom data retention',
+      'A named analyst',
+    ],
   },
 ];
 
@@ -85,7 +91,8 @@ export const faqs: Faq[] = [
   },
   {
     question: 'Can we change plans later?',
-    answer: 'Yes. Upgrades apply straight away and are prorated. Downgrades take effect at the end of the billing period.',
+    answer:
+      'Yes. Upgrades apply straight away and are prorated. Downgrades take effect at the end of the billing period.',
   },
   {
     question: 'Where do briefs show up?',

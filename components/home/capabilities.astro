@@ -53,10 +53,16 @@ const brief =
       data-reveal>
       <div class="max-w-[34ch]">
         <h3 class="font-display text-subtitle font-bold text-bone">Spots the shift</h3>
-        <p class="mt-3 text-mute">Every metric gets its own normal range. Kairo flags what breaks it, with the likely cause.</p>
+        <p class="mt-3 text-mute">
+          Every metric gets its own normal range. Kairo flags what breaks it, with the likely cause.
+        </p>
       </div>
       <figure class="relative -mx-2 mt-8" data-chart>
-        <svg viewBox={`0 0 ${W} ${H}`} class="h-auto w-full overflow-visible" role="img" aria-label="A metric line leaves its normal range in a sharp spike">
+        <svg
+          viewBox={`0 0 ${W} ${H}`}
+          class="h-auto w-full overflow-visible"
+          role="img"
+          aria-label="A metric line leaves its normal range in a sharp spike">
           <path d={band} fill="var(--color-bone)" opacity="0.05"></path>
           <path
             d={line}
@@ -78,7 +84,13 @@ const brief =
             stroke-dashoffset="1"
             data-chart-anomaly></path>
           <g opacity="0" data-chart-marker>
-            <circle cx={peak.x} cy={peak.y} r="16" fill="var(--color-signal)" opacity="0.18" class="chart-ping"></circle>
+            <circle
+              cx={peak.x}
+              cy={peak.y}
+              r="16"
+              fill="var(--color-signal)"
+              opacity="0.18"
+              class="chart-ping"></circle>
             <circle cx={peak.x} cy={peak.y} r="4.5" fill="var(--color-signal)"></circle>
           </g>
           <line x1="0" x2="0" y1="0" y2={H} stroke="var(--color-bone)" stroke-opacity="0.18" data-chart-scan></line>
@@ -105,22 +117,25 @@ const brief =
       <div class="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/30 to-ink/90"></div>
       <div class="relative max-w-[30ch]">
         <h3 class="font-display text-subtitle font-bold text-bone">Plugs into your stack</h3>
-        <p class="mt-3 text-mute">Billing, CRM, support, product analytics and your warehouse. Read-only, connected in minutes.</p>
+        <p class="mt-3 text-mute">
+          Billing, CRM, support, product analytics and your warehouse. Read-only, connected in minutes.
+        </p>
       </div>
-      <div class="relative mx-auto mt-6 aspect-square w-full max-w-[17rem]" aria-label="Supported integrations" role="img">
+      <div
+        class="relative mx-auto mt-6 aspect-square w-full max-w-[17rem]"
+        aria-label="Supported integrations"
+        role="img">
         <div class="absolute inset-[10%] rounded-full border border-dashed border-line-strong"></div>
         <div class="absolute inset-0 animate-[spin_48s_linear_infinite]">
-          {
-            orbit.map((item) => (
-              <span
-                class="absolute grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-ink/80 text-bone backdrop-blur"
-                style={`left:${item.left}%; top:${item.top}%`}>
-                <span class="grid animate-[spin_48s_linear_infinite_reverse] place-items-center">
-                  <BrandIcon icon={item.icon} class="size-5" label={false} />
-                </span>
+          {orbit.map((item) => (
+            <span
+              class="absolute grid size-11 -translate-x-1/2 -translate-y-1/2 place-items-center rounded-full border border-line bg-ink/80 text-bone backdrop-blur"
+              style={`left:${item.left}%; top:${item.top}%`}>
+              <span class="grid animate-[spin_48s_linear_infinite_reverse] place-items-center">
+                <BrandIcon icon={item.icon} class="size-5" label={false} />
               </span>
-            ))
-          }
+            </span>
+          ))}
         </div>
         <div class="absolute inset-0 grid place-items-center">
           <span class="grid size-16 place-items-center rounded-full bg-signal text-ink">
@@ -133,33 +148,40 @@ const brief =
       </div>
     </article>
 
-    <article class="flex min-h-[24rem] flex-col justify-between border border-line bg-ink-2 p-6 md:p-8 lg:col-span-4" data-reveal>
+    <article
+      class="flex min-h-[24rem] flex-col justify-between border border-line bg-ink-2 p-6 md:p-8 lg:col-span-4"
+      data-reveal>
       <div>
         <h3 class="font-display text-subtitle font-bold text-bone">Ranks by impact</h3>
         <p class="mt-3 text-mute">Changes are sorted by what they cost, so the biggest one is always on top.</p>
       </div>
       <ul class="mt-8 flex flex-col gap-2" data-priority>
-        {
-          priorities.map((item, i) => (
-            <li
-              class="flex items-center justify-between gap-4 border border-line bg-ink-3 px-4 py-3 data-[top=true]:border-signal/60"
-              data-priority-item
-              data-top={i === 0 ? 'true' : 'false'}>
-              <span class="truncate text-sm text-bone">{item.title}</span>
-              <span class="shrink-0 font-mono text-xs text-mute">{item.value}</span>
-            </li>
-          ))
-        }
+        {priorities.map((item, i) => (
+          <li
+            class="flex items-center justify-between gap-4 border border-line bg-ink-3 px-4 py-3 data-[top=true]:border-signal/60"
+            data-priority-item
+            data-top={i === 0 ? 'true' : 'false'}>
+            <span class="truncate text-sm text-bone">{item.title}</span>
+            <span class="shrink-0 font-mono text-xs text-mute">{item.value}</span>
+          </li>
+        ))}
       </ul>
     </article>
 
-    <article class="flex min-h-[24rem] flex-col justify-between bg-signal p-6 text-ink md:p-8 lg:col-span-4" data-reveal>
+    <article
+      class="flex min-h-[24rem] flex-col justify-between bg-signal p-6 text-ink md:p-8 lg:col-span-4"
+      data-reveal>
       <div>
         <h3 class="font-display text-subtitle font-bold">Writes the brief</h3>
-        <p class="mt-3 text-ink/75">One short message with the cause, the size and an owner. Sent where that person works.</p>
+        <p class="mt-3 text-ink/75">
+          One short message with the cause, the size and an owner. Sent where that person works.
+        </p>
       </div>
-      <p class="mt-8 min-h-[7.5rem] border-t border-ink/20 pt-5 font-mono text-[0.8125rem] leading-relaxed" data-type={brief}>
-        <span data-type-text>{brief}</span><span
+      <p
+        class="mt-8 min-h-[7.5rem] border-t border-ink/20 pt-5 font-mono text-[0.8125rem] leading-relaxed"
+        data-type={brief}>
+        <span data-type-text>{brief}</span>
+        <span
           class="ml-0.5 inline-block h-[1.1em] w-[0.55em] translate-y-[0.2em] animate-pulse bg-ink"
           aria-hidden="true"></span>
       </p>
@@ -170,15 +192,24 @@ const brief =
       data-reveal>
       <div
         class="absolute inset-0 opacity-60 [background-image:radial-gradient(var(--color-line-strong)_1px,transparent_1px)] [background-size:18px_18px] [mask-image:radial-gradient(circle_at_50%_70%,#000,transparent_70%)]"
-        aria-hidden="true">
-      </div>
+        aria-hidden="true"></div>
       <div class="relative">
         <h3 class="font-display text-subtitle font-bold text-bone">Private by default</h3>
         <p class="mt-3 text-mute">SSO, audit logs and field-level redaction. Your data never trains shared models.</p>
       </div>
       <div class="relative mx-auto mt-8 grid size-36 place-items-center">
-        <svg viewBox="0 0 100 100" class="absolute inset-0 size-full animate-[spin_24s_linear_infinite]" aria-hidden="true">
-          <circle cx="50" cy="50" r="48" fill="none" stroke="var(--color-signal)" stroke-width="0.8" stroke-dasharray="2 6"></circle>
+        <svg
+          viewBox="0 0 100 100"
+          class="absolute inset-0 size-full animate-[spin_24s_linear_infinite]"
+          aria-hidden="true">
+          <circle
+            cx="50"
+            cy="50"
+            r="48"
+            fill="none"
+            stroke="var(--color-signal)"
+            stroke-width="0.8"
+            stroke-dasharray="2 6"></circle>
         </svg>
         <span class="grid size-20 place-items-center rounded-full border border-line-strong bg-ink text-bone">
           <Icon name="shield" class="size-8" />

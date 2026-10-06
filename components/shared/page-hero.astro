@@ -13,24 +13,22 @@ const { lines, intro, accent, class: className } = Astro.props;
 
 <section class={cn('shell pt-36 pb-14 md:pt-44 md:pb-20', className)}>
   <h1 class="font-display text-[clamp(3.25rem,9.6vw,12rem)] leading-[0.9] font-extrabold tracking-[-0.05em] text-bone">
-    {
-      lines.map((line, i) => (
-        <span class="block overflow-hidden pb-[0.06em]" data-hero-line>
-          <span class={cn('block', accent === i && 'text-signal')}>{line}</span>
-        </span>
-      ))
-    }
+    {lines.map((line, i) => (
+      <span class="block overflow-hidden pb-[0.06em]" data-hero-line>
+        <span class={cn('block', accent === i && 'text-signal')}>{line}</span>
+      </span>
+    ))}
   </h1>
-  {
-    (intro || Astro.slots.has('default')) && (
-      <div class="mt-10 grid grid-cols-1 gap-8 md:mt-14 md:grid-cols-12 md:items-end">
-        {intro && (
-          <p class="max-w-[46ch] text-lead text-mute md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8" data-intro>
-            {intro}
-          </p>
-        )}
-        <slot />
-      </div>
-    )
-  }
+  {(intro || Astro.slots.has('default')) && (
+    <div class="mt-10 grid grid-cols-1 gap-8 md:mt-14 md:grid-cols-12 md:items-end">
+      {intro && (
+        <p
+          class="max-w-[46ch] text-lead text-mute md:col-span-6 md:col-start-7 lg:col-span-5 lg:col-start-8"
+          data-intro>
+          {intro}
+        </p>
+      )}
+      <slot />
+    </div>
+  )}
 </section>

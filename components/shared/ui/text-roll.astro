@@ -11,6 +11,10 @@ const { text, class: className } = Astro.props;
 ---
 
 <span class={cn('roll', className)} aria-hidden="true">
-  {chars(text).map((c, i) => <span class="roll-char" data-c={c} style={`--i:${i}`}>{c}</span>)}
+  {chars(text).map((c, i) => (
+    <span class="roll-char" data-c={c} style={`--i:${i}`}>
+      {c}
+    </span>
+  ))}
 </span>
 <span class="sr-only">{text}</span>

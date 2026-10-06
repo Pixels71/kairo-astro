@@ -14,7 +14,9 @@ const meta = [
 ];
 ---
 
-<section class="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden" aria-labelledby="story-title">
+<section
+  class="relative isolate flex min-h-[100dvh] flex-col justify-end overflow-hidden"
+  aria-labelledby="story-title">
   <Media
     src={story.data.cover}
     alt={story.data.summary}
@@ -26,19 +28,19 @@ const meta = [
   />
   <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/55 to-ink/20" aria-hidden="true"></div>
   <div class="shell pt-36 pb-10 md:pb-14">
-    <p class="font-mono text-label text-bone/80 uppercase" data-intro>{story.data.client}</p>
+    <p class="font-mono text-label text-bone/80 uppercase" data-intro>
+      {story.data.client}
+    </p>
     <h1 id="story-title" class="mt-6 max-w-[20ch] font-display text-title font-bold text-bone" data-split="intro">
       {story.data.title}
     </h1>
     <dl class="mt-12 grid grid-cols-1 gap-6 border-t border-bone/20 pt-6 sm:grid-cols-3" data-intro>
-      {
-        meta.map((item) => (
-          <div>
-            <dt class="font-mono text-label text-bone/60 uppercase">{item.label}</dt>
-            <dd class="mt-2 text-bone">{item.value}</dd>
-          </div>
-        ))
-      }
+      {meta.map((item) => (
+        <div>
+          <dt class="font-mono text-label text-bone/60 uppercase">{item.label}</dt>
+          <dd class="mt-2 text-bone">{item.value}</dd>
+        </div>
+      ))}
     </dl>
   </div>
 </section>

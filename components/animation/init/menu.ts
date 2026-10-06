@@ -40,13 +40,12 @@ export default function init() {
     tl = gsap.timeline();
     if (open) {
       tl.set(menu, { visibility: 'visible' })
-        .fromTo(menu, { clipPath: `circle(0% at ${at})` }, { clipPath: `circle(150% at ${at})`, duration: 1, ease: 'expo.inOut' })
         .fromTo(
-          links,
-          { yPercent: 110 },
-          { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 },
-          0.35,
+          menu,
+          { clipPath: `circle(0% at ${at})` },
+          { clipPath: `circle(150% at ${at})`, duration: 1, ease: 'expo.inOut' },
         )
+        .fromTo(links, { yPercent: 110 }, { yPercent: 0, duration: 0.9, ease: 'expo.out', stagger: 0.06 }, 0.35)
         .fromTo(meta, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: 'power3.out' }, 0.6);
     } else {
       tl.to(links, { yPercent: -110, duration: 0.45, ease: 'power3.in', stagger: 0.03 })

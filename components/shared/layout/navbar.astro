@@ -18,34 +18,39 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
       <ul
         class="relative flex items-center rounded-full border border-line bg-ink-2/70 p-1 backdrop-blur-xl"
         data-nav-pill>
-        <li aria-hidden="true" class="absolute inset-y-1 left-0 rounded-full bg-bone/10 opacity-0" data-nav-highlight>
-        </li>
-        {
-          navLinks.map((link) => (
-            <li class="relative z-10">
-              <a
-                href={link.href}
-                class={cn(
-                  'group flex h-10 items-center rounded-full px-4 text-sm font-medium text-mute transition-colors duration-300 hover:text-bone',
-                  isCurrent(link.href) && 'text-bone',
-                )}
-                aria-current={isCurrent(link.href) ? 'page' : undefined}
-                data-nav-link>
-                <TextRoll text={link.label} />
-              </a>
-            </li>
-          ))
-        }
+        <li
+          aria-hidden="true"
+          class="absolute inset-y-1 left-0 rounded-full bg-bone/10 opacity-0"
+          data-nav-highlight></li>
+        {navLinks.map((link) => (
+          <li class="relative z-10">
+            <a
+              href={link.href}
+              class={cn(
+                'group flex h-10 items-center rounded-full px-4 text-sm font-medium text-mute transition-colors duration-300 hover:text-bone',
+                isCurrent(link.href) && 'text-bone',
+              )}
+              aria-current={isCurrent(link.href) ? 'page' : undefined}
+              data-nav-link>
+              <TextRoll text={link.label} />
+            </a>
+          </li>
+        ))}
         <li
           aria-hidden="true"
           class="absolute inset-x-6 -bottom-px h-px origin-left bg-signal"
           style="transform: scaleX(0)"
-          data-nav-progress>
-        </li>
+          data-nav-progress></li>
       </ul>
     </nav>
     <div class="pointer-events-auto flex items-center gap-2" data-nav-item>
-      <Button label="Book a demo" href="/pricing?intent=demo#sales" variant="outline" icon={false} class="hidden h-11 xl:inline-flex" />
+      <Button
+        label="Book a demo"
+        href="/pricing?intent=demo#sales"
+        variant="outline"
+        icon={false}
+        class="hidden h-11 xl:inline-flex"
+      />
       <Button label="Start free" href="/pricing#sales" class="h-11 max-xs:px-4" />
       <button
         type="button"
@@ -55,8 +60,12 @@ const isCurrent = (href: string) => path === href || path.startsWith(`${href}/`)
         aria-label="Open menu"
         data-menu-toggle>
         <span class="relative block h-3 w-5" aria-hidden="true">
-          <span class="absolute inset-x-0 top-0 h-px bg-bone transition-[translate,rotate] duration-500 ease-(--ease-out-expo)" data-menu-line></span>
-          <span class="absolute inset-x-0 bottom-0 h-px bg-bone transition-[translate,rotate] duration-500 ease-(--ease-out-expo)" data-menu-line></span>
+          <span
+            class="absolute inset-x-0 top-0 h-px bg-bone transition-[translate,rotate] duration-500 ease-(--ease-out-expo)"
+            data-menu-line></span>
+          <span
+            class="absolute inset-x-0 bottom-0 h-px bg-bone transition-[translate,rotate] duration-500 ease-(--ease-out-expo)"
+            data-menu-line></span>
         </span>
       </button>
     </div>

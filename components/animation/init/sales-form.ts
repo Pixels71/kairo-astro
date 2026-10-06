@@ -18,9 +18,10 @@ export default function init() {
     intents.forEach((input) => (input.checked = input.value === intent));
     if (demoOnly) {
       demoOnly.hidden = intent !== 'demo';
-      if (intent === 'demo' && motionEnabled()) gsap.fromTo(demoOnly, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 });
+      if (intent === 'demo' && motionEnabled())
+        gsap.fromTo(demoOnly, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.6 });
     }
-    if (label) setRollText(label, intent === 'demo' ? label.dataset.demo ?? '' : label.dataset.free ?? '');
+    if (label) setRollText(label, intent === 'demo' ? (label.dataset.demo ?? '') : (label.dataset.free ?? ''));
     ScrollTrigger.refresh();
   };
 

@@ -17,38 +17,38 @@ const parts: Part[] = [
 ---
 
 <section class="shell py-32 md:py-48" aria-labelledby="manifesto-title">
-  <p class="font-mono text-label text-mute uppercase" data-reveal>Why Kairo</p>
+  <p class="font-mono text-label text-mute uppercase" data-reveal>
+    Why Kairo
+  </p>
   <h2
     id="manifesto-title"
     class="mt-8 max-w-[24ch] font-display text-[clamp(2rem,4.8vw,5.25rem)] leading-[1.04] font-bold tracking-[-0.035em] text-bone"
     data-words>
-    {
-      parts.map((part) =>
-        'text' in part ? (
-          words(part.text).map((word) => (
-            <>
-              <span class="inline-block" data-word>
-                {word}
-              </span>{' '}
-            </>
-          ))
-        ) : (
+    {parts.map((part) =>
+      'text' in part ? (
+        words(part.text).map((word) => (
           <>
-            <span
-              class="relative mx-[0.06em] inline-block h-[0.8em] w-[1.9em] overflow-hidden align-[-0.06em]"
-              data-word-media
-              aria-hidden="true">
-              <Image
-                src={resolveImage(part.image)}
-                alt=""
-                widths={[240, 480]}
-                sizes="12vw"
-                class="absolute inset-0 size-full object-cover"
-              />
+            <span class="inline-block" data-word>
+              {word}
             </span>{' '}
           </>
-        ),
-      )
-    }
+        ))
+      ) : (
+        <>
+          <span
+            class="relative mx-[0.06em] inline-block h-[0.8em] w-[1.9em] overflow-hidden align-[-0.06em]"
+            data-word-media
+            aria-hidden="true">
+            <Image
+              src={resolveImage(part.image)}
+              alt=""
+              widths={[240, 480]}
+              sizes="12vw"
+              class="absolute inset-0 size-full object-cover"
+            />
+          </span>{' '}
+        </>
+      ),
+    )}
   </h2>
 </section>

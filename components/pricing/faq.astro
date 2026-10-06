@@ -9,29 +9,32 @@ import { faqs } from '@/data/pricing';
       Questions, answered.
     </h2>
     <div class="lg:col-span-7 lg:col-start-6" data-accordion>
-      {
-        faqs.map((faq, i) => (
-          <div class="border-b border-line" data-accordion-item data-reveal>
-            <h3>
-              <button
-                type="button"
-                class="group flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-medium text-bone"
-                aria-expanded="false"
-                aria-controls={`faq-${i}`}
-                id={`faq-button-${i}`}
-                data-accordion-trigger>
-                {faq.question}
-                <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong transition-[rotate,background-color,color] duration-500 ease-(--ease-out-expo) group-aria-expanded:rotate-45 group-aria-expanded:bg-signal group-aria-expanded:text-ink">
-                  <Icon name="plus" />
-                </span>
-              </button>
-            </h3>
-            <div id={`faq-${i}`} role="region" aria-labelledby={`faq-button-${i}`} class="h-0 overflow-hidden" data-accordion-panel>
-              <p class="max-w-[60ch] pb-6 text-mute">{faq.answer}</p>
-            </div>
+      {faqs.map((faq, i) => (
+        <div class="border-b border-line" data-accordion-item data-reveal>
+          <h3>
+            <button
+              type="button"
+              class="group flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-medium text-bone"
+              aria-expanded="false"
+              aria-controls={`faq-${i}`}
+              id={`faq-button-${i}`}
+              data-accordion-trigger>
+              {faq.question}
+              <span class="grid size-9 shrink-0 place-items-center rounded-full border border-line-strong transition-[rotate,background-color,color] duration-500 ease-(--ease-out-expo) group-aria-expanded:rotate-45 group-aria-expanded:bg-signal group-aria-expanded:text-ink">
+                <Icon name="plus" />
+              </span>
+            </button>
+          </h3>
+          <div
+            id={`faq-${i}`}
+            role="region"
+            aria-labelledby={`faq-button-${i}`}
+            class="h-0 overflow-hidden"
+            data-accordion-panel>
+            <p class="max-w-[60ch] pb-6 text-mute">{faq.answer}</p>
           </div>
-        ))
-      }
+        </div>
+      ))}
     </div>
   </div>
 </section>

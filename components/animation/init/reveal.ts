@@ -21,8 +21,7 @@ export default function init() {
       ScrollTrigger.batch(items, {
         start: 'top 90%',
         once: true,
-        onEnter: (batch) =>
-          gsap.to(batch, { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out', stagger: 0.08 }),
+        onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: 1.2, ease: 'expo.out', stagger: 0.08 }),
       });
     }
 

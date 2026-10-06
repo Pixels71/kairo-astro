@@ -32,7 +32,9 @@ export default function init() {
       setOdometer(odometer);
       odometer.setAttribute('aria-label', String(value));
       if (label) label.textContent = `$${value} per month`;
-      if (monthly > 0) note.textContent = period === 'yearly' ? `$${value * 12} billed yearly` : 'Billed monthly';
+      if (monthly > 0)
+        note.textContent =
+          period === 'yearly' ? `$${(value * 12).toLocaleString('en-US')} billed yearly` : 'Billed monthly';
     });
   };
 

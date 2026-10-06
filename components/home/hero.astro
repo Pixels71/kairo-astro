@@ -6,29 +6,36 @@ import Button from '@/components/shared/ui/button.astro';
   <canvas class="absolute inset-0 -z-10 size-full" data-signal-field aria-hidden="true"></canvas>
   <div
     class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_65%_35%,transparent_20%,var(--color-ink)_92%)]"
-    aria-hidden="true">
-  </div>
+    aria-hidden="true"></div>
   <div
     class="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-ink via-ink/80 to-transparent"
-    aria-hidden="true">
-  </div>
+    aria-hidden="true"></div>
 
   <div class="shell flex min-h-[100dvh] flex-col justify-end pt-28 pb-10 md:pb-14" data-hero-sink>
     <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end">
       <h1 id="hero-title" class="font-display text-hero font-extrabold text-bone lg:col-span-12">
-        <span class="block overflow-hidden pb-[0.04em]" data-hero-line><span class="block">Know the moment</span></span>
+        <span class="block overflow-hidden pb-[0.04em]" data-hero-line>
+          <span class="block">Know the moment</span>
+        </span>
         <span class="block overflow-hidden pb-[0.06em]" data-hero-line>
-          <span class="block">before it <span class="text-signal">passes.</span></span>
+          <span class="block">
+            before it <span class="text-signal">passes.</span>
+          </span>
         </span>
       </h1>
-      <div
-        class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between lg:col-span-12 lg:-mt-2">
+      <div class="flex flex-col gap-8 md:flex-row md:items-end md:justify-between lg:col-span-12 lg:-mt-2">
         <p class="max-w-[38ch] text-lead text-mute" data-intro>
           Kairo reads your metrics, tickets and calls, then tells your team what changed and why it matters.
         </p>
         <div class="flex flex-wrap items-center gap-3" data-intro>
           <Button label="Start free" href="/pricing#sales" class="h-13 px-7" />
-          <Button label="Book a demo" href="/pricing?intent=demo#sales" variant="outline" icon={false} class="h-13 px-7" />
+          <Button
+            label="Book a demo"
+            href="/pricing?intent=demo#sales"
+            variant="outline"
+            icon={false}
+            class="h-13 px-7"
+          />
         </div>
       </div>
     </div>

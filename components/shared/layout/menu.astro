@@ -24,47 +24,41 @@ const previews: Record<string, string> = {
   <div class="shell grid h-full grid-cols-1 gap-10 pt-28 pb-8 md:grid-cols-12">
     <nav aria-label="Menu" class="flex flex-col justify-between md:col-span-7">
       <ul class="flex flex-col">
-        {
-          menuLinks.map((link) => (
-            <li class="overflow-hidden">
-              <a
-                href={link.href}
-                class="group flex items-baseline gap-4 py-1 font-display text-[clamp(3rem,13vw,6.5rem)] leading-[1] font-bold tracking-[-0.04em] text-bone"
-                data-menu-link
-                data-preview={link.href}
-                data-label={link.label}>
-                <TextRoll text={link.label} />
-              </a>
-            </li>
-          ))
-        }
+        {menuLinks.map((link) => (
+          <li class="overflow-hidden">
+            <a
+              href={link.href}
+              class="group flex items-baseline gap-4 py-1 font-display text-[clamp(3rem,13vw,6.5rem)] leading-[1] font-bold tracking-[-0.04em] text-bone"
+              data-menu-link
+              data-preview={link.href}
+              data-label={link.label}>
+              <TextRoll text={link.label} />
+            </a>
+          </li>
+        ))}
       </ul>
       <div class="flex flex-wrap items-center gap-3" data-menu-meta>
-        {
-          socialLinks.map((social) => (
-            <a
-              href={social.href}
-              target="_blank"
-              rel="noopener"
-              aria-label={social.label}
-              class="grid size-11 place-items-center rounded-full border border-line text-mute transition-colors duration-300 hover:border-bone hover:text-bone">
-              <Icon name={social.icon === 'x' ? 'x-logo' : social.icon} class="size-5" />
-            </a>
-          ))
-        }
+        {socialLinks.map((social) => (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener"
+            aria-label={social.label}
+            class="grid size-11 place-items-center rounded-full border border-line text-mute transition-colors duration-300 hover:border-bone hover:text-bone">
+            <Icon name={social.icon === 'x' ? 'x-logo' : social.icon} class="size-5" />
+          </a>
+        ))}
         <a href="mailto:hello@kairo.app" class="group ml-auto text-sm text-mute hover:text-bone">
           <TextRoll text="hello@kairo.app" />
         </a>
       </div>
     </nav>
     <div class="relative hidden md:col-span-5 md:block" data-menu-preview>
-      {
-        Object.entries(previews).map(([href, src], i) => (
-          <div class="absolute inset-0" style={`opacity:${i === 0 ? 1 : 0}`} data-menu-image={href}>
-            <Media src={src} alt="" reveal={false} class="size-full" sizes="40vw" />
-          </div>
-        ))
-      }
+      {Object.entries(previews).map(([href, src], i) => (
+        <div class="absolute inset-0" style={`opacity:${i === 0 ? 1 : 0}`} data-menu-image={href}>
+          <Media src={src} alt="" reveal={false} class="size-full" sizes="40vw" />
+        </div>
+      ))}
     </div>
   </div>
 </div>

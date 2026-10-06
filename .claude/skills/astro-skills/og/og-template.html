@@ -2,11 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500&family=Instrument+Serif:ital@1&family=Inter+Tight:wght@400;500&display=block" />
+      href="https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700&f[]=general-sans@400,500&display=block" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=block" />
     <style>
       * { margin: 0; padding: 0; box-sizing: border-box; }
       html, body { width: 1200px; height: 630px; overflow: hidden; background: {{DARK}}; }
@@ -15,64 +16,76 @@
         width: 1200px;
         height: 630px;
         overflow: hidden;
-        color: #fff;
+        color: #ebe9e2;
         background:
-          radial-gradient(900px 700px at 105% 115%, {{ACCENT_GLOW}}, rgba(0, 0, 0, 0) 62%),
-          radial-gradient(760px 520px at -8% -12%, {{MUTED_GLOW}}, rgba(0, 0, 0, 0) 66%),
+          radial-gradient(700px 520px at 92% 18%, {{ACCENT_GLOW}}, rgba(0, 0, 0, 0) 62%),
+          radial-gradient(760px 520px at -8% 112%, {{MUTED_GLOW}}, rgba(0, 0, 0, 0) 66%),
           linear-gradient(180deg, {{DARK_TOP}} 0%, {{DARK}} 100%);
       }
-      .grain {
+      .grid {
         position: absolute;
         inset: 0;
-        background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-        background-size: 3px 3px;
-        opacity: 0.5;
+        background-image: radial-gradient(rgba(235, 233, 226, 0.22) 1.4px, transparent 1.4px);
+        background-size: 26px 26px;
+        -webkit-mask-image: radial-gradient(circle at 80% 30%, #000 0%, transparent 62%);
+        mask-image: radial-gradient(circle at 80% 30%, #000 0%, transparent 62%);
       }
-      .frame {
+      .ring {
         position: absolute;
-        inset: 28px;
-        border: 1px solid rgba(250, 252, 255, 0.16);
-        border-radius: 40px;
+        left: 930px;
+        top: 160px;
+        width: 220px;
+        height: 220px;
+        margin: -110px 0 0 -110px;
+        border: 1.5px solid {{ACCENT}};
+        border-radius: 50%;
+        opacity: 0.6;
       }
-      .logo { position: absolute; left: 72px; top: 66px; height: 62px; width: auto; }
+      .dot {
+        position: absolute;
+        left: 924px;
+        top: 154px;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: {{ACCENT}};
+      }
+      .logo { position: absolute; left: 72px; top: 64px; height: 44px; width: auto; }
       .badge {
         position: absolute;
         left: 72px;
-        top: 238px;
-        font-family: 'Inter Tight', sans-serif;
-        font-size: 20px;
-        letter-spacing: 0.01em;
-        color: rgba(255, 255, 255, 0.72);
+        top: 250px;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 18px;
+        letter-spacing: 0.06em;
+        color: rgba(235, 233, 226, 0.6);
       }
       h1 {
         position: absolute;
-        left: 72px;
-        top: 282px;
-        font-family: 'Manrope', sans-serif;
-        font-weight: 400;
-        font-size: 84px;
-        line-height: 1.08;
-        letter-spacing: -0.03em;
+        left: 68px;
+        top: 290px;
+        font-family: 'Cabinet Grotesk', sans-serif;
+        font-weight: 800;
+        font-size: 104px;
+        line-height: 0.92;
+        letter-spacing: -0.045em;
       }
       h1 em {
         display: block;
-        font-family: 'Instrument Serif', serif;
-        font-style: italic;
-        font-weight: 400;
-        font-size: 96px;
-        letter-spacing: -0.01em;
+        font-style: normal;
+        color: {{ACCENT}};
       }
       .foot {
         position: absolute;
         left: 72px;
         right: 72px;
-        bottom: 62px;
+        bottom: 56px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        font-family: 'Inter Tight', sans-serif;
+        font-family: 'General Sans', sans-serif;
         font-size: 20px;
-        color: rgba(255, 255, 255, 0.64);
+        color: rgba(235, 233, 226, 0.64);
       }
       .pill {
         display: inline-flex;
@@ -80,9 +93,9 @@
         gap: 14px;
         padding: 6px 8px 6px 24px;
         border-radius: 999px;
-        background: rgba(250, 252, 255, 0.12);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 8px 15px rgba(255, 255, 255, 0.1);
-        color: #fff;
+        background: {{ACCENT}};
+        color: {{DARK}};
+        font-weight: 500;
       }
       .pill i {
         display: grid;
@@ -90,14 +103,15 @@
         width: 44px;
         height: 44px;
         border-radius: 50%;
-        background: {{ACCENT}};
+        background: {{DARK}};
       }
     </style>
   </head>
   <body>
     <div class="card">
-      <div class="grain"></div>
-      <div class="frame"></div>
+      <div class="grid"></div>
+      <div class="ring"></div>
+      <div class="dot"></div>
       <img class="logo" src="{{LOGO}}" alt="" />
       <p class="badge">{{EYEBROW}}</p>
       <h1>{{TITLE}}<em>{{TITLE_ITALIC}}</em></h1>
@@ -109,8 +123,8 @@
             ><svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path
                 d="M6 14 14 6M7 6h7v7"
-                stroke="{{DARK}}"
-                stroke-width="1.5"
+                stroke="{{ACCENT}}"
+                stroke-width="1.6"
                 stroke-linecap="round"
                 stroke-linejoin="round" /></svg
           ></i>

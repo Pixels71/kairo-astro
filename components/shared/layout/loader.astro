@@ -9,36 +9,33 @@ const digits = Array.from({ length: 10 }, (_, i) => i);
   <div class="absolute inset-x-0 bottom-0 h-1/2 bg-ink" data-loader-panel="bottom"></div>
   <div class="absolute inset-0" data-loader-content>
     <div class="absolute inset-x-0 bottom-1/2 flex justify-center overflow-hidden">
-      <span
-        class="flex font-display text-[clamp(5.5rem,24vw,24rem)] leading-[0.78] font-extrabold tracking-[-0.06em] text-bone">
-        {
-          chars('Kairo').map((c) => (
-            <span class="inline-block" style="transform: translateY(100%)" data-loader-letter>
-              {c}
-            </span>
-          ))
-        }
+      <span class="flex font-display text-[clamp(5.5rem,24vw,24rem)] leading-[0.78] font-extrabold tracking-[-0.06em] text-bone">
+        {chars('Kairo').map((c) => (
+          <span class="inline-block" style="transform: translateY(100%)" data-loader-letter>
+            {c}
+          </span>
+        ))}
       </span>
     </div>
     <div class="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-line">
       <div class="h-full origin-left bg-signal" style="transform: scaleX(0)" data-loader-line></div>
     </div>
     <div class="shell absolute inset-x-0 top-1/2 flex items-start justify-between pt-5">
-      <span class="font-mono text-label text-mute uppercase opacity-0" data-loader-caption>Reading signals</span>
+      <span class="font-mono text-label text-mute uppercase opacity-0" data-loader-caption>
+        Reading signals
+      </span>
       <span
         class="flex font-mono text-[clamp(2rem,5vw,4.5rem)] leading-none text-bone tabular-nums opacity-0"
         data-loader-count>
-        {
-          [0, 1, 2].map(() => (
-            <span class="odo">
-              <span class="odo-col [transition-duration:0.7s]" data-loader-digit>
-                {digits.map((d) => (
-                  <span>{d}</span>
-                ))}
-              </span>
+        {[0, 1, 2].map(() => (
+          <span class="odo">
+            <span class="odo-col [transition-duration:0.7s]" data-loader-digit>
+              {digits.map((d) => (
+                <span>{d}</span>
+              ))}
             </span>
-          ))
-        }
+          </span>
+        ))}
         <span class="ml-1 text-signal">%</span>
       </span>
     </div>

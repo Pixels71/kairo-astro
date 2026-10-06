@@ -25,7 +25,9 @@ const { post } = Astro.props;
     />
     <div class="md:col-span-5" data-reveal>
       <p class="font-mono text-label text-mute uppercase">
-        {post.data.category}<span class="mx-2 text-dim">/</span>{formatDate(post.data.date)}
+        {post.data.category}
+        <span class="mx-2 text-dim">/</span>
+        {formatDate(post.data.date)}
       </p>
       <h2 class="mt-5 font-display text-title font-bold text-bone transition-colors duration-500 group-hover:text-signal">
         {post.data.title}

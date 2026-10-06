@@ -11,39 +11,39 @@ import { steps } from '@/data/steps';
     </h2>
   </div>
   <div class="shell" data-stack>
-    {
-      steps.map((step, i) => (
-        <div class="relative flex items-center py-3 md:h-[100dvh] md:py-0" style={`z-index:${i + 1}`} data-stack-card>
-          <article class="grid w-full grid-cols-1 overflow-hidden border border-line bg-ink-2 md:h-[82dvh] md:grid-cols-12" data-stack-inner>
-            <Media
-              src={step.image}
-              alt=""
-              class="aspect-[4/3] md:col-span-6 md:aspect-auto md:h-full lg:col-span-7"
-              sizes="(min-width: 768px) 55vw, 100vw"
-              reveal={false}
-            />
-            <div class="flex flex-col justify-between gap-10 p-6 md:col-span-6 md:p-10 lg:col-span-5 lg:p-14">
-              <div>
-                <p class="font-display text-[clamp(3.5rem,7vw,7rem)] leading-[0.9] font-extrabold tracking-[-0.05em] text-signal">
-                  {step.verb}
-                </p>
-                <h3 class="mt-6 max-w-[18ch] font-display text-subtitle font-bold text-bone">{step.title}</h3>
-                <p class="mt-4 max-w-[44ch] text-mute">{step.body}</p>
-              </div>
-              <ul class="flex flex-col gap-3 border-t border-line pt-6">
-                {step.points.map((point) => (
-                  <li class="flex items-center gap-3 text-sm text-bone">
-                    <span class="grid size-6 shrink-0 place-items-center rounded-full bg-signal-soft text-signal">
-                      <Icon name="check" class="size-3.5" />
-                    </span>
-                    {point}
-                  </li>
-                ))}
-              </ul>
+    {steps.map((step, i) => (
+      <div class="relative flex items-center py-3 md:h-[100dvh] md:py-0" style={`z-index:${i + 1}`} data-stack-card>
+        <article
+          class="grid w-full grid-cols-1 overflow-hidden border border-line bg-ink-2 md:h-[82dvh] md:grid-cols-12"
+          data-stack-inner>
+          <Media
+            src={step.image}
+            alt=""
+            class="aspect-[4/3] md:col-span-6 md:aspect-auto md:h-full lg:col-span-7"
+            sizes="(min-width: 768px) 55vw, 100vw"
+            reveal={false}
+          />
+          <div class="flex flex-col justify-between gap-10 p-6 md:col-span-6 md:p-10 lg:col-span-5 lg:p-14">
+            <div>
+              <p class="font-display text-[clamp(3.5rem,7vw,7rem)] leading-[0.9] font-extrabold tracking-[-0.05em] text-signal">
+                {step.verb}
+              </p>
+              <h3 class="mt-6 max-w-[18ch] font-display text-subtitle font-bold text-bone">{step.title}</h3>
+              <p class="mt-4 max-w-[44ch] text-mute">{step.body}</p>
             </div>
-          </article>
-        </div>
-      ))
-    }
+            <ul class="flex flex-col gap-3 border-t border-line pt-6">
+              {step.points.map((point) => (
+                <li class="flex items-center gap-3 text-sm text-bone">
+                  <span class="grid size-6 shrink-0 place-items-center rounded-full bg-signal-soft text-signal">
+                    <Icon name="check" class="size-3.5" />
+                  </span>
+                  {point}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </article>
+      </div>
+    ))}
   </div>
 </section>

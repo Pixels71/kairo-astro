@@ -83,7 +83,8 @@ function createField(canvas: HTMLCanvasElement) {
         const shown = Math.min(1, Math.max(0, (intro.radius - fromOrigin) / 140));
         if (shown <= 0) continue;
 
-        const wave = Math.sin(bx * 0.006 + t * 0.7) * Math.cos(by * 0.008 - t * 0.5) + Math.sin((bx + by) * 0.004 + t * 0.9) * 0.5;
+        const wave =
+          Math.sin(bx * 0.006 + t * 0.7) * Math.cos(by * 0.008 - t * 0.5) + Math.sin((bx + by) * 0.004 + t * 0.9) * 0.5;
         let x = bx;
         let y = by + wave * 5;
         let lift = 0;

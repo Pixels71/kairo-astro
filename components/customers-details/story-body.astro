@@ -22,7 +22,9 @@ const { Content } = await render(story);
           </blockquote>
           <figcaption class="mt-4 text-sm">
             <span class="block text-bone">{story.data.quote.name}</span>
-            <span class="text-mute">{story.data.quote.role}, {story.data.client}</span>
+            <span class="text-mute">
+              {story.data.quote.role}, {story.data.client}
+            </span>
           </figcaption>
         </figure>
         <Button label="Start free" href="/pricing#sales" class="self-start" />

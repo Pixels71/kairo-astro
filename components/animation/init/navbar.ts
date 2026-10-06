@@ -59,7 +59,11 @@ export default function init() {
       const shouldHide = self.direction === 1 && self.scroll() > 240 && !document.documentElement.dataset.menuOpen;
       if (shouldHide === hidden) return;
       hidden = shouldHide;
-      gsap.to(nav, { yPercent: hidden ? -130 : 0, duration: hidden ? 0.5 : 0.8, ease: hidden ? 'power3.in' : 'expo.out' });
+      gsap.to(nav, {
+        yPercent: hidden ? -130 : 0,
+        duration: hidden ? 0.5 : 0.8,
+        ease: hidden ? 'power3.in' : 'expo.out',
+      });
     },
   });
 

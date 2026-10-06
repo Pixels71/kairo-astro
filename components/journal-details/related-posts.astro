@@ -12,26 +12,28 @@ const { posts } = Astro.props;
 
 <section class="border-t border-line" aria-labelledby="related-title">
   <div class="shell py-24 md:py-32">
-    <h2 id="related-title" class="font-display text-title font-bold text-bone" data-split>Keep reading.</h2>
+    <h2 id="related-title" class="font-display text-title font-bold text-bone" data-split>
+      Keep reading.
+    </h2>
     <div class="mt-14 grid grid-cols-1 gap-x-6 gap-y-14 md:grid-cols-2">
-      {
-        posts.map((post, i) => (
-          <a href={`/journal/${post.id}`} class="group flex flex-col gap-5" data-chip="Read" data-label="Journal">
-            <Media
-              src={post.data.cover}
-              alt=""
-              class={`media-zoom ${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3] md:mt-24'}`}
-              sizes="(min-width: 768px) 45vw, 100vw"
-            />
-            <p class="font-mono text-label text-mute uppercase">
-              {post.data.category}<span class="mx-2 text-dim">/</span>{formatDate(post.data.date)}
-            </p>
-            <h3 class="max-w-[24ch] font-display text-subtitle font-bold text-bone transition-colors duration-500 group-hover:text-signal">
-              {post.data.title}
-            </h3>
-          </a>
-        ))
-      }
+      {posts.map((post, i) => (
+        <a href={`/journal/${post.id}`} class="group flex flex-col gap-5" data-chip="Read" data-label="Journal">
+          <Media
+            src={post.data.cover}
+            alt=""
+            class={`media-zoom ${i === 0 ? 'aspect-[4/3]' : 'aspect-[4/3] md:mt-24'}`}
+            sizes="(min-width: 768px) 45vw, 100vw"
+          />
+          <p class="font-mono text-label text-mute uppercase">
+            {post.data.category}
+            <span class="mx-2 text-dim">/</span>
+            {formatDate(post.data.date)}
+          </p>
+          <h3 class="max-w-[24ch] font-display text-subtitle font-bold text-bone transition-colors duration-500 group-hover:text-signal">
+            {post.data.title}
+          </h3>
+        </a>
+      ))}
     </div>
   </div>
 </section>
