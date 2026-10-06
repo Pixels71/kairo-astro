@@ -128,9 +128,9 @@ function createLine(host: HTMLElement) {
   });
 
   gsap
-    .timeline({ scrollTrigger: { trigger: host, start: 'top 85%', end: 'top 35%', scrub: 0.6 } })
-    .to(base, { attr: { 'stroke-dashoffset': 0 }, ease: 'none', duration: 1 })
-    .to(rise, { value: 1, duration: 0.5, ease: 'power2.out', onUpdate: () => (spike = rise.value) }, 0.55);
+    .timeline({ scrollTrigger: { trigger: host, start: 'top 92%', once: true } })
+    .to(base, { attr: { 'stroke-dashoffset': 0 }, ease: 'power2.inOut', duration: 1.6 })
+    .to(rise, { value: 1, duration: 0.9, ease: 'expo.out', onUpdate: () => (spike = rise.value) }, 0.9);
 
   gsap.fromTo(
     pulse,
