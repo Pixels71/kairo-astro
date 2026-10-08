@@ -3,7 +3,7 @@ import type { SiteConfig } from '@/interface';
 export const site: SiteConfig = {
   name: 'Kairo',
   legalName: 'Kairo Labs, Inc.',
-  url: 'https://kairo-astro.pixels71.workers.dev',
+  url: 'https://kairo-astro.vercel.app',
   title: 'Kairo - Know the moment before it passes',
   description:
     'Kairo reads your metrics, tickets and calls, then tells your team what changed, why it matters and who should act.',

@@ -11,3 +11,5 @@ pnpm-debug.log*
 .idea/
 
 .claude
+
+.vercel

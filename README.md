@@ -2,7 +2,7 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FStaticMania%2Fkairo-astro-templete&project-name=kairo-astro&repository-name=kairo-astro) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/StaticMania/kairo-astro-templete)
 
-**Live demo:** [kairo-astro.pixels71.workers.dev](https://kairo-astro.pixels71.workers.dev)
+**Live demo:** [kairo-astro.vercel.app](https://kairo-astro.vercel.app)
 
 ![Kairo theme preview](public/images/og-image.jpg)
 
