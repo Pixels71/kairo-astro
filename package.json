@@ -1,8 +1,23 @@
 {
-  "name": "kairo",
+  "name": "kairo-astro",
   "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
+  "description": "Kairo: a cinematic, motion-heavy SaaS marketing theme built with Astro, Tailwind CSS 4 and GSAP.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/StaticMania/kairo-astro-templete.git"
+  },
+  "keywords": [
+    "astro",
+    "astro-theme",
+    "template",
+    "saas",
+    "landing-page",
+    "gsap",
+    "tailwindcss"
+  ],
   "engines": {
     "node": ">=22.12.0"
   },

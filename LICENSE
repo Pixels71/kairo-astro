@@ -1,0 +1,44 @@
+MIT License
+
+Copyright (c) 2026 StaticMania
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---------------------------------------------------------------------------
+
+Third-party content NOT covered by the MIT License above
+
+The MIT License applies to the source code of this template only. The
+following are not part of the licensed Software and keep their own terms:
+
+1. Photographs in assets/images/ come from Lummi (https://www.lummi.ai) and are used under the Lummi
+   license: https://www.lummi.ai/license. They are free to use in personal
+   and commercial projects, but they may not be resold on their own or
+   bundled into a stock image site or competing service. Lummi and the
+   original artists keep all rights to them. Replace them with your own
+   images if your use does not fit that license.
+
+2. Fonts. Cabinet Grotesk and General Sans by the Indian Type Foundry are
+   downloaded from Fontshare (https://www.fontshare.com) by the Astro Fonts
+   API at build time, under the ITF Free Font License. No font files are
+   included in this repository. JetBrains Mono is downloaded from Google
+   Fonts the same way, under the SIL Open Font License 1.1.
+
+3. Dependencies installed from npm, such as GSAP (https://gsap.com/standard-license),
+   keep their own licenses.

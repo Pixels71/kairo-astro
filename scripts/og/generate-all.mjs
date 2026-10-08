@@ -26,7 +26,11 @@ const brand = {
 const frontmatter = (file) => {
   const text = fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
   const block = text.match(/^---\n([\s\S]*?)\n---/)?.[1] ?? '';
-  const read = (key) => block.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1].trim().replace(/^'|'$/g, '');
+  const read = (key) =>
+    block
+      .match(new RegExp(`^${key}:\\s*(.+)$`, 'm'))?.[1]
+      .trim()
+      .replace(/^'|'$/g, '');
   return { read };
 };
 
@@ -51,11 +55,41 @@ const size = (lines) => {
 };
 
 const jobs = [
-  { out: 'og-image.jpg', eyebrow: `${BRAND} / SIGNAL INTELLIGENCE`, lines: ['Know the moment', 'before it passes.'], tagline: 'Metrics, tickets and calls, briefed in plain English', cta: 'Start free' },
-  { out: 'og/customers.jpg', eyebrow: `${BRAND} / CUSTOMERS`, lines: ['Stories from teams', 'that moved first.'], tagline: 'Freight, energy, health, finance and mobility', cta: 'Read the stories' },
-  { out: 'og/pricing.jpg', eyebrow: `${BRAND} / PRICING`, lines: ['Start free.', 'Pay when it pays off.'], tagline: 'Free for small teams. No card needed.', cta: 'See plans' },
-  { out: 'og/journal.jpg', eyebrow: `${BRAND} / JOURNAL`, lines: ['Notes on', 'acting early.'], tagline: 'Operations, signal detection and writing briefs people read', cta: 'Read the journal' },
-  { out: 'og/about.jpg', eyebrow: `${BRAND} / ABOUT`, lines: ['We build for the', 'minute before it matters.'], tagline: 'A remote-first team in Berlin and London', cta: 'Meet the team' },
+  {
+    out: 'og-image.jpg',
+    eyebrow: `${BRAND} / SIGNAL INTELLIGENCE`,
+    lines: ['Know the moment', 'before it passes.'],
+    tagline: 'Metrics, tickets and calls, briefed in plain English',
+    cta: 'Start free',
+  },
+  {
+    out: 'og/customers.jpg',
+    eyebrow: `${BRAND} / CUSTOMERS`,
+    lines: ['Stories from teams', 'that moved first.'],
+    tagline: 'Freight, energy, health, finance and mobility',
+    cta: 'Read the stories',
+  },
+  {
+    out: 'og/pricing.jpg',
+    eyebrow: `${BRAND} / PRICING`,
+    lines: ['Start free.', 'Pay when it pays off.'],
+    tagline: 'Free for small teams. No card needed.',
+    cta: 'See plans',
+  },
+  {
+    out: 'og/journal.jpg',
+    eyebrow: `${BRAND} / JOURNAL`,
+    lines: ['Notes on', 'acting early.'],
+    tagline: 'Operations, signal detection and writing briefs people read',
+    cta: 'Read the journal',
+  },
+  {
+    out: 'og/about.jpg',
+    eyebrow: `${BRAND} / ABOUT`,
+    lines: ['We build for the', 'minute before it matters.'],
+    tagline: 'A remote-first team in Berlin and London',
+    cta: 'Meet the team',
+  },
 ];
 
 for (const file of fs.readdirSync(path.join(root, 'data/customers'))) {

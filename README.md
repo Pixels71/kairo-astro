@@ -1,5 +1,11 @@
 # Kairo: Astro SaaS Template
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FStaticMania%2Fkairo-astro-templete&project-name=kairo-astro&repository-name=kairo-astro) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/StaticMania/kairo-astro-templete)
+
+**Live demo:** [kairo-astro.pixels71.workers.dev](https://kairo-astro.pixels71.workers.dev)
+
+![Kairo theme preview](public/images/og-image.jpg)
+
 A cinematic, motion-heavy SaaS marketing template built with Astro, Tailwind CSS v4 and GSAP. It ships with a demo brand (Kairo, a fictional signal-intelligence product) so the preview looks real, and every word, link, number and image comes from data files you can edit without touching a component.
 
 ## Highlights
@@ -14,16 +20,16 @@ A cinematic, motion-heavy SaaS marketing template built with Astro, Tailwind CSS
 
 ## Pages
 
-| Route | What it is |
-| --- | --- |
-| `/` | Home |
-| `/customers` | Customer stories with filters |
-| `/customers/[slug]` | Story detail (from Markdown) |
-| `/pricing` | Plans, comparison table, FAQ and a sales form |
-| `/journal` | Blog index with a cursor-follow preview list |
-| `/journal/[slug]` | Article detail (from Markdown) |
-| `/about` | Story, timeline, values, team and open roles |
-| `/404` | Not found page |
+| Route               | What it is                                    |
+| ------------------- | --------------------------------------------- |
+| `/`                 | Home                                          |
+| `/customers`        | Customer stories with filters                 |
+| `/customers/[slug]` | Story detail (from Markdown)                  |
+| `/pricing`          | Plans, comparison table, FAQ and a sales form |
+| `/journal`          | Blog index with a cursor-follow preview list  |
+| `/journal/[slug]`   | Article detail (from Markdown)                |
+| `/about`            | Story, timeline, values, team and open roles  |
+| `/404`              | Not found page                                |
 
 ## Tech stack
 
@@ -38,13 +44,13 @@ bun run dev
 
 Open `http://localhost:4321`.
 
-| Command | Action |
-| --- | --- |
-| `bun run dev` | Start the dev server |
-| `bun run build` | Build the static site into `dist/` |
-| `bun run preview` | Preview the production build |
-| `bun run check` | Type-check `.astro` and `.ts` files |
-| `bun run format` | Format with Prettier |
+| Command           | Action                              |
+| ----------------- | ----------------------------------- |
+| `bun run dev`     | Start the dev server                |
+| `bun run build`   | Build the static site into `dist/`  |
+| `bun run preview` | Preview the production build        |
+| `bun run check`   | Type-check `.astro` and `.ts` files |
+| `bun run format`  | Format with Prettier                |
 
 ## Project structure
 
@@ -62,6 +68,7 @@ components/
   animation/           main.ts boots every behaviour in animation/init/*.ts
 data/                  All content: site config, copy, lists, Markdown collections
 interface/index.ts     Shared TypeScript types
+scripts/og/            Open Graph image generator
 styles/                Design tokens, typography and shared CSS
 utils/                 Small helpers
 content.config.ts      Schemas for the customers and journal collections
@@ -75,19 +82,19 @@ Edit `data/site.ts`. This is the only file you need for a basic rebrand.
 
 ```ts
 export const site = {
-  name: 'Kairo',                     // logo, footer wordmark, page titles
-  legalName: 'Kairo Labs, Inc.',     // footer copyright
-  url: 'https://your-domain.com',    // canonical URLs and OG images
+  name: 'Kairo', // logo, footer wordmark, page titles
+  legalName: 'Kairo Labs, Inc.', // footer copyright
+  url: 'https://your-domain.com', // canonical URLs and OG images
   title: 'Kairo - Know the moment before it passes',
   description: 'Default meta description',
   email: 'hello@kairo.app',
   careersEmail: 'careers@kairo.app',
-  accent: '#ff5b1f',                 // the one accent colour used everywhere
+  accent: '#ff5b1f', // the one accent colour used everywhere
   cta: {
     primary: { label: 'Start free', href: '/pricing#sales' },
     secondary: { label: 'Book a demo', href: '/pricing?intent=demo#sales' },
   },
-  socials: [ /* label, href, icon: 'x' | 'linkedin' | 'github' */ ],
+  socials: [/* label, href, icon: 'x' | 'linkedin' | 'github' */],
 };
 ```
 
@@ -105,19 +112,19 @@ Fonts are loaded with Astro's built-in font API in `astro.config.ts` (Cabinet Gr
 
 ### 4. Copy
 
-| File | What it controls |
-| --- | --- |
-| `data/home.ts` | Hero, logo strip label, manifesto, product story, capabilities, how-it-works title, stories intro, testimonials title, closing CTA |
-| `data/hero.ts` | Hero slideshow slides and the floating portrait |
-| `data/loader.ts` | Loader module names, counts, status words, captions and photos |
-| `data/steps.ts` | The three how-it-works cards and the brief preview |
-| `data/proof.ts` | Testimonials and their result metrics |
-| `data/logos.ts` | Customer logo strip and integration icons |
-| `data/pricing.ts` | Plans, comparison table and FAQ |
-| `data/pages.ts` | Page heroes, meta descriptions and labels for customers, story, pricing, journal, about and 404 |
-| `data/about.ts` | Timeline, values, team and open roles |
-| `data/navbar.ts` | Navigation links and page transition labels |
-| `data/footer.ts` | Footer link groups, newsletter copy and legal line |
+| File              | What it controls                                                                                                                   |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| `data/home.ts`    | Hero, logo strip label, manifesto, product story, capabilities, how-it-works title, stories intro, testimonials title, closing CTA |
+| `data/hero.ts`    | Hero slideshow slides and the floating portrait                                                                                    |
+| `data/loader.ts`  | Loader module names, counts, status words, captions and photos                                                                     |
+| `data/steps.ts`   | The three how-it-works cards and the brief preview                                                                                 |
+| `data/proof.ts`   | Testimonials and their result metrics                                                                                              |
+| `data/logos.ts`   | Customer logo strip and integration icons                                                                                          |
+| `data/pricing.ts` | Plans, comparison table and FAQ                                                                                                    |
+| `data/pages.ts`   | Page heroes, meta descriptions and labels for customers, story, pricing, journal, about and 404                                    |
+| `data/about.ts`   | Timeline, values, team and open roles                                                                                              |
+| `data/navbar.ts`  | Navigation links and page transition labels                                                                                        |
+| `data/footer.ts`  | Footer link groups, newsletter copy and legal line                                                                                 |
 
 ### 5. Customer stories and journal posts
 
@@ -132,7 +139,7 @@ The schemas are in `content.config.ts`. Values like `-34%`, `$1.3M` or `5 days` 
 
 Put photos in `assets/images/` and reference them as `/images/your-file.jpg` in data files or front matter. Astro optimises them into responsive WebP at build time. Roughly 2000px wide is plenty for full-bleed images and 1400px for portraits and cards.
 
-> The demo photos are for preview only. Replace them with images you have the rights to before you publish.
+The demo photos come from [Lummi](https://www.lummi.ai/license) and are **not covered by the MIT License**. Lummi's licence allows free personal and commercial use, including in templates, without attribution, but you may not resell the photos on their own or bundle them into a stock image site or competing service. Swap in your own images whenever you like.
 
 ### 7. Logos and integrations
 
@@ -156,10 +163,10 @@ Each behaviour lives in its own file in `components/animation/init/` and is load
 Each page passes its own `title`, `description` and `image` to the layout. Share images live in `public/images/og/`. After changing your brand or content, regenerate them all (needs Chrome or Edge installed):
 
 ```bash
-node .claude/skills/astro-skills/og/generate-all.mjs --force
+node scripts/og/generate-all.mjs --force
 ```
 
-Edit the brand colours and copy at the top of that script. The template it renders is `og/og-template.html` in the same folder.
+It reads the brand name and accent from `data/site.ts`; the page copy for each image is at the top of `scripts/og/generate-all.mjs`. The layout it renders is `scripts/og/og-template.html`.
 
 ## Deployment
 
@@ -169,10 +176,14 @@ Edit the brand colours and copy at the top of that script. The template it rende
 
 Current versions of Chrome, Edge, Firefox and Safari. Effects degrade gracefully: where a feature is missing, the content still shows.
 
-## Credits and licences
+## License
+
+The source code is released under the [MIT License](LICENSE). The demo photos and fonts are third-party content with their own terms and are **not** covered by the MIT License. See [LICENSE](LICENSE) for details.
+
+## Credits
 
 - [Astro](https://astro.build), [Tailwind CSS](https://tailwindcss.com), [Lenis](https://lenis.darkroom.engineering), [NumberFlow](https://number-flow.barvian.me) and [Phosphor Icons](https://phosphoricons.com): MIT.
 - [GSAP](https://gsap.com) including ScrollTrigger, SplitText and Flip: free under the GSAP standard licence.
-- Cabinet Grotesk and General Sans by the Indian Type Foundry via [Fontshare](https://www.fontshare.com): free for personal and commercial use.
+- Cabinet Grotesk and General Sans by the Indian Type Foundry via [Fontshare](https://www.fontshare.com): ITF Free Font License, downloaded at build time (no font files in this repository).
 - JetBrains Mono: SIL Open Font License.
-- Demo photography: for preview purposes only. Replace it before you go live.
+- Demo photography: [Lummi](https://www.lummi.ai/license) licence (not MIT).
