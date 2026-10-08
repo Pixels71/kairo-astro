@@ -1,6 +1,6 @@
 # Kairo: Astro SaaS Template
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FStaticMania%2Fkairo-astro-templete&project-name=kairo-astro&repository-name=kairo-astro) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/StaticMania/kairo-astro-templete)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FPixels71%2Fkairo-astro&project-name=kairo-astro&repository-name=kairo-astro) [![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Pixels71/kairo-astro)
 
 **Live demo:** [kairo-astro.vercel.app](https://kairo-astro.vercel.app)
 
